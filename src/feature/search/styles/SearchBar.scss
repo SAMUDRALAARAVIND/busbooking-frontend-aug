@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.search-container{
+    height: 80vh;
+    width: 100vw;
+    position: fixed;
+}
+
+.search-bg-img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: url(https://static.abhibus.com/web/media/backgrounds/search.20230915.webp);
+    background-position: top;
+}
+
+.search-form-container{
+    position: relative;
+    top: 5rem;
+    left: 4.5rem;
+
+    .material-icons{
+        cursor:default;
+    }
+}
+
+.search-form-container h1{
+    line-height: 1.2;
+    font-family: 'Roboto', sans-sarif;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    color: #353535;
+    text-align: justify;
+    padding-left: 32rem;
+}
+
+.search-form{
+    display: flex;
+    background-color: #fff;
+    width: 90vw;
+    padding: 1rem 0rem;
+    border-radius: 1rem;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .search-input{
+        border: 1px solid #F2F2F2;
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        column-gap: 8px;
+        padding: 1rem;
+        height: 70px;
+
+
+        input{
+            border: none;
+            font-size: large;
+            font-family: "Roboto",sans-serif;
+        }
+        input::placeholder{
+            color: #B7B0B2;
+            font-size: medium;
+        }
+        input:focus{
+            outline:none;
+        }
+    }
+
+    .search-input:focus{
+        border: 1px solid #DFA09E !important;
+    }
+
+    .today-tomorrow-btn{
+        display: flex;
+        column-gap: 1rem;
+    }
+
+    .search-date{
+        display: flex;
+        flex-wrap: wrap;
+        input{
+            cursor: text;
+        }
+        button{
+            background-color: #F3F1F1;
+            border: none;
+            min-height: 40px;
+            padding: 0px 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: medium;
+        }
+        button:hover, button:focus{
+            background-color: #FAEAEA;
+            color: #E29EAD;
+        }
+    }
+    .search-button{
+        background-color: #DC635B;
+        color: white;
+        font-weight: 500;
+        font-size: large;
+        padding: 10px;
+        border: none;
+        border-radius: 0.5rem;
+        padding: 0.8rem 2rem;
+        cursor: pointer;
+
+    }
+    .search-button:hover{
+        background-color: #A34940;
+    }
+}
+
+.ant-picker {
+    border-color: #d9d9d9; 
+}
+.ant-picker:hover {
+    border-color: #DC635B;
+}
+.ant-picker-focused {
+    border-color: #DC635B !important;
+    box-shadow: 0 0 0 2px rgba(235, 162, 162, 0.2) !important; 
+}
+.ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+    border-color: #A34940 !important; 
+}
+.ant-picker-cell-selected .ant-picker-cell-inner {
+    background-color: #DC635B !important;
+    color: white; 
+}
+
+.search-city-div{
+    box-shadow: 0px 1px 2px #E8E8E8, 1px 0px 2px #E8E8E8, 0px -1px 2px #E8E8E8, -1px 0px 2px #E8E8E8;
+    background-color: white;
+    padding: 8px 15px;
+    max-height: 15rem;
+    overflow-y: scroll;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    width: 20vw;
+
+    .singleCity{
+        text-align: left;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        .city-name{
+            font-size: large;
+            line-height: 2;
+        }
+    
+        .state-name{
+            font-size: small;
+        }
+    }:hover{
+        background-color: #FDF5F3;
+    }
+}
+
+.source-city-div{
+    position: absolute;
+    top: 14.5rem;
+    left: 5.5rem;
+}
+
+.destination-city-div{
+    position: absolute;
+    top: 14.5rem;
+    left: 26.7rem;
+}
+
+.mobile-search-component{
+    display: none;
+}
+.desktop-search-component{
+    display: block;
+}
+
+.logo{
+    padding: 1rem 0rem;
+    text-align: center;
+}
+  
+@media screen and (max-width: 767px) {
+    .desktop-search-component{
+        display: none;
+    }
+    .mobile-search-component{
+        display: block;
+    }
+    .search-city-div{
+        width: 86vw !important;
+        height: 80vh;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .search-bg-img{
+        width: 117%;
+    }
+    .search-form-container h1{
+        padding-left: 15rem;
+    }
+    .search-form{
+        border: 1px solid #F2F2F2;
+    }
+    .search-city-div{
+        width: 30vw;
+    }
+    .source-city-div{
+        left: 6rem;
+    }
+    .search-form-container{
+        left: 2.5rem;
+    }
+}
+
+  
