@@ -141,31 +141,49 @@
                 }
 
                 .checkbox_group {
-                    max-height: 100px;
-                    overflow-y: auto;
-                    overflow-x: auto;
+                    width: 100%;
+                    max-height: 100%;
+                    display: flex;
+                    // justify-content: space-between;
+                    align-items: center;
+                    overflow-y: scroll;
+                    flex-direction: column;
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+                    
+               
 
-                    ::-webkit-scrollbar-thumb:hover {
-                        background-color: #555;
+                    .insidecheckgroup {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-evenly;
+                        gap: 5px;
+                        width: 90%;
+                        margin-bottom: 5px;
+                        cursor: pointer;
+                        label {
+                            width: 50%;
+                            color: #868585;
+                        }
+
+
                     }
 
-                    label {
-                        color: #868585;
 
 
-                    }
+                
 
-                    label::before {
-                        content: "";
-                        display: inline-block;
-                        margin-right: 10px;
-                        width: 15px;
-                        height: 15px;
-                        border: 1px solid #acabab;
-                        border-radius: 3px;
-                        background-color: #fff;
-                        vertical-align: middle;
-                    }
+                    // label::before {
+                    //     display: inline-block;
+                    //     margin-right: 10px;
+                    //     width: 15px;
+                    //     height: 15px;
+                    //     border: 1px solid #acabab;
+                    //     border-radius: 3px;
+                    //     background-color: #fff;
+                    //     vertical-align: middle;
+                    // }
                 }
             }
         }
@@ -173,6 +191,12 @@
 }
 
 
+
+
+.checkbox_group::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color of the track */
+    border-radius: 10px; /* Optional: round the corners of the scrollbar track */
+}
 
 .bustype {
     display: flex;

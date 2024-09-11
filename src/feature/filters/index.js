@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import AirlineSeatFlatIcon from '@mui/icons-material/AirlineSeatFlat';
 import AirIcon from '@mui/icons-material/Air';
@@ -15,43 +15,93 @@ import { ExpandMore } from '@mui/icons-material';
 import { Box, Slider } from '@mui/material';
 
 import './filter.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleBusTiming, toggleBusType, togglePriceDrop } from './slice';
 
 const Filters = () => {
 
-  
+
   const [priceRange, setPriceRange] = useState([450, 3500]);
-  
   const [showBusPartner, setShowBusPartner] = useState(false);
   const [showBoardingPoint, setShowBoardingPoint] = useState(false);
   const [showDroppingPoint, setShowDroppingPoint] = useState(false);
-
-  const [filter, setfilter] = useState({
-    priceDrop: false,
-    busType: {
-      AC: false,
-      Sleeper: false,
-      NonAC: false,
-      Seater: false
-    }
+  const [Dropdownsvalue, setDropdownsvalue] = useState({
+    dropbusPartners: '',
+    BoardingPoint: '',
+    dropingPoints: ''
   })
 
-  const [selectedDepartureTime, setSelectedDepartureTime] = useState({
-    before10am: false,
-    between10amAnd5pm: false,
-    between5pmAnd11pm: false,
-    after11pm: false,
-});
+  const dispatch = useDispatch()
+
+  const data = useSelector((state) => state.filters)
+
+  const busPartners = useSelector((state) => state.filters.busPartners || [])
+  const boardingPoints = useSelector((state) => state.filters.cities || [])
+  const dropingPoints = useSelector((state) => state.filters.cities || [])
 
 
+  const partnersss = busPartners.filter(partner =>
+    partner.toLowerCase().includes(Dropdownsvalue.dropbusPartners?.toLowerCase() || '')
+  )
+
+  const boardingPointss = boardingPoints.filter(city =>
+    city.toLowerCase().includes(Dropdownsvalue.BoardingPoint.toLowerCase() || '')
+  )
+
+
+  const dropingPointss = dropingPoints.filter((city) =>
+    city.toLowerCase().includes(Dropdownsvalue.dropingPoints.toLowerCase() || '')
+  )
+
+
+  const handleSearchChange = (e) => {
+    setDropdownsvalue(prevState => ({
+      ...prevState,
+      dropbusPartners: e.target.value
+    }));
+  };
+
+  const handleCityChange = (e) => {
+    setDropdownsvalue(prevState => ({
+      ...prevState,
+      BoardingPoint: e.target.value
+    }));
+  };
+
+  const handleDropingChange = (e) => {
+    setDropdownsvalue(prevState => ({
+      ...prevState, 
+      dropingPoints: e.target.value
+    }))
+  }
+
+
+
+  useEffect(() => {
+    console.log('Updated filters state:', Dropdownsvalue);
+  }, [Dropdownsvalue]);
 
   const toggleDropDown = (setValue) => {
-      setValue(prevState => !prevState);
+    setValue(prevState => !prevState);
   };
 
 
   const handleChange = (event, newValue) => {
-      setPriceRange(newValue);
+    setPriceRange(newValue);
   }
+
+  const handlebusChange = (e) => {
+    console.log(e.target.checked)
+    const { id, checked } = e.target;
+    dispatch(toggleBusType({ type: id, checked: checked }));
+  }
+
+  const handelDepartureTime = (e) => {
+    const { id, checked } = e.target;
+    dispatch(toggleBusTiming({ type: id, checked: checked }));
+  }
+
+
 
 
 
@@ -65,7 +115,8 @@ const Filters = () => {
           <div className='filter_section price_drop'>
             <label htmlFor='priceDrop'>Price Drop</label>
             <input id='priceDrop' type="checkbox"
-              onChange={(e) => setfilter({ ...filter, priceDrop: e.target.checked })} />
+              onChange={((e) => dispatch(togglePriceDrop(e.target.checked)))}
+            />
           </div>
           <div className=' bustype'>
             <label className='bustypekabel' >Bus Type</label>
@@ -75,13 +126,8 @@ const Filters = () => {
                   <input
                     id='AC'
                     type='checkbox'
-                    checked={filter.busType.AC}
-                    onChange={(e) =>
-                      setfilter({
-                        ...filter,
-                        busType: { ...filter.busType, AC: e.target.checked },
-                      })
-                    }
+                    checked={data.busType.AC}
+                    onChange={handlebusChange}
                   />
                   <AcUnitIcon />
                   <span>AC</span>
@@ -94,13 +140,8 @@ const Filters = () => {
                   <input
                     id='Sleeper'
                     type='checkbox'
-                    checked={filter.busType.Sleeper}
-                    onChange={(e) =>
-                      setfilter({
-                        ...filter,
-                        busType: { ...filter.busType, Sleeper: e.target.checked },
-                      })
-                    }
+                    checked={data.busType.Sleeper}
+                    onChange={handlebusChange}
                   />
                   <AirlineSeatFlatIcon />
                   <span>Sleeper</span>
@@ -112,13 +153,8 @@ const Filters = () => {
                   <input
                     id='NonAC'
                     type='checkbox'
-                    checked={filter.busType.NonAC}
-                    onChange={(e) =>
-                      setfilter({
-                        ...filter,
-                        busType: { ...filter.busType, NonAC: e.target.checked },
-                      })
-                    }
+                    checked={data.busType.NonAC}
+                    onChange={handlebusChange}
                   />
                   <AirIcon />
                   <span>NonAC</span>
@@ -131,16 +167,11 @@ const Filters = () => {
                   <input
                     id='Seater'
                     type='checkbox'
-                    checked={filter.busType.Seater}
-                    onChange={(e) =>
-                      setfilter({
-                        ...filter,
-                        busType: { ...filter.busType, Seater: e.target.checked },
-                      })
-                    }
+                    checked={data.busType.Seater}
+                    onChange={handlebusChange}
                   />
                   <EventSeatIcon />
-                  <span>Sleeper</span>
+                  <span>Seater</span>
                 </label>
               </div>
             </div>
@@ -167,12 +198,8 @@ const Filters = () => {
                   <input
                     id='before10am'
                     type='checkbox'
-                    checked={selectedDepartureTime.before10am}
-                    onChange={(e) =>
-                      setSelectedDepartureTime({
-                        ...selectedDepartureTime, before10am: e.target.checked
-                      })
-                    }
+                    checked={data.busTiming.before10am}
+                    onChange={handelDepartureTime}
                   />
                   <br />
                   <WbSunnyIcon />
@@ -187,11 +214,8 @@ const Filters = () => {
                   <input
                     id='between10amAnd5pm'
                     type='checkbox'
-                    checked={selectedDepartureTime.between10amAnd5pm}
-                    onChange={(e) =>
-                      setSelectedDepartureTime({
-                        ...selectedDepartureTime, between10amAnd5pm: e.target.checked
-                      })}
+                    checked={data.busTiming.between10amAnd5pm}
+                    onChange={handelDepartureTime}
                   />
                   <Brightness6Icon />
                 </label>
@@ -203,12 +227,8 @@ const Filters = () => {
                   <input
                     id='between5pmAnd11pm'
                     type='checkbox'
-                    checked={selectedDepartureTime.between5pmAnd11pm}
-
-                    onChange={(e) =>
-                      setSelectedDepartureTime({
-                        ...selectedDepartureTime, between5pmAnd11pm: e.target.checked
-                      })}
+                    checked={data.busTiming.between5pmAnd11pm}
+                    onChange={handelDepartureTime}
                   />
                   <WbSunnyIcon />
                 </label>
@@ -220,11 +240,8 @@ const Filters = () => {
                   <input
                     id='after11pm'
                     type='checkbox'
-                    checked={selectedDepartureTime.after11pm}
-                    onChange={(e) =>
-                      setSelectedDepartureTime({
-                        ...selectedDepartureTime, after11pm: e.target.checked
-                      })}
+                    checked={data.busTiming.after11pm}
+                    onChange={handelDepartureTime}
                   />
                   <NightsStayIcon />
                 </label>
@@ -239,28 +256,26 @@ const Filters = () => {
             </div>
             {showBusPartner && (
               <div className='dropdown_content'>
-                <input type='text' placeholder='Search..' className='search_bar' />
+                <input
+                  type='text'
+                  placeholder='Search..'
+                  className='search_bar'
+                  value={Dropdownsvalue.dropbusPartners}
+                  onChange={handleSearchChange}
+                />
+
                 <div className='checkbox_group'>
-                  <label>
-                    <input type='checkbox' />
-                    Partner 1
-                  </label>
-                  <label>
-                    <input type='checkbox' />
-                    Partner 2
-                  </label>
-                  <label>
-                    <input type='checkbox' />
-                    Partner 3
-                  </label>
-                  <label>
-                    <input type='checkbox' />
-                    Partner 4
-                  </label>
-                  <label>
-                    <input type='checkbox' />
-                    Partner 5
-                  </label>
+                  {
+                    partnersss && partnersss.map(
+                      (bus, index) => (
+                        <div className='insidecheckgroup'>
+                          <label key={index} htmlFor={bus}> {bus} </label>
+                          <input id={bus} type='checkbox' />
+                        </div>
+
+                      )
+                    )
+                  }
                 </div>
               </div>
             )}
@@ -272,28 +287,24 @@ const Filters = () => {
             </div>
             {showBoardingPoint && (
               <div className='dropdown_content'>
-                <input type='text' placeholder='Search..' className='search_bar' />
+                <input
+                  type='text'
+                  placeholder='Search..'
+                  className='search_bar'
+                  value={Dropdownsvalue.BoardingPoint}
+                  onChange={handleCityChange}
+                />
                 <div className='checkbox_group'>
-                  <label>
-                    <input type='checkbox' />
-                    Partner 1
-                  </label>
-                  <label>
-                    <input type='checkbox' />
-                    Partner 2
-                  </label>
-                  <label>
-                    <input type='checkbox' />
-                    Partner 3
-                  </label>
-                  <label>
-                    <input type='checkbox' />
-                    Partner 4
-                  </label>
-                  <label>
-                    <input type='checkbox' />
-                    Partner 5
-                  </label>
+                  {
+                    boardingPointss && boardingPointss.map(
+                      (bus, index) => (
+                        <div className='insidecheckgroup'>
+                          <label key={index} htmlFor={bus}> {bus} </label>
+                          <input id={bus} type='checkbox' />
+                        </div>
+                      )
+                    )
+                  }
                 </div>
               </div>
             )}
@@ -305,28 +316,24 @@ const Filters = () => {
             </div>
             {showDroppingPoint && (
               <div className='dropdown_content'>
-                <input type='text' placeholder='Search..' className='search_bar' />
+                <input
+                  type='text'
+                  placeholder='Search..'
+                  className='search_bar'
+                  value={Dropdownsvalue.dropingPoints}
+                  onChange={handleDropingChange}
+                />
                 <div className='checkbox_group'>
-                  <label>
-                    <input type='checkbox' />
-                    Partner 1
-                  </label>
-                  <label>
-                    <input type='checkbox' />
-                    Partner 2
-                  </label>
-                  <label>
-                    <input type='checkbox' />
-                    Partner 3
-                  </label>
-                  <label>
-                    <input type='checkbox' />
-                    Partner 4
-                  </label>
-                  <label>
-                    <input type='checkbox' />
-                    Partner 5
-                  </label>
+                  {
+                    dropingPointss && dropingPointss.map(
+                      (bus, index) => (
+                        <div className='insidecheckgroup'>
+                          <label key={index} htmlFor={bus}> {bus} </label>
+                          <input id={bus} type='checkbox' />
+                        </div>
+                      )
+                    )
+                  }
                 </div>
               </div>
             )}

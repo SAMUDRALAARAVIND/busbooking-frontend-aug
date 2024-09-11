@@ -5,7 +5,7 @@ const TripsScreen = lazy(() => import("./feature/trips/index"));
 const BookingScreen = lazy(() => import("./feature/booking/index"));
 
 const LazyLoadingWrapper = ({ Component }) => {
-  return <Suspense fallback={<h1>Loading ...</h1>}>{Component}</Suspense>;
+  return <Suspense fallback={<h1>Loading ...</h1>}>{<Component />}</Suspense>;
 };
 
 const App = () => {
@@ -15,7 +15,6 @@ const App = () => {
         <Route path="" element={<LazyLoadingWrapper Component={Search} />} />
         <Route
           path="/trips/search/:source/:sourceId/:destionation/:destinationId"
-          // path="/trips"
           element={<LazyLoadingWrapper Component={TripsScreen} />}
         />
         <Route
