@@ -12,14 +12,17 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="" element={<LazyLoadingWrapper Component={Search} />} />
+        <Route
+          path=""
+          element={<LazyLoadingWrapper Component={<Search />} />}
+        />
         <Route
           path="/trips/search/:source/:sourceId/:destionation/:destinationId"
-          element={<LazyLoadingWrapper Component={TripsScreen} />}
+          element={<LazyLoadingWrapper Component={<TripsScreen />} />}
         />
         <Route
           path="/book"
-          element={<LazyLoadingWrapper Component={BookingScreen} />}
+          element={<LazyLoadingWrapper Component={<BookingScreen />} />}
         />
       </Routes>
     </BrowserRouter>

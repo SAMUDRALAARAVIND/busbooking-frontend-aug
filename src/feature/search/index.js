@@ -1,5 +1,11 @@
+import SeatLayout from "../trips/seatLayout/SeatLayout.js";
+
 const CitySearch = () => {
-  return <p>this will be the landing page</p>;
+  return (
+    <div>
+      <SeatLayout />
+    </div>
+  );
 };
 
 export default CitySearch;
