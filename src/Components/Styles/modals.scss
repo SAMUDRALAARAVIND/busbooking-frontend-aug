@@ -1,0 +1,23 @@
+.bdContainer{
+    position: relative;
+    height: 50vh;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10 10px #7e7d7d;
+    width: 35%;
+    text-align: start;
+    margin :10px 23px ;
+    padding: 10px;
+    z-index: 1000;
+    border-radius: 1px solid red;
+}
+.boardingList, .DroppingList {
+    height: 40vh;
+    padding: 5px 10px;
+  }
+
+  
+  .left h5, .right h5 {
+    margin: 10px;
+  }
+  
