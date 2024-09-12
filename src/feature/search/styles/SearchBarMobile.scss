@@ -2,9 +2,9 @@
     .oranger-div{
         background-color: #DC635B;
         width: 100vw;
-        height: 38vh;
-        border-bottom-left-radius: 5rem;
-        border-bottom-right-radius: 5rem;
+        height: 47vh;
+        border-bottom-left-radius: 19rem;
+        border-bottom-right-radius: 19rem;
     }
     .search-form-mobile{
         display: flex;
@@ -12,25 +12,29 @@
         align-items: center;
         position: absolute;
         background-color: white;
-        padding: 1.5rem 0.2rem;
+        padding: 0.5rem 0.2rem;
         border-radius: 1rem;
-        top: 7rem;
+        top: 8rem;
         left: 0.5rem;
+        row-gap: 1.5rem;
+        padding-bottom: 1.5rem;
         box-shadow: 0 2px 5px rgba(211, 211, 211, 0.5), 0 -2px 5px rgba(211, 211, 211, 0.5), 2px 0 5px rgba(211, 211, 211, 0.5), -2px 0 5px rgba(211, 211, 211, 0.5);
         hr{
-            width: 57vw;
-            color: #616161;
+            width: 66vw;
+            border-top: 1px solid #D3D3D3;
+            position: absolute;
+            top: 5rem;
+            left: 1rem;
         }
         .swap-icon{
             position: absolute;
-            top: 4rem;
-            right: 0.6rem;
-            color: white;
-            background-color:#DC635B;
-            padding: 0.7rem;
+            top: 3.7rem;
+            right: 1.7rem;
+            padding: 0.6rem;
             border-radius: 50%;
             font-size: 24px;
             transform: rotate(90deg);
+            border: 1px solid #D3D3D3;
         }
         .select-city{
             display: flex;
@@ -65,7 +69,7 @@
             }
             .calendar{
                 position: absolute;
-                top: 10rem;
+                top: 12.2rem;
                 left: 4rem;
             }
               
@@ -81,7 +85,8 @@
             padding: 0.8rem 2rem;
             cursor: pointer;
             position: absolute;
-            top: 13rem;
+            top: 15.3rem;
+            width: 53%;
         }
     }
 }
@@ -94,4 +99,12 @@
     margin-bottom: 1rem;
 }:focus{
     outline: none;
+}
+
+.heading{
+    position: absolute;
+    color: white;
+    top: 5.3rem;
+    left: 25%;
+    font-size: 1.2rem;
 }
