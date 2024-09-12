@@ -41,6 +41,19 @@ const SearchBarMobile = () => {
   const todayDate = dayjs();
   const maxDate = todayDate.add(3, "month");
 
+  const handleCitySwap = () => {
+    const swappedSource = search.destination;
+    const swappedDestination = search.source;
+
+    setSearch({
+      source: swappedSource,
+      destination: swappedDestination,
+    });
+
+    dispatch(addSourceCity(swappedSource));
+    dispatch(addDestinationCity(swappedDestination));
+  };
+
   const onCityClick = (identifier, city) => {
     if (identifier === "source") {
       dispatch(addSourceCity(city));
@@ -97,7 +110,7 @@ const SearchBarMobile = () => {
             <p>{suggestions.search.sourceCity || "Leaving From"}</p>
           </div>
           <hr />
-          <SwapOutlined className="swap-icon" />
+          <SwapOutlined className="swap-icon"  onClick={handleCitySwap}/>
           <div
             className="select-city"
             onClick={() =>
@@ -169,18 +182,23 @@ const SearchBarMobile = () => {
           }}
         />
         <div className="search-city-div">
-          {filterCities("source", suggestions.search.cities, search).map(
-            (city, index) => {
-              return (
-                <CitiesDiv
-                  key={index}
-                  city={city}
-                  identifier={"source"}
-                  onCityClick={onCityClick}
-                />
-              );
-            }
-          )}
+        {filterCities("source", suggestions.search.cities, search).length >
+            0 ? (
+              showPopOver.source && filterCities("source", suggestions.search.cities, search).map(
+                (city, index) => {
+                  return (
+                    <CitiesDiv
+                      key={index}
+                      city={city}
+                      identifier={"source"}
+                      onCityClick={onCityClick}
+                    />
+                  );
+                }
+              )
+            ) : (
+              <div className="singleCity">No Data Found</div>
+            )}
         </div>
       </Drawer>
 
@@ -202,18 +220,22 @@ const SearchBarMobile = () => {
           }}
         />
         <div className="search-city-div">
-          {showPopOver.destination &&
-            filterCities("destination", suggestions.search.cities, search).map(
-              (city, index) => {
-                return (
-                  <CitiesDiv
-                    key={index}
-                    city={city}
-                    identifier={"destination"}
-                    onCityClick={onCityClick}
-                  />
-                );
-              }
+        {filterCities("destination", suggestions.search.cities, search).length >
+            0 ? (
+              showPopOver.destination && filterCities("destination", suggestions.search.cities, search).map(
+                (city, index) => {
+                  return (
+                    <CitiesDiv
+                      key={index}
+                      city={city}
+                      identifier={"destination"}
+                      onCityClick={onCityClick}
+                    />
+                  );
+                }
+              )
+            ) : (
+              <div className="singleCity">No Data Found</div>
             )}
         </div>
       </Drawer>

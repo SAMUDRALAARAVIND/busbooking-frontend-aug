@@ -6,11 +6,11 @@ const searchSlice = createSlice({
   name: "search",
   initialState: {
     cities: [...cityData],
-    sourceCity: "",     // selected city 
+    sourceCity: "",     // selected city
     destinationCity: "",    // selected city
     date: null,
     // TODO - save the source city id and destination city id after fetching data from server
-    sourceCityId: "",      
+    sourceCityId: "",
     destinationCityId: ""
   },
   reducers: {
@@ -28,4 +28,3 @@ const searchSlice = createSlice({
 
 export const { addSourceCity, addDestinationCity, addDate } = searchSlice.actions;
 export default searchSlice;
-
