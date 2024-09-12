@@ -7,7 +7,9 @@ import { DownOutlined } from "@ant-design/icons";
 import { boardingPoints } from "./data";
 
 export default function Trip() {
-  const [boardingDroppingPoints, setBoardingDroppingPoints] = useState(false);
+  // const [toggleAminities, setToggleAminities] = useState(false);
+
+  // const [boardingDroppingPoints, setBoardingDroppingPoints] = useState(false);
 
   return (
     <div className="trips container">
@@ -40,7 +42,7 @@ export default function Trip() {
                 </div>
               </div>
             </div>
-            <div className="tripRecords flex">
+            {/* <div className="tripRecords flex">
               <div className="rating flex">
                 <div className="avgRating flex">
                   <span dangerouslySetInnerHTML={{ __html: svg.ratingSvg }} />
@@ -56,14 +58,7 @@ export default function Trip() {
                 {aminities?.slice(0, 3).map((item) => (
                   <span dangerouslySetInnerHTML={{ __html: item.img }} />
                 ))}
-                {/* {aminities?.map((item) => (
-                  <span
-                    dangerouslySetInnerHTML={{ __html: item.washroom.img }}
-                  />
-                ))} */}
-                {/* {aminities?.map((item) => (
-                  <span dangerouslySetInnerHTML={{ __html: item.ac.img }} />
-                ))} */}
+              
                 <span
                   className="aminitiesLength "
                   onClick={() => setToggleAminities(!toggleAminities)}
@@ -76,9 +71,11 @@ export default function Trip() {
                 <span dangerouslySetInnerHTML={{ __html: svg.liveTracking }} />
                 <p> Live Tracking</p>
               </div>
-            </div>
+            </div> */}
           </div>
-          <div className="moreDetails flex">
+          <TripDetails />
+
+          {/* <div className="moreDetails flex">
             <div
               className="flex"
               onClick={() => setBoardingDroppingPoints(!boardingDroppingPoints)}
@@ -127,8 +124,9 @@ export default function Trip() {
               </p>
               <div className="verticalline"> </div>
             </div>
-          </div>
+          </div> */}
         </div>
+
         <div className="verticalline height"></div>
         <div className="rightWrapper">
           <div className="text-end">
@@ -141,7 +139,8 @@ export default function Trip() {
           </div>
         </div>
       </div>
-      {toggleAminities && (
+      {/* <Aminities /> */}
+      {/* {toggleAminities && (
         <div className="aminitesModal">
           <h5>Aminities</h5>
           <div>
@@ -161,37 +160,167 @@ export default function Trip() {
             ))}
           </div>
         </div>
-      )}
-      {boardingDroppingPoints && <BoardingDropping />}
+      )} */}
+      {/* {boardingDroppingPoints && <BoardingDropping />} */}
     </div>
   );
 }
 
-const Aminities = () => {
+const TripDetails = () => {
+  // const [details, setDetails] = useState("");
   const [toggleAminities, setToggleAminities] = useState(false);
+  const [boardingDroppingPoints, setBoardingDroppingPoints] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("click", () => {
+      setToggleAminities(false);
+      setBoardingDroppingPoints(false);
+    });
+  }, []);
 
   return (
     <>
-      {toggleAminities && (
-        <div className="aminitesModal">
-          <h5>Aminities</h5>
-          <div>
-            {aminities.map((item, index) => (
-              <p className="">
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: item.img.replace(
-                      /stroke="[^"]*"/g,
-                      'stroke="#444444"'
-                    ),
-                  }}
-                />
-                <span dangerouslySetInnerHTML={{ __html: item.name }} />
-              </p>
-            ))}
-          </div>
+      <TripRecord {...{ setToggleAminities }} />
+      <MoreDetails {...{ setToggleAminities, setBoardingDroppingPoints }} />
+      {boardingDroppingPoints && <BoardingDropping />}
+      {toggleAminities && <Aminities />}
+    </>
+  );
+};
+
+const TripRecord = ({ setToggleAminities, setBoardingDroppingPoints }) => {
+  return (
+    <div className="tripRecords flex">
+      <div className="rating flex">
+        <div className="avgRating flex">
+          <span dangerouslySetInnerHTML={{ __html: svg.ratingSvg }} />
+          <p>4.6</p>
         </div>
-      )}
+        <div className="totalRating flex">
+          <span dangerouslySetInnerHTML={{ __html: svg.usersRating }} />
+          <p className="grey">37.5k</p>
+        </div>
+      </div>
+
+      <div className="aminities flex">
+        {aminities?.slice(0, 3).map((item) => (
+          <span dangerouslySetInnerHTML={{ __html: item.img }} />
+        ))}
+        {/* {aminities?.map((item) => (
+            <span
+              dangerouslySetInnerHTML={{ __html: item.washroom.img }}
+            />
+          ))} */}
+        {/* {aminities?.map((item) => (
+            <span dangerouslySetInnerHTML={{ __html: item.ac.img }} />
+          ))} */}
+        <span
+          onClick={(e) => {
+            e.stopPropagation();
+            setToggleAminities((prev) => !prev);
+            // setToggleAminities("aminities");
+            setBoardingDroppingPoints(false);
+          }}
+          className="aminitiesLength "
+        >
+          +{aminities.slice(3).length}
+        </span>
+      </div>
+
+      <div className="tracking flex">
+        <span dangerouslySetInnerHTML={{ __html: svg.liveTracking }} />
+        <p> Live Tracking</p>
+      </div>
+    </div>
+  );
+};
+
+const MoreDetails = ({ setBoardingDroppingPoints, setToggleAminities }) => {
+  return (
+    <div className="moreDetails flex">
+      <div
+        className="flex"
+        onClick={(e) => {
+          e.stopPropagation();
+          setBoardingDroppingPoints((prev) => !prev);
+          setToggleAminities(false);
+        }}
+      >
+        <p className="grey">Boarding & Dropping Points </p>
+        <p>
+          <DownOutlined
+            className="downArrow grey"
+            // onClick={() =>
+            //   setBoardingDroppingPoints(!boardingDroppingPoints)
+            // }
+          />{" "}
+        </p>
+      </div>
+
+      <div className="verticalline"> </div>
+
+      <div
+        onClick={(e) => {
+          e.stopPropagation();
+          setToggleAminities((prev) => !prev);
+          setBoardingDroppingPoints(false);
+        }}
+        className="flex"
+      >
+        <p className="grey">Amenities </p>
+        <p>
+          <DownOutlined className="downArrow grey" />
+        </p>
+      </div>
+      <div className="verticalline"> </div>
+
+      <br className="grey" />
+
+      <div className="flex">
+        <p className="grey">Cancellation Policy </p>
+        <p>
+          <DownOutlined className="downArrow grey" />
+        </p>
+      </div>
+
+      <div className="verticalline"> </div>
+
+      <div className="flex">
+        <p className="grey">Travel Policy </p>
+        <p>
+          <DownOutlined className="downArrow grey" />
+        </p>
+        <div className="verticalline"> </div>
+      </div>
+    </div>
+  );
+};
+
+const Aminities = () => {
+  return (
+    <>
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{ position: "absolute", zIndex: "10" }}
+        className="aminitesModal"
+      >
+        <h5>Aminities</h5>
+        <div>
+          {aminities.map((item, index) => (
+            <p className="">
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: item.img.replace(
+                    /stroke="[^"]*"/g,
+                    'stroke="#444444"'
+                  ),
+                }}
+              />
+              <span dangerouslySetInnerHTML={{ __html: item.name }} />
+            </p>
+          ))}
+        </div>
+      </div>
     </>
   );
 };

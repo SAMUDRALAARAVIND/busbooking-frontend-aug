@@ -1,14 +1,14 @@
-import React from 'react'
-import TripsSlice from "../Components/Trip.js"
-import Filters from "../Components/features/Filters.js"
+import React from "react";
+import TripsSlice from "../Components/Trip.js";
+import Filters from "../Components/features/Filters.js";
 function TripPage() {
   return (
-    <div className='flex'>
-      <Filters/>
-      <TripsSlice/>
-
+    <div style={{ border: "solid", height: "100vh" }}>
+      <Filters />
+      <TripsSlice />
+      <TripsSlice />
     </div>
-  )
+  );
 }
 
-export default TripPage
+export default TripPage;
