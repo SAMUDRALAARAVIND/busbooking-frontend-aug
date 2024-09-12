@@ -1,173 +1,85 @@
-import react, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./Styles/Trip.scss";
 import { svg, aminities } from "./svg";
 import BoardingDropping from "./modal/droppingBoardingPoint";
 import tagImg from "../asssests/tagImg.jpg";
 import { DownOutlined } from "@ant-design/icons";
-import { boardingPoints } from "./data";
+import { tripsData } from "./data"; // assuming tripsData is imported
 
 export default function Trip() {
-  // const [toggleAminities, setToggleAminities] = useState(false);
-
-  // const [boardingDroppingPoints, setBoardingDroppingPoints] = useState(false);
-
   return (
     <div className="trips container">
-      <div className="TripContainer">
-        <div className="leftWrapper">
-          <div className="upperItems">
-            <div className="ads absolute">
-              <p>AD</p>
+      {tripsData[0].trips.map((trip, index) => (
+        <div key={trip.tripId} className="TripContainer">
+          <div className="leftWrapper">
+            <div className="upperItems">
+              <div className="ads absolute">
+                <p>AD</p>
+              </div>
+              <img src={tagImg} className="tagImg" alt="abhiAssuaranceTag" />
+
+              <div className="flex tripInfo">
+                <div className="NameAndType">
+                  <h4>{trip.busPartner}</h4>
+                  <p className="grey">{trip.busType}</p>
+                </div>
+                <div className="timeInfo flex">
+                  <div className="departureData">
+                    <p className="grey">{formatDate(trip.departureTime)}</p>
+                    <span>{formatTime(trip.departureTime)}</span>
+                    <p className="grey">{tripsData[0].sourceCity.name}</p>
+                  </div>
+                  <div className="duration flex grey">
+                    - - -<p>{calculateDuration(trip.departureTime, trip.arrivalTime)}</p>- - -
+                  </div>
+                  <div className="arrivalData">
+                    <p className="grey">{formatDate(trip.arrivalTime)}</p>
+                    <span>{formatTime(trip.arrivalTime)}</span>
+                    <p className="grey">{tripsData[0].destinationCity.name}</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <img src={tagImg} className="tagImg" alt="abhiAssuaranceTag" />
-
-            <div className="flex tripInfo">
-              <div className="NameAndType">
-                <h3>IntrCity SmartBus (Washroom onboard)</h3>
-                <p className="grey">AC Seater/Sleeper(2+1)</p>
-              </div>
-              <div className="timeInfo flex">
-                <div className="departureData">
-                  <p className="grey">16 sep</p>
-                  <span>22:25</span>
-                  <p className="grey">Bangalore</p>
-                </div>
-                <div className="duration flex grey">
-                  - - -<p>07:10hrs</p>- - -
-                </div>
-                <div className="arrivalData">
-                  <p className="grey">17 sept</p>
-                  <span>05:35</span>
-                  <p className="grey">Chennai</p>
-                </div>
-              </div>
-            </div>
-            {/* <div className="tripRecords flex">
-              <div className="rating flex">
-                <div className="avgRating flex">
-                  <span dangerouslySetInnerHTML={{ __html: svg.ratingSvg }} />
-                  <p>4.6</p>
-                </div>
-                <div className="totalRating flex">
-                  <span dangerouslySetInnerHTML={{ __html: svg.usersRating }} />
-                  <p className="grey">37.5k</p>
-                </div>
-              </div>
-
-              <div className="aminities flex">
-                {aminities?.slice(0, 3).map((item) => (
-                  <span dangerouslySetInnerHTML={{ __html: item.img }} />
-                ))}
-              
-                <span
-                  className="aminitiesLength "
-                  onClick={() => setToggleAminities(!toggleAminities)}
-                >
-                  +{aminities.slice(3).length}
-                </span>
-              </div>
-
-              <div className="tracking flex">
-                <span dangerouslySetInnerHTML={{ __html: svg.liveTracking }} />
-                <p> Live Tracking</p>
-              </div>
-            </div> */}
+            <TripDetails trip={trip} />
           </div>
-          <TripDetails />
 
-          {/* <div className="moreDetails flex">
-            <div
-              className="flex"
-              onClick={() => setBoardingDroppingPoints(!boardingDroppingPoints)}
-            >
-              <p className="grey">Boarding & Dropping Points </p>
-              <p>
-                <DownOutlined
-                  className="downArrow grey"
-                  // onClick={() =>
-                  //   setBoardingDroppingPoints(!boardingDroppingPoints)
-                  // }
-                />{" "}
-              </p>
+          <div className="verticalline "></div>
+          <div className="rightWrapper">
+            <div className="text-end">
+              <p className="grey">Starting At</p>
+              <span>₹ {trip.minPrice}</span>
             </div>
-
-            <div className="verticalline"> </div>
-
-            <div className="flex">
-              <p
-                className="grey"
-                onClick={() => setToggleAminities(!toggleAminities)}
-              >
-                Amenities{" "}
-              </p>
-              <p>
-                <DownOutlined className="downArrow grey" />
-              </p>
+            <div className="text-end">
+              <button className="showSeat">Show Seat</button>
+              <p className="grey">{trip.availableSeats} Seats Available</p>
             </div>
-            <div className="verticalline"> </div>
-
-            <br className="grey" />
-
-            <div className="flex">
-              <p className="grey">Cancellation Policy </p>
-              <p>
-                <DownOutlined className="downArrow grey" />
-              </p>
-            </div>
-
-            <div className="verticalline"> </div>
-
-            <div className="flex">
-              <p className="grey">Travel Policy </p>
-              <p>
-                <DownOutlined className="downArrow grey" />
-              </p>
-              <div className="verticalline"> </div>
-            </div>
-          </div> */}
-        </div>
-
-        <div className="verticalline height"></div>
-        <div className="rightWrapper">
-          <div className="text-end">
-            <p className="grey">Starting At</p>
-            <span>₹ 2500.0</span>
-          </div>
-          <div className="text-end">
-            <button className="showSeat">Show Seat</button>
-            <p className="grey">29 Seats Available</p>
           </div>
         </div>
-      </div>
-      {/* <Aminities /> */}
-      {/* {toggleAminities && (
-        <div className="aminitesModal">
-          <h5>Aminities</h5>
-          <div>
-            {aminities.map((item, index) => (
-              <p className="">
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: item.img.replace(
-                      /stroke="[^"]*"/g,
-                      'stroke="#444444"'
-                    ),
-                  }}
-                />
-                <span dangerouslySetInnerHTML={{ __html: item.name }} />
-              </p>
-              // <p key={`modal-${index}`}>{}</p>
-            ))}
-          </div>
-        </div>
-      )} */}
-      {/* {boardingDroppingPoints && <BoardingDropping />} */}
+      ))}
     </div>
   );
 }
 
-const TripDetails = () => {
-  // const [details, setDetails] = useState("");
+// Utility functions to format time and date
+const formatDate = (epochTime) => {
+  const date = new Date(epochTime * 1000);
+  return date.toLocaleDateString("en-GB");
+};
+
+const formatTime = (epochTime) => {
+  const date = new Date(epochTime * 1000);
+  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+};
+
+const calculateDuration = (departureTime, arrivalTime) => {
+  const durationMs = (arrivalTime - departureTime) * 1000;
+  const hours = Math.floor(durationMs / (1000 * 60 * 60));
+  const minutes = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60));
+  return `${hours}h ${minutes}m`;
+};
+
+// The TripDetails component, for amenities and other details
+const TripDetails = ({ trip }) => {
   const [toggleAminities, setToggleAminities] = useState(false);
   const [boardingDroppingPoints, setBoardingDroppingPoints] = useState(false);
 
@@ -180,62 +92,62 @@ const TripDetails = () => {
 
   return (
     <>
-      <TripRecord {...{ setToggleAminities }} />
-      <MoreDetails {...{ setToggleAminities, setBoardingDroppingPoints }} />
+      <TripRecord
+        {...{ setToggleAminities, setBoardingDroppingPoints }}
+        trip={trip}
+      />
+      <MoreDetails
+        {...{ setToggleAminities, setBoardingDroppingPoints }}
+        trip={trip}
+      />
       {boardingDroppingPoints && <BoardingDropping />}
       {toggleAminities && <Aminities />}
     </>
   );
 };
 
-const TripRecord = ({ setToggleAminities, setBoardingDroppingPoints }) => {
+const TripRecord = ({ setToggleAminities, setBoardingDroppingPoints, trip }) => {
   return (
     <div className="tripRecords flex">
       <div className="rating flex">
         <div className="avgRating flex">
           <span dangerouslySetInnerHTML={{ __html: svg.ratingSvg }} />
-          <p>4.6</p>
+          <p>{trip.averageRating}</p>
         </div>
         <div className="totalRating flex">
           <span dangerouslySetInnerHTML={{ __html: svg.usersRating }} />
-          <p className="grey">37.5k</p>
+          <p className="grey">{trip.numberOfRatings} ratings</p>
         </div>
       </div>
 
       <div className="aminities flex">
-        {aminities?.slice(0, 3).map((item) => (
-          <span dangerouslySetInnerHTML={{ __html: item.img }} />
+        {trip.amenities.slice(0, 3).map((item, index) => (
+          <span key={index}>{item}</span>
         ))}
-        {/* {aminities?.map((item) => (
-            <span
-              dangerouslySetInnerHTML={{ __html: item.washroom.img }}
-            />
-          ))} */}
-        {/* {aminities?.map((item) => (
-            <span dangerouslySetInnerHTML={{ __html: item.ac.img }} />
-          ))} */}
-        <span
-          onClick={(e) => {
-            e.stopPropagation();
-            setToggleAminities((prev) => !prev);
-            // setToggleAminities("aminities");
-            setBoardingDroppingPoints(false);
-          }}
-          className="aminitiesLength "
-        >
-          +{aminities.slice(3).length}
-        </span>
+
+        {trip.amenities.length > 3 && (
+          <span
+            onClick={(e) => {
+              e.stopPropagation();
+              setToggleAminities((prev) => !prev);
+              setBoardingDroppingPoints(false);
+            }}
+            className="aminitiesLength "
+          >
+            +{trip.amenities.slice(3).length}
+          </span>
+        )}
       </div>
 
       <div className="tracking flex">
         <span dangerouslySetInnerHTML={{ __html: svg.liveTracking }} />
-        <p> Live Tracking</p>
+        <p>Live Tracking</p>
       </div>
     </div>
   );
 };
 
-const MoreDetails = ({ setBoardingDroppingPoints, setToggleAminities }) => {
+const MoreDetails = ({ setBoardingDroppingPoints, setToggleAminities, trip }) => {
   return (
     <div className="moreDetails flex">
       <div
@@ -248,12 +160,7 @@ const MoreDetails = ({ setBoardingDroppingPoints, setToggleAminities }) => {
       >
         <p className="grey">Boarding & Dropping Points </p>
         <p>
-          <DownOutlined
-            className="downArrow grey"
-            // onClick={() =>
-            //   setBoardingDroppingPoints(!boardingDroppingPoints)
-            // }
-          />{" "}
+          <DownOutlined className="downArrow grey" />
         </p>
       </div>
 
@@ -272,6 +179,7 @@ const MoreDetails = ({ setBoardingDroppingPoints, setToggleAminities }) => {
           <DownOutlined className="downArrow grey" />
         </p>
       </div>
+
       <div className="verticalline"> </div>
 
       <br className="grey" />
@@ -282,19 +190,10 @@ const MoreDetails = ({ setBoardingDroppingPoints, setToggleAminities }) => {
           <DownOutlined className="downArrow grey" />
         </p>
       </div>
-
-      <div className="verticalline"> </div>
-
-      <div className="flex">
-        <p className="grey">Travel Policy </p>
-        <p>
-          <DownOutlined className="downArrow grey" />
-        </p>
-        <div className="verticalline"> </div>
-      </div>
     </div>
   );
 };
+
 
 const Aminities = () => {
   return (
