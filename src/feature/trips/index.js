@@ -1,5 +1,5 @@
 import Filters from "../filters";
-import './trip.scss'
+import "./trip.scss";
 
 const TripsScreen = () => {
   return (

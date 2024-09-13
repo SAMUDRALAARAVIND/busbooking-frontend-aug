@@ -1,0 +1,91 @@
+.filters-container {
+    background-color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    gap: 20px;
+    box-shadow: 1px 1px 3px #e3e3e3;
+    overflow-y: scroll;
+
+    .section {
+        padding: 5px 10px;
+        border-radius: 10px;
+        background-color: #f4f4f4;
+
+        .title {
+            font-weight: 600;
+            display: block;
+            margin: 10px 0;
+            color: #3d3d3d;
+        }
+
+        .boxes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+
+            .box {
+                .select-box {
+                    display: none;
+
+                    &:checked+label {
+                        color: #dc635b;
+                        outline: 1px solid #dc635b;
+                    }
+                }
+
+                label {
+                    color: #444444;
+                    font-size: 0.7rem;
+                    display: flex;
+                    gap: 5px;
+                    flex-direction: column;
+                    align-items: center;
+                    padding: 10px;
+                    cursor: pointer;
+                    background-color: #fff;
+                    border-radius: 5px;
+                }
+            }
+        }
+    }
+}
+
+
+.filter-icon {
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.filter-icon:hover {
+    background-color: #e9e6e6;
+    cursor: pointer;
+}
+
+.range-val {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #000;
+
+}
+
+.filters-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.filters-container::-webkit-scrollbar-thumb {
+    background-color: #DC635B;
+    border-radius: 4px;
+}
+
+.filters-container::-webkit-scrollbar-track {
+    background: #f0f0f0;
+}
+
+.filters-container {
+    scrollbar-width: thin;
+    scrollbar-color: #DC635B #f0f0f0;
+}

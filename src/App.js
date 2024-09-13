@@ -12,9 +12,10 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="" element={<LazyLoadingWrapper Component={Search} />} />
+        {/* <Route path="" element={<LazyLoadingWrapper Component={Search} />} /> */}
         <Route
-          path="/trips/search/:source/:sourceId/:destionation/:destinationId"
+          // path="/trips/search/:source/:sourceId/:destionation/:destinationId"
+          path="/"
           element={<LazyLoadingWrapper Component={TripsScreen} />}
         />
         <Route

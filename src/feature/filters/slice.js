@@ -1,67 +1,72 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export const filterType = {
+  BUS_TYPES: "busTypes",
+  PRICE_RANGE: "priceRange",
+  DEPARTURE_TIME: "departureTime",
+  BUS_PARTNER: "busPartner",
+  BOARDING_POINTS: "boardingPoints",
+  DROPPING_POINTS: "droppingPoints",
+};
 
-const busPartners = [
-  "RedBus",
-  "Volvo Bus",
-  "Greenline Travels",
-  "VRL Travels",
-  "SRS Travels",
-  "National Travels",
-  "Orange Tours",
-  "KPN Travels",
-  "Sharma Transport",
-  "Jabbar Travels",
-];
+export const departureTime = {
+  MORNING: "before10am",
+  AFTERNOON: "10amTo5pm",
+  EVENING: "5pmTo11pm",
+  NIGHT: "after11pm",
+};
 
-const cities = [
-  "New York",
-  "Los Angeles",
-  "Chicago",
-  "Houston",
-  "Phoenix",
-  "Philadelphia",
-  "San Antonio",
-  "San Diego",
-  "Dallas",
-  "San Jose",
-];
+const initialPriceRange = {
+  range: [],
+  selectedRange: [],
+};
 
-// TODO: write the logic as per the need
-const filtersSlice = createSlice({
-  name: "filters",
-  initialState: {
-    priceDrop: false,
-    busType: {
-      AC: false,
-      Sleeper: false,
-      NonAC: false,
-      Seater: false
-    },
-    busTiming: {
-      before10am: false,
-      between10amAnd5pm: false,
-      between5pmAnd11pm: false,
-      after11pm: false
-    },
-    busPartners: busPartners,
-    cities : cities,
+const initialState = {
+  [filterType.BUS_TYPES]: {},
+  [filterType.DEPARTURE_TIME]: {
+    [departureTime.MORNING]: false,
+    [departureTime.AFTERNOON]: false,
+    [departureTime.EVENING]: false,
+    [departureTime.NIGHT]: false,
   },
+  [filterType.BUS_PARTNER]: {},
+  [filterType.BOARDING_POINTS]: {},
+  [filterType.DROPPING_POINTS]: {},
+  [filterType.PRICE_RANGE]: initialPriceRange,
+};
 
+const filterSlice = createSlice({
+  name: "filters",
+  initialState,
   reducers: {
-    togglePriceDrop: (state) => {
-      state.priceDrop =!state.priceDrop;
+    togglePriceRange: (state, action) => {
+      state[filterType.PRICE_RANGE].range = action.payload;
+      state[filterType.PRICE_RANGE].selectedRange = action.payload;
     },
-    toggleBusType: (state, action) => {
-      state.busType[action.payload.type] = action.payload.checked;
+    toggleUpdatedPriceRange: (state, action) => {
+      state[filterType.PRICE_RANGE].selectedRange = action.payload;
     },
-    toggleBusTiming: (state, action) => {
-      state.busTiming[action.payload.type] = action.payload.checked;
-    }
+    toggleStop: (state, { payload: { add, stopId, identifier } }) => {
+      if (add) {
+        state[identifier][stopId] = add;
+      } else {
+        delete state[identifier][stopId];
+      }
+    },
+    clearAllFilters: (state, action) => {
+      return {
+        ...state,
+        initialState,
+      };
+    },
   },
 });
 
+export const {
+  togglePriceRange,
+  toggleUpdatedPriceRange,
+  toggleStop,
+  clearAllFilters,
+} = filterSlice.actions;
 
-export const { togglePriceDrop, toggleBusType, toggleBusTiming } = filtersSlice.actions;
-
-export default filtersSlice;
+export default filterSlice;
