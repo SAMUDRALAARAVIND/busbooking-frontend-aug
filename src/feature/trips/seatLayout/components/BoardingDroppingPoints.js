@@ -1,13 +1,19 @@
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Cookies from "js-cookie";
 import styles from "../styles/points-styles.module.scss";
+import { setSeatData, setSingleSeatData } from "../../slice";
+import { useSingleSeatData } from "./Seats";
+import { useTripContext } from "../SeatLayout";
 
 const BoardingDroppingPoints = () => {
-  const points = Cookies.get("points") ? JSON.parse(Cookies.get("points")) : {};
-  const [boardingPoint, setBoardingPoint] = useState(points.boardingPoint);
-  const [droppingPoint, setDroppingPoint] = useState(points.droppingPoint);
+  const tripId = useTripContext();
+  const seatData = useSelector((state) => state.trips.seatData);
+  const { seats, points } = useSingleSeatData(seatData, tripId);
+
+  const [boardingPoint, setBoardingPoint] = useState(points?.boardingPoint);
+  const [droppingPoint, setDroppingPoint] = useState(points?.droppingPoint);
 
   return (
     <li className={styles.seatLayout_stopPoints}>
@@ -27,26 +33,25 @@ const BoardingDroppingPoints = () => {
 
       {/* Dummy button */}
       <button style={{ height: "60px" }}></button>
-      <BookingButton {...{ boardingPoint, droppingPoint }} />
+      <BookingButton {...{ boardingPoint, droppingPoint, seats, tripId }} />
     </li>
   );
 };
 
-const BookingButton = ({ droppingPoint, boardingPoint }) => {
-  const selectedSeats = useSelector((state) => state.trips.selectedSeats);
-  const isDisabled = !(selectedSeats.length && boardingPoint && droppingPoint);
+const BookingButton = ({ droppingPoint, boardingPoint, seats, tripId }) => {
+  const isDisabled = !(seats?.length && boardingPoint && droppingPoint);
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     const expires = new Date(new Date().getTime() + 5 * 60 * 1000);
-    Cookies.set("selectedSeats", JSON.stringify(selectedSeats), {
+    const points = { boardingPoint, droppingPoint };
+    const singleSeatData = { tripId, seats, points };
+    Cookies.set("seatData", JSON.stringify(singleSeatData), {
       expires,
       path: "/",
     });
-    Cookies.set("points", JSON.stringify({ boardingPoint, droppingPoint }), {
-      expires,
-      path: "/",
-    });
-
+    dispatch(setSeatData({ tripId, points }));
+    dispatch(setSingleSeatData(singleSeatData));
     alert("Seat data saved to cookie");
   };
 
@@ -59,10 +64,10 @@ const BookingButton = ({ droppingPoint, boardingPoint }) => {
       }}
       onClick={handleClick}
     >
-      {!selectedSeats.length ? (
+      {!seats?.length ? (
         "Select seat to continue"
       ) : (
-        <ButtonActive selectedSeats={selectedSeats} />
+        <ButtonActive selectedSeats={seats ? seats : []} />
       )}
     </button>
   );

@@ -2,7 +2,8 @@ import { useMemo } from "react";
 import styles from "../styles/seats-styles.module.scss";
 import { Tooltip } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedSeats } from "../../slice";
+import { setSeatData } from "../../slice";
+import { useTripContext } from "../SeatLayout";
 
 const getSeats = (seats) => {
   const formattedSeats = [];
@@ -26,7 +27,10 @@ const getSeats = (seats) => {
     }
   });
 
-  formattedSeats.splice(1, 0, [{ seatNumber: "", gender: null, price: "" }]);
+  const emptySeats = [[{ seatNumber: "", gender: null, price: "" }]];
+  // emptySeats[1] = [{ seatNumber: "", gender: null, price: "" }];
+
+  formattedSeats.splice(1, 0, ...emptySeats);
 
   return formattedSeats.reverse();
 };
@@ -93,27 +97,37 @@ const DeckTitle = ({ title, children }) => (
   </div>
 );
 
-const SeatRow = ({ seat, arr, i, selectedPrice }) => (
-  <div className={styles.seatRow}>
-    {seat.map((item, j) => (
-      <SeatColumn
-        key={item.seatNumber || `${i}-${j}`} // fallback key if seatNumber is empty
-        item={item}
-        arr={arr}
-        i={i}
-        j={j}
-        selectedPrice={selectedPrice}
-      />
-    ))}
-  </div>
-);
+const SeatRow = ({ seat, arr, i, selectedPrice }) => {
+  let className = styles.seatRow;
+  if (seat.length === 1) className += " " + styles.empty;
+
+  return (
+    <div className={className}>
+      {seat.map((item, j) => (
+        <SeatColumn
+          key={item.seatNumber || `${i}-${j}`} // fallback key if seatNumber is empty
+          item={item}
+          arr={arr}
+          i={i}
+          j={j}
+          selectedPrice={selectedPrice}
+        />
+      ))}
+    </div>
+  );
+};
+
+export const useSingleSeatData = (seatData, tripId) => {
+  return seatData.find((s) => s.tripId === tripId);
+};
 
 const SeatColumn = ({ item, arr, i, j, selectedPrice }) => {
+  const tripId = useTripContext();
+  const seatData = useSelector((state) => state.trips.seatData);
+  const { seats } = useSingleSeatData(seatData, tripId);
   const dispatch = useDispatch();
-  const selectedSeats = useSelector((state) => state.trips.selectedSeats);
 
   const { bgClr, bdrClr } = getSeatColor(item.gender);
-
   const dynamicStyle = { backgroundColor: bgClr, borderColor: bdrClr };
 
   if (selectedPrice === item.price && !item.gender)
@@ -121,14 +135,16 @@ const SeatColumn = ({ item, arr, i, j, selectedPrice }) => {
 
   if (!item.seatNumber) dynamicStyle.visibility = "hidden";
 
-  if (selectedSeats.some((s) => s.seatNumber === item.seatNumber)) {
+  if (seats?.some((s) => s.seatNumber === item.seatNumber)) {
     dynamicStyle.backgroundColor = "hsl(143, 46%, 89%)";
     dynamicStyle.borderColor = "hsl(143, 52%, 50%)";
   }
 
   const handleSeatSelection = () => {
     if (item.gender) return;
-    dispatch(setSelectedSeats(item));
+    const seat = { seatNumber: item.seatNumber };
+    seat.price = item.price;
+    dispatch(setSeatData({ seat, tripId }));
   };
 
   return (

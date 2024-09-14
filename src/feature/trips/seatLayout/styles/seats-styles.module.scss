@@ -19,6 +19,8 @@ li.seats {
       & div.seatContainer {
         max-width: 550px;
         margin-inline: auto;
+    padding-inline: 24px;
+
       }
     }
     @media (max-width: 480px) {
@@ -59,6 +61,16 @@ li.seats {
         height: 160px;
       }
     }
+
+@media (max-width: 360px) {
+      margin-inline: -38px;
+      div.seatContainer {
+        height: 160px;
+        transform: scale(.90);
+      }
+    }
+
+
   }
 }
 
@@ -68,7 +80,7 @@ div.deckTitle {
 
   justify-content: space-between;
   flex-direction: column-reverse;
-  align-items: center;
+  align-items: start;
   padding-block: 8px;
 
   // this is the title of deck
@@ -82,18 +94,19 @@ div.deckSeats {
   width: calc(100% - 40px);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  justify-content: center;
+  gap: 6px;
 
   div.seatRow {
-    height: 35px;
+    // height: 35px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
   }
 
   div.seatColumn {
-    height: 32px;
-    width: 65px;
+    height: 31px;
+    width: 62px;
     // border: 2px solid gray;
     border-width: 2px;
     border-style: solid;
@@ -105,6 +118,7 @@ div.deckSeats {
     font-size: 0.75rem;
     cursor: pointer;
     position: relative;
+    overflow: hidden;
 
     span.seatColumnIcon {
       height: 80%;
@@ -112,9 +126,15 @@ div.deckSeats {
       border: inherit;
       border-right: none;
       position: absolute;
+      background-color: white;
       right: -2px;
       border-radius: 4px;
+
     }
+  }
+
+  div.empty{
+    height: 60px;
   }
 
   @media screen {
@@ -123,7 +143,7 @@ div.deckSeats {
     @media (max-width: 550px) {
       div.seatRow {
         gap: 4px;
-        transform: scale(0.85);
+        transform: scale(0.9);
       }
       div.seatColumn {
         transform: scale(0.9);
@@ -133,6 +153,10 @@ div.deckSeats {
           width: 10%;
         }
       }
+      div.empty{
+    height: 40px;
+  }
+
     }
 
     @media (max-width: 480px) {
@@ -142,6 +166,22 @@ div.deckSeats {
           transform: rotate(-90deg);
         }
       }
+      div.empty{
+        height: 32px;
+  }
     }
+
+
+@media (max-width: 360px) {
+        
+      // div.seatRow {
+       
+      //   transform: scale(0.85);
+      // }
+      div.seatColumn {
+        transform: scale(0.85);
+             }
+        }
+
   }
 }

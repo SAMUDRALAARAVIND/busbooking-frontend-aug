@@ -3,10 +3,10 @@ import Cookies from "js-cookie";
 
 // Initialized the state with selected seats from cookies, if available
 const initialState = {
-  selectedSeats: Cookies.get("selectedSeats")
-    ? JSON.parse(Cookies.get("selectedSeats"))
+  seatData: Cookies.get("seatData")
+    ? [JSON.parse(Cookies.get("seatData"))]
     : [],
-  points: null,
+  singleSeatData: {},
 };
 
 const MAX_SEATS = 6; //  constant for maximum seat limit
@@ -15,31 +15,39 @@ const tripsSlice = createSlice({
   name: "trips",
   initialState,
   reducers: {
-    setSelectedSeats: (state, action) => {
-      const seat = action.payload;
-      const seatExists = state.selectedSeats.some(
-        (s) => s.seatNumber === seat.seatNumber
-      );
+    setSeatData: (state, action) => {
+      const seat = action.payload.seat;
+      const tripId = action.payload.tripId;
+      const points = action.payload.points;
 
-      if (seatExists) {
-        // Remove the seat if it already exists in the selected seats
-        state.selectedSeats = state.selectedSeats.filter(
-          (s) => s.seatNumber !== seat.seatNumber
-        );
-      } else if (state.selectedSeats.length < MAX_SEATS) {
-        // Add the seat if the limit is not exceeded
-        state.selectedSeats.push(seat);
-      } else {
-        window.alert("Sorry, Maximum 6 seats allowed per passenger");
-      }
+      state.seatData = state.seatData.map((s) => {
+        if (tripId === s.tripId) {
+          let seatExists;
+          if (s.seats && seat) {
+            seatExists = s.seats.some((s) => s.seatNumber === seat.seatNumber);
+            if (seatExists) {
+              s.seats = s.seats.filter((s) => s.seatNumber !== seat.seatNumber);
+            } else if (s.seats.length < MAX_SEATS) s.seats.push(seat);
+            else {
+              window.alert("Sorry, Maximum 6 seats allowed per passenger");
+            }
+          } else if (seat) s.seats = [seat];
+          s.points = points;
+        }
+        return s;
+      });
+      // state.singleSeatData = state.seatData.find((s) => (s.tripId = tripId));
     },
-
-    setSelectedPoints: (state, action) => {
-      state.points = action.payload;
+    setSingleSeatData: (state, action) => {
+      state.singleSeatData = action.payload;
+    },
+    setTripId: (state, action) => {
+      const isExist = state.seatData.some((s) => s.tripId === action.payload);
+      if (!isExist) state.seatData.push({ tripId: action.payload });
     },
   },
 });
 
-export const { setSelectedSeats, setSelectedPoints } = tripsSlice.actions;
+export const { setSeatData, setSingleSeatData, setTripId } = tripsSlice.actions;
 
 export default tripsSlice;
