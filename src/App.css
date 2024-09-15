@@ -1,6 +1,6 @@
-.App {
+body {
   text-align: center;
-  background-color: #d8d4d4;
+  background-color: #F4F4F4;
   flex-wrap: wrap;
   /* background-color: #F4F4F4; */
   /* height: 100vh; */
@@ -10,7 +10,7 @@
 .flex{
   display: flex;
   gap: 2px;
-  align-items: center;
+  /* align-items: center; */
 }
 .text-end{
   text-align: end;
@@ -32,4 +32,10 @@ position: relative;
   overflow-y: auto ;
   scrollbar-color: var(--mediumRed) #fce3e3;
   scrollbar-width: thin;
+}
+
+@media (max-width:538px){
+  .trips-page{
+  flex-direction: column;
+  }
 }

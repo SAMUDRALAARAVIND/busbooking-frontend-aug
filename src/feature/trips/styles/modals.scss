@@ -1,0 +1,180 @@
+.bdContainer {
+  position: absolute;
+  height: 38vh;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 5px 10px 5px rgba(121, 120, 120, 0.2);
+  width: 60%;
+  text-align: start;
+  margin: 10px 23px;
+  padding: 10px;
+  z-index: 1000;
+}
+.boardingList,
+.DroppingList {
+  height: 27vh;
+  padding:  10px;
+}
+
+.bdContainer h5{
+  font-size: 20px;
+  font-weight: 500;
+  padding-bottom: 7px;
+  border-bottom: 1px solid rgb(209, 207, 207);
+border-right: 1px solid rgb(209, 207, 207);
+}
+.boardingList h6, .DroppingList h6{
+  font-size: 18px;
+  font-weight: 500;
+  color: #616161;
+  margin: 3px 0px;
+  margin-top: 10px;
+}
+
+.boardingList p, .DroppingList p{
+  font-size: 16px;
+}
+
+.left h5,
+.right h5 {
+  margin: 10px;
+}
+.left{
+  width: 55%;
+
+}
+
+
+.aminitesModal {
+  gap: 10px;
+  background-color: #ffffff;
+  padding:  10px;
+  width: 70%;
+  text-align: left;
+  margin: auto;
+  margin-left: 20%;
+  margin-top: 5px;
+  border-radius: 10px;
+  box-shadow: 0px 5px 10px 5px rgba(121, 120, 120, 0.2);
+}
+.aminitesModal h5{
+  font-size: 1.1rem;
+  margin: .8rem;
+}
+.aminitesModal div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 2px 30px;
+}
+.aminitesModal p{
+  font-size: .9rem;
+  margin: 0;
+
+}
+.aminitesModal h5 {
+  line-height: 1px;
+  color: #703b3b;
+}
+.aminitesModal svg {
+  fill: #444444;
+  stroke: #444444;
+}
+.aminitesModal p {
+  display: flex;
+  line-height: 2px;
+  gap: 3px;
+  align-items: center;
+  text-align: center;
+  align-self: center;
+  color: #444492;
+}
+
+.cancellation-policy{
+  position: absolute;
+  height: 30vh;
+  background-color: white;
+  border-radius: 10px;
+  width: 70%;
+  box-shadow: 0px 5px 10px 5px rgba(121, 120, 120, 0.2);
+  width: 45%;
+  text-align: start;
+  margin: 10px 23px;
+  padding: 10px;
+  overflow-y: scroll;
+  z-index: 1000;
+  margin-left: 30%;
+}
+.cancellation-policy .flex{
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+}
+.cancellation-policy .heading{
+  color: var(--mediumRed);
+  font-size:18px;
+
+}
+.cancellation-policy h5{
+  font-size:18px;
+  font-weight: 500;
+  margin: 10px;
+
+  // line-height: 1px;
+
+}
+.refundOnTime{
+  color: grey;
+}
+
+.cancellation-policy .desc{
+color: grey;
+}
+.Travel-policy{
+  position: absolute;
+  height: 30vh;
+  background-color: white;
+  border-radius: 10px;
+  width: 70%;
+  box-shadow: 0px 5px 10px 5px rgba(121, 120, 120, 0.2);
+  width: 45%;
+  text-align: start;
+  margin: 10px 23px;
+  padding: 10px 20px;
+  padding-bottom: 20px;
+  overflow-y: scroll;
+  z-index: 1000;
+  margin-left: 30%;
+  margin-bottom: 20px;
+}
+
+.Travel-policy p{
+color: grey;
+margin:0;
+}
+
+.Travel-policy h3{
+  font-size: 20px;
+margin: 8px;
+}
+.Travel-policy h4{
+  font-size: 20px;
+  font-weight: 500;
+  color: #212121;
+margin:  0;
+margin-top: 12px;
+}
+
+@media only screen and (min-width: 780px) and (max-width: 1300px) {
+  .cancellation-policy {
+    zoom: 0.8;
+  }
+}
+
+@media only screen and (min-width: 459px) and (max-width: 809px) {
+  .TripContainer {
+    zoom: 0.6;
+  }
+}
+@media only screen and (max-width: 599px) {
+}

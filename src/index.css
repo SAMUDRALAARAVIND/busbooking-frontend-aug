@@ -18,3 +18,17 @@ body {
 .scroll{
   overflow-y: scroll;
 }
+
+
+:root{
+  --grayFont : #8A8A86;
+  --mediumRed : #DC635B;
+}
+::-webkit-scrollbar {
+  width: 5px;
+  
+}
+
+.scroll{
+  overflow-y: scroll;
+}
