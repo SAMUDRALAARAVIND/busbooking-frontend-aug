@@ -108,6 +108,8 @@ border-right: 1px solid rgb(209, 207, 207);
 .cancellation-policy .flex{
   justify-content: space-between;
   align-items: center;
+  padding: 5px 10px;
+  margin: 5px;
   gap: 5px;
 }
 .cancellation-policy .heading{
@@ -118,7 +120,7 @@ border-right: 1px solid rgb(209, 207, 207);
 .cancellation-policy h5{
   font-size:18px;
   font-weight: 500;
-  margin: 10px;
+  margin: 10px 0px;
 
   // line-height: 1px;
 
