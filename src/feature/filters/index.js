@@ -1,10 +1,11 @@
-import './filters.scss'
-
+import "./filters.scss"
 
 const Filters = () => {
-  return (
-  <> 
-  <div className="filters">filters</div></>)
+  
+  return( 
+  <p className="filters">Filters </p>
+
+)
 };
 
 export default Filters;

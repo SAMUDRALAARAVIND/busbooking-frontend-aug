@@ -3,7 +3,7 @@ import Filters from '../feature/filters'
 import TripsScreen from '../feature/trips'
 const TripsPage = () => {
   return (
-    <div className=' trips-page flex'>
+    <div className='trips-page flex'>
 <Filters/>
 <TripsScreen/>
     </div>
