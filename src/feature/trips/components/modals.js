@@ -1,6 +1,6 @@
 import React from 'react'
-import "./styles/modals.scss";
-import { boardingPoints, droppingPoints } from "../data";
+import "../styles/modals.scss";
+import { boardingPoints, droppingPoints } from "../../data";
 import { formatDate, formatTime } from './formatDatetime';
 import { aminitiesSvg } from "./svg";
 
@@ -114,18 +114,18 @@ export const TravelPolicy =() => {
   return(
     <>
     <div className='Travel-policy overflow'> 
-      <h3>Travel Policy</h3>
-        <h4>Do I need to buy a ticket for my child?</h4> 
+      <h4>Travel Policy</h4>
+        <h5>Do I need to buy a ticket for my child?</h5> 
         <p>Please purchase a ticket for children above the age of 6</p>
 
-        <h4>Will i charged for excess luggage ?</h4>
+        <h5>Will i charged for excess luggage ?</h5>
         <p>Yes excess luggage is chargeable. You are allowed to carry 2 pieces of luggage. 15 kgs each.</p>
 
-        <h4>Can i travel with my pet ?</h4>
+        <h5>Can i travel with my pet ?</h5>
         <p>No, Travelling with pet is not permitted</p>
-        <h4>Is ther any alcohol/liquor policy</h4>
+        <h5>Is ther any alcohol/liquor policy</h5>
         <p>Yes ALcohol/Liquor consumption and caarring it inside the bus is prohibited. Bus partnersreserves the right to debopard any passendger with inappropriate behaviour or does not comply with the policy . Rfunds will not be processed in such cases.</p> 
-        <h4>Will the bus wait if the boarding time has passed?</h4>
+        <h5>Will the bus wait if the boarding time has passed?</h5>
         <p>Bus partner do not wait for the passengers beyond the departure time.</p>
            </div>
     </>

@@ -33,9 +33,3 @@ position: relative;
   scrollbar-color: var(--mediumRed) #fce3e3;
   scrollbar-width: thin;
 }
-
-@media (max-width:538px){
-  .trips-page{
-  flex-direction: column;
-  }
-}

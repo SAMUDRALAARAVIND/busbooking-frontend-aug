@@ -40,8 +40,11 @@ border-right: 1px solid rgb(209, 207, 207);
   margin: 10px;
 }
 .left{
-  width: 55%;
+  width: 54%;
 
+}
+.right{
+  width:44%;
 }
 
 
@@ -49,7 +52,7 @@ border-right: 1px solid rgb(209, 207, 207);
   gap: 10px;
   background-color: #ffffff;
   padding:  10px;
-  width: 70%;
+  width: 60%;
   text-align: left;
   margin: auto;
   margin-left: 20%;
@@ -122,8 +125,10 @@ border-right: 1px solid rgb(209, 207, 207);
   font-weight: 500;
   margin: 10px 0px;
 
-  // line-height: 1px;
-
+}
+.cancellation-policy .desc p{
+  padding: 5px;
+  margin: 5px;
 }
 .refundOnTime{
   color: grey;
@@ -155,15 +160,17 @@ color: grey;
 margin:0;
 }
 
-.Travel-policy h3{
-  font-size: 20px;
-margin: 8px;
-}
 .Travel-policy h4{
   font-size: 20px;
   font-weight: 500;
+color: #703B3B;
+margin: 18px 0px;
+}
+.Travel-policy h5{
+  font-size: 18px;
+  font-weight: 500;
   color: #212121;
-margin:  0;
+margin:  2px 0px;
 margin-top: 12px;
 }
 
