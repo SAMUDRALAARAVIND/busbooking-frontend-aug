@@ -26,7 +26,7 @@ const SearchItems = ({ list, placeholder, identifier }) => {
       </span> */}
       <Input
         className="search-input"
-        prefix={<span className="material-icons">search</span>}
+        suffix={<span className="material-icons custom-icon">search</span>}
         placeholder={placeholder}
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}

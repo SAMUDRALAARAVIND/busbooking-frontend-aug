@@ -19,6 +19,8 @@
             flex-wrap: wrap;
             gap: 10px;
             margin: 14px;
+            height: 50%;
+            border-radius: 8px;
             /* Removed margin-bottom to align with filter section */
 
             .amenities-button {
@@ -52,6 +54,7 @@
             background-color: red;
             // padding: 10px;
             margin-left: auto;
+            // border-radius: 8px;
             border-top-right-radius: 8px;
             border-bottom-right-radius: 8px;
             /* Pushes the filter button to the end of the sidebar */
@@ -64,6 +67,8 @@
                 color: white;
                 border: none;
                 padding: 10px 10px;
+                border-top-right-radius: 8px;
+                border-bottom-right-radius: 8px;
                 // border-radius: 5px;
                 cursor: pointer;
                 font-size: 14px;
@@ -100,7 +105,7 @@
 
         .nav-btn {
             margin: 20px;
-            width: 450px;
+            width: 410px;
             padding: 15px;
             border-radius: 5px;
             border: 1px solid transparent;
@@ -121,6 +126,11 @@
 
     .res-sidebar {
         display: none;
+    }
+
+    .nav-filter {
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
     }
 }
 

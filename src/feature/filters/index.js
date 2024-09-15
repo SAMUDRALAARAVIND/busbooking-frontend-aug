@@ -161,7 +161,7 @@ const SideBar = () => {
           width={470}
           className="custom-drawer" // Use className instead of classNames
         >
-          <Filters width={450} padding={20} />
+          <Filters width={420} padding={20} />
           <button className="nav-btn" onClick={handleClearAllFilters}>
             Reset
           </button>

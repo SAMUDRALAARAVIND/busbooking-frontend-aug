@@ -9,12 +9,13 @@
     overflow-y: scroll;
 
     .section {
-        padding: 5px 10px;
+        padding: 15px;
         border-radius: 10px;
         background-color: #f4f4f4;
 
         .title {
-            font-weight: 600;
+            font-size: 1rem;
+            font-weight: 500;
             display: block;
             margin: 10px 0;
             color: #3d3d3d;
@@ -23,9 +24,10 @@
         .boxes {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
 
             .box {
+                padding: 5px;
+
                 .select-box {
                     display: none;
 
@@ -87,5 +89,5 @@
 
 .filters-container {
     scrollbar-width: thin;
-    scrollbar-color: #DC635B #f0f0f0;
+    scrollbar-color: #f0f0f0;
 }
