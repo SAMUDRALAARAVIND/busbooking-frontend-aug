@@ -42,7 +42,7 @@ const BookingButton = ({ droppingPoint, boardingPoint, seats, tripId }) => {
   const isDisabled = !(seats?.length && boardingPoint && droppingPoint);
   const dispatch = useDispatch();
 
-  const handleClick = () => {
+  const handleClick = async () => {
     const expires = new Date(new Date().getTime() + 5 * 60 * 1000);
     const points = { boardingPoint, droppingPoint };
     const singleSeatData = { tripId, seats, points };
@@ -52,7 +52,7 @@ const BookingButton = ({ droppingPoint, boardingPoint, seats, tripId }) => {
     });
     dispatch(setSeatData({ tripId, points }));
     dispatch(setSingleSeatData(singleSeatData));
-    alert("Seat data saved to cookie");
+    // alert("Seat data saved to cookie");
   };
 
   return (
