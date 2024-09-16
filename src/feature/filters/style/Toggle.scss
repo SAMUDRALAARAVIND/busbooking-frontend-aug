@@ -1,0 +1,14 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+}
+
+.material-icons {
+    transition: transform 0.3s ease;
+}
