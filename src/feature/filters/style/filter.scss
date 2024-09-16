@@ -1,12 +1,32 @@
 .filters-container {
     background-color: #fff;
-    padding: 20px;
+    padding-top: 20px;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
-    gap: 20px;
+    gap: 10px;
     box-shadow: 1px 1px 3px #e3e3e3;
-    overflow-y: scroll;
+    // overflow-y: scroll;
+
+    .header {
+        display: flex;
+
+        .subheading {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .clear_all_btn {
+            display: flex;
+            justify-content: flex-end;
+            background-color: #fff;
+            border: none;
+            color: #dc635b;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+    }
 
     .section {
         padding: 15px;
@@ -72,22 +92,4 @@
     justify-content: space-between;
     color: #000;
 
-}
-
-.filters-container::-webkit-scrollbar {
-    width: 8px;
-}
-
-.filters-container::-webkit-scrollbar-thumb {
-    background-color: #DC635B;
-    border-radius: 4px;
-}
-
-.filters-container::-webkit-scrollbar-track {
-    background: #f0f0f0;
-}
-
-.filters-container {
-    scrollbar-width: thin;
-    scrollbar-color: #f0f0f0;
 }

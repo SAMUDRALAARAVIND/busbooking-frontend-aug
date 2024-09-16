@@ -122,6 +122,26 @@
     }
 }
 
+.header {
+    display: flex;
+
+    .subheading {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .clear_all_btn {
+        display: flex;
+        justify-content: flex-end;
+        background-color: #fff;
+        border: none;
+        color: #dc635b;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+    }
+}
+
 @media (min-width: 992px) {
 
     .res-sidebar {
