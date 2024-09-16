@@ -1,13 +1,17 @@
-import React from 'react'
-import Filters from '../filters'
-import TripsCard from './components/tripsCard'
+import React from "react";
+import Filters from "../filters";
+import Navbar from "../search/Navbar";
+import TripsCard from "./components/tripsCard";
 const TripsScreen = () => {
   return (
-    <div className='trips-screen flex'>
-<Filters/>
-<TripsCard/>
-    </div>
-  )
-}
+    <>
+      <Navbar />
+      <div className="trips-screen flex">
+        <Filters />
+        <TripsCard />
+      </div>
+    </>
+  );
+};
 
-export default TripsScreen
+export default TripsScreen;

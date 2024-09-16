@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
 import "../styles/TripCard.scss";
-import { svg, aminitiesSvg } from "./svg";
 import tagImg from "../../../assets/tagImg.jpg";
 import { tripsData } from "../../data"; 
 import { formatDate, formatTime } from "./formatDatetime";
-import { TripRecord, TripDetails, MoreDetails } from "./TripsDetails";
+import { TripDetails } from "./TripsDetails";
 
 export default function TripsCard() {
   return (
@@ -49,7 +47,7 @@ export default function TripsCard() {
             </div>
             <div className="text-end">
               <button className="showSeat">Show Seat</button>
-              <p className="grey">{trip.availableSeats} Seats Available</p>
+              <p className="grey seats-available">{trip.availableSeats} Seats Available</p>
             </div>
           </div>
         </div>
@@ -71,7 +69,3 @@ const calculateDuration = (departureTime, arrivalTime) => {
 
   return `${formattedHours}.${formattedMinutes} Hrs`;
 };
-
-
-
-

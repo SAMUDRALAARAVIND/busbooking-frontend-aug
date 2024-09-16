@@ -1,28 +1,24 @@
 .container {
-  padding-top: 10px;
-  position: relative;
   width: 100%;
   padding: 0;
   margin: 0;
 }
 .trips p{
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 .TripContainer {
   background-color: white;
-  // width: auto;
   text-align: start;
   margin: 17px;
   display: flex;
   margin-top: 20px;
-  max-width: 1200px;
+  max-width: 70vw;
   border-radius: 10px;
   gap: .6rem;
   justify-content: space-between;
-  box-shadow: 0px 0px 8px 3px rgba(121, 120, 120, 0.2);
 }
 .TripContainer:hover {
-  box-shadow: 0px 0px 15px 7px rgba(121, 120, 120, 0.2);
+  box-shadow: 0px 0px 5px 5px rgba(121, 120, 120, 0.2);
 }
 
 .leftWrapper {
@@ -35,14 +31,27 @@
   border-left: 1px solid rgb(236, 235, 235) ;
   width: 16%;
   display: flex;
-  justify-content: space-around;
-  gap: 5px;
+  justify-content: space-between;
   align-items: normal;
   margin: 10px;
   margin-left: 1rem;
   flex-direction: column;
   flex-flow: column wrap;
   flex-wrap: wrap;
+  padding-right: 0.5rem;
+  padding-top: 1rem;
+
+  .text-end{
+    span{
+      font-size: 1.5rem;
+      letter-spacing: 0.1rem;
+      font-weight: 600;
+    }
+    .seats-available{
+      width: 100%;
+      text-align: center;
+    }
+  }
 }
 .rightWrapper p {
   margin-bottom: 5px;
@@ -78,11 +87,10 @@
   width: 40%;
 }
 .NameAndType h5{
-  font-size: 21px;
-  font-weight: 600;
+  font-size: 1.1rem !important;
   margin: 15px 0px;
-  color: #4f4f4f;
-
+  color: #353434;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 .NameAndType p {
   margin: 0px;
@@ -96,11 +104,12 @@
 }
 .timeInfo span {
   font-weight: 600;
-  font-size: 21px;
+  font-size: 1.1rem;
+  line-height: 1.5;
 }
 .moreDetails {
   border-top: 1px solid rgb(230, 227, 227);
-  padding: 3px 10px;
+  padding: 0.2rem 1rem;
   gap: 0.7rem;
   text-wrap: nowrap;
 }
@@ -175,10 +184,10 @@
   margin: -2px;
   align-items: center;
   gap: 3px;
-  padding: 4px 8px;
+  padding: 3px 8px;
 }
 .totalRating p{
-  font-size: 16px;
+  font-size: 0.8rem;
 margin-top: -2px;
 }
 .tracking {
@@ -203,14 +212,18 @@ margin-top: -2px;
   background-color: #f2f2f2;
 }
 .showSeat {
-  padding: 12px 22px;
-  background-color: #dc635b;
+  padding: 0.5rem 1.3rem;
+  background-color: #DC635B;
   border: none;
   color: white;
-  font-size: 17px;
+  font-size: 0.8rem;
   cursor: pointer;
   margin-bottom: 10px;
   border-radius: 5px;
+  width: 90%;
+}
+.showSeat:hover{
+  background-color: #A34940;
 }
 .height {
   height: 220px;
@@ -220,7 +233,7 @@ margin-top: -2px;
 
 
 .rating{
-  height: 30px;
+  height: 1.8rem;
 }
 
 
