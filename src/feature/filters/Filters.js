@@ -14,6 +14,9 @@ const Filters = ({ width, padding }) => {
   };
   return (
     <div className="filters-container" style={sidebarStyle}>
+      <div className="filter-title">
+        <p>Filters</p>
+      </div>
       <BusTypes />
       <PriceRange />
       <DepartureTime />

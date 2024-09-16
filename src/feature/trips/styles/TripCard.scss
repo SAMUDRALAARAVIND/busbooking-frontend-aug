@@ -1,7 +1,7 @@
 .container {
   width: 100%;
   padding: 0;
-  margin: 0;
+  margin-left: 20rem;
 }
 .trips p{
   font-size: 0.8rem;
@@ -240,13 +240,23 @@ margin-top: -2px;
 
 
 @media (max-width: 1200px){
+  .container{
+    margin-left: 0;
+  }
   .showSeat{
     padding: 12px 12px ;
     font-size: 15px;
   }
-
+}
+@media (min-width: 1024px) and (max-width: 1200px) {
+  .filters-container{
+    position:  relative !important;
+  }
 }
 @media only screen and (min-width: 862px) and (max-width: 1072px) {
+  .container{
+    margin-left: 0;
+  }
   .TripContainer {
     zoom: 0.8;
     max-width: 100%;
@@ -254,6 +264,9 @@ margin-top: -2px;
 }
 
 @media only screen and (min-width: 538px) and (max-width: 862px) {
+  .container{
+    margin-left: 0;
+  }
   .TripContainer {
     zoom: 0.7;
     max-width: 100%;
@@ -262,6 +275,9 @@ margin-top: -2px;
 
 
 @media  (max-width: 650px){
+  .container{
+    margin-left: 0;
+  }
   .tripInfo{
     gap: 1rem;
     flex-direction: column;
@@ -303,6 +319,10 @@ margin-top: -2px;
   .TripContainer{
     zoom: 0.7;
     max-width: 100%;
+  }
+  .container{
+    margin-bottom: 15rem;
+    margin-left: 0;
   }
   .rightWrapper .text-end span {
     font-size: 1.3rem;

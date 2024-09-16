@@ -40,9 +40,15 @@
     }
 }
 
+.bg-white{
+    background-color: white;
+    width: fit-content;
+    border-radius: 1rem;
+}
+
 .search-form {
     display: flex;
-    background-color: #fff;
+    background-color: transparent;
     width: 90vw;
     padding: 1.3rem 1rem;
     border-radius: 1rem;
@@ -68,6 +74,7 @@
             border: none;
             font-size: medium;
             font-family: "Roboto", sans-serif;
+            background-color: transparent;
 
             &::placeholder {
                 color: #B7B0B2;
@@ -117,7 +124,6 @@
             }
         }
     }
-
     .search-button {
         background-color: #DC635B;
         color: white;

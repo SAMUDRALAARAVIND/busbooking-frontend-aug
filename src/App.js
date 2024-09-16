@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import './App.css'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import 'material-icons/iconfont/material-icons.css';
 const Search = lazy(() => import("./feature/search/index"));
 const TripsScreen = lazy(() => import("./feature/trips/index"));
 // const BookingScreen = lazy(() => import("./feature/booking/index"));

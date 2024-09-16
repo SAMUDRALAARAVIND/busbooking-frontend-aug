@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addSourceCity, addDestinationCity, addDate } from "./slice";
 import { useNavigate } from "react-router-dom";
 dayjs.extend(customParseFormat);
-
+ 
 function filterCities(type, cities, search) {
   const searchVal = search[type]?.toLowerCase();
   return cities
@@ -120,9 +120,7 @@ const SearchBar = () => {
   return (
     <div>
       <form onSubmit={handleSearchSubmit}>
-        <div className="search-form-container">
-          <h1>Book Bus Tickets</h1>
-          <div className="search-form">
+      <div className="search-form">
             <div
               tabIndex="0"
               className="search-input source-city-input"
@@ -259,7 +257,6 @@ const SearchBar = () => {
             </div>
             <button className="search-button" onClick={()=> navigate('/trips/search')}>Search</button>
           </div>
-        </div>
       </form>
 
       <div className="source-city-div city-div">

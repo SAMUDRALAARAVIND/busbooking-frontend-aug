@@ -7,6 +7,24 @@
     gap: 20px;
     box-shadow: 1px 1px 3px #e3e3e3;
     overflow-y: scroll;
+    max-height: 90vh;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+    position: fixed;
+    margin-left: 1rem;
+
+    &::-webkit-scrollbar {
+        display: none !important; 
+    }
+
+    .filter-title{
+        border-bottom: 1px solid #F2F2F2;
+        padding-bottom: 0.8rem;
+        padding-left: 0.8rem;
+        p{
+            text-align: left;
+        }
+    }
 
     .section {
         padding: 5px 10px;
@@ -72,20 +90,20 @@
 
 }
 
-.filters-container::-webkit-scrollbar {
-    width: 8px;
+.search-box .items::-webkit-scrollbar {
+    width: 2px !important;
 }
 
-.filters-container::-webkit-scrollbar-thumb {
+.search-box .items::-webkit-scrollbar-thumb {
     background-color: #DC635B;
     border-radius: 4px;
 }
 
-.filters-container::-webkit-scrollbar-track {
+.search-box .items::-webkit-scrollbar-track {
     background: #f0f0f0;
 }
 
-.filters-container {
-    scrollbar-width: thin;
+.search-box .items {
+    scrollbar-width: thin !important;
     scrollbar-color: #DC635B #f0f0f0;
 }
