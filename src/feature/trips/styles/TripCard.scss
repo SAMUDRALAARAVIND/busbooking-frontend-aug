@@ -249,12 +249,14 @@ margin-top: -2px;
 @media only screen and (min-width: 862px) and (max-width: 1072px) {
   .TripContainer {
     zoom: 0.8;
+    max-width: 100%;
   }
 }
 
 @media only screen and (min-width: 538px) and (max-width: 862px) {
   .TripContainer {
     zoom: 0.7;
+    max-width: 100%;
   }
 }
 
@@ -277,6 +279,7 @@ margin-top: -2px;
   }
   .TripContainer{
     zoom: 0.8;
+    max-width: 100%;
   }
   .moreDetails{
     flex-wrap: wrap;
@@ -299,15 +302,23 @@ margin-top: -2px;
 @media only screen and (max-width: 458px) {
   .TripContainer{
     zoom: 0.7;
+    max-width: 100%;
   }
-  
+  .rightWrapper .text-end span {
+    font-size: 1.3rem;
+    letter-spacing: 0rem;
+    font-weight: 600;
+  } 
+  .rightWrapper .text-end .seats-available{
+    font-size: 0.8rem;
+  }
   .timeInfo{
     width: 95%;
     
   }
   .showSeat{
-    padding: 12px 14px;
-    font-size: 10px;
+    padding: 12px 3px;
+    font-size: 11px;
   }
   .NameAndType h4{
     font-size: 18px;
@@ -320,6 +331,7 @@ margin-top: -2px;
   }
   .rightWrapper{
     width: 20%;
+    justify-content: space-evenly;
   }
   .ads{
     display: none;
@@ -327,13 +339,12 @@ margin-top: -2px;
   .moreDetails{
     flex-wrap: wrap;
     gap: 0px;
-    margin: 2px;
+    margin: -4px;
   }
   .tripInfo{
     gap: .2rem;
   }
   .tagImg{
-    
     margin: 0.5rem;
     padding-left: 18px;
   }
