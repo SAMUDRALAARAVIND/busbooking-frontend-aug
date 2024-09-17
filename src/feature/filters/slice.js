@@ -17,8 +17,8 @@ export const departureTime = {
 };
 
 const initialPriceRange = {
-  range: [],
-  selectedRange: [],
+  range: [0, 5000],
+  selectedRange: [0, 5000],
 };
 
 const initialState = {
@@ -53,12 +53,7 @@ const filterSlice = createSlice({
         delete state[identifier][stopId];
       }
     },
-    clearAllFilters: (state, action) => {
-      return {
-        ...state,
-        initialState,
-      };
-    },
+    clearAllFilters: () => initialState,
   },
 });
 

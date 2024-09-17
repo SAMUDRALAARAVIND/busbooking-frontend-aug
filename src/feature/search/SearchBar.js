@@ -258,7 +258,7 @@ const SearchBar = () => {
             <button className="search-button" onClick={()=> navigate('/trips/search')}>Search</button>
           </div>
       </form>
-
+ 
       <div className="source-city-div city-div">
         {showPopOver.source && (
           <div className="search-city-div">

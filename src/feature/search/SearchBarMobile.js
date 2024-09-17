@@ -7,6 +7,7 @@ import { useState } from "react";
 import CitiesDiv from "./CitiesDiv";
 import { useDispatch, useSelector } from "react-redux";
 import { addSourceCity, addDestinationCity, addDate } from "./slice";
+import { useNavigate } from "react-router-dom";
 
 dayjs.extend(customParseFormat);
 
@@ -38,6 +39,7 @@ const SearchBarMobile = () => {
     source: "",
     destination: "",
   });
+  const navigate = useNavigate();
   const todayDate = dayjs();
   const maxDate = todayDate.add(3, "month");
 
@@ -160,7 +162,7 @@ const SearchBarMobile = () => {
                 : today.format("DD/MM/YYYY")}
             </p>
           </div>
-          <button className="search-button">Submit</button>
+          <button className="search-button" onClick={()=> navigate('/trips/search')}>Submit</button>
         </div>
       </form>
 
@@ -247,6 +249,7 @@ const SearchBarMobile = () => {
         onClose={() => setShowPopOver({ ...showPopOver, date: false })}
         open={showPopOver.date}
         width="100%"
+        style={{textAlign:"left"}}
       >
         <DatePicker
           defaultValue={

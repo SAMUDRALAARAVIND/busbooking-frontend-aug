@@ -1,49 +1,73 @@
 .filters-container {
-    background-color: #fff;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-    gap: 20px;
-    box-shadow: 1px 1px 3px #e3e3e3;
-    overflow-y: scroll;
     max-height: 90vh;
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
     position: fixed;
     margin-left: 1rem;
+    background-color: #fff;
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-bottom: 2rem !important;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    gap: 10px;
+    border: 1px solid #e3e3e3;
+    overflow-y: scroll;
+    width: 26vw !important;
+
 
     &::-webkit-scrollbar {
-        display: none !important; 
+        display: none !important;
     }
 
-    .filter-title{
-        border-bottom: 1px solid #F2F2F2;
-        padding-bottom: 0.8rem;
-        padding-left: 0.8rem;
-        p{
-            text-align: left;
+
+    .header {
+        display: flex;
+        margin-top: -10px;
+        margin-bottom: -10px;
+
+        .subheading {
+            font-size: 1rem;
+            font-weight: 500;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 3;
+        }
+
+        .clear_all_btn {
+            display: flex;
+            justify-content: flex-end;
+            background-color: #fff;
+            border: none;
+            color: #dc635b;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
         }
     }
 
     .section {
-        padding: 5px 10px;
+        padding: 15px;
         border-radius: 10px;
         background-color: #f4f4f4;
 
         .title {
-            font-weight: 600;
+            font-size: 1rem;
+            font-weight: 500;
             display: block;
             margin: 10px 0;
             color: #3d3d3d;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: left;
         }
 
         .boxes {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
 
             .box {
+                padding: 5px;
+
                 .select-box {
                     display: none;
 
@@ -103,7 +127,29 @@
     background: #f0f0f0;
 }
 
-.search-box .items {
-    scrollbar-width: thin !important;
-    scrollbar-color: #DC635B #f0f0f0;
+@media (max-width: 991px) {
+    .filters-container {
+        max-height: 80vh;
+        width: 90vw !important;
+        position: relative;
+    }
+    .clear_all_btn{
+        display: none !important;
+    }
+    .box label{
+        padding: 7px !important;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .filters-container{
+        width: 51vw !important;
+        position: relative;
+    }
+    .box label{
+        padding: 7px !important;
+    }
+    .clear_all_btn{
+        display: none !important;
+    }
 }

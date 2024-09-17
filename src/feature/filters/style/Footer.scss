@@ -1,11 +1,8 @@
 @media (max-width: 991px) {
-    .filters-container{
-        position: relative;
-    }
+
     .res-sidebar {
         display: flex;
         flex-direction: row;
-        justify-content: center;
         position: fixed;
         bottom: 15px;
         left: 20px;
@@ -22,6 +19,8 @@
             flex-wrap: wrap;
             gap: 10px;
             margin: 14px;
+            height: 50%;
+            border-radius: 8px;
             /* Removed margin-bottom to align with filter section */
 
             .amenities-button {
@@ -55,6 +54,7 @@
             background-color: red;
             // padding: 10px;
             margin-left: auto;
+            // border-radius: 8px;
             border-top-right-radius: 8px;
             border-bottom-right-radius: 8px;
             /* Pushes the filter button to the end of the sidebar */
@@ -67,6 +67,8 @@
                 color: white;
                 border: none;
                 padding: 10px 10px;
+                border-top-right-radius: 8px;
+                border-bottom-right-radius: 8px;
                 // border-radius: 5px;
                 cursor: pointer;
                 font-size: 14px;
@@ -98,12 +100,12 @@
 
         .ant-drawer-body {
             margin: 2px;
-            padding: 0px;
+            padding: 0;
         }
 
         .nav-btn {
-            margin: 20px;
-            width: calc(100% - 40px);
+            margin: 24px;
+            width: 84vw;
             padding: 15px;
             border-radius: 5px;
             border: 1px solid transparent;
@@ -112,7 +114,6 @@
             font-weight: 500;
             font-size: larger;
             cursor: pointer;
-            text-align: center;
         }
 
         .nav-btn:hover {
@@ -121,15 +122,46 @@
     }
 }
 
+.header {
+    display: flex;
+
+    .subheading {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .clear_all_btn {
+        display: flex;
+        justify-content: flex-end;
+        background-color: #fff;
+        border: none;
+        color: #dc635b;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+    }
+}
+
 @media (min-width: 992px) {
 
     .res-sidebar {
         display: none;
+    }
+
+    .nav-filter {
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
     }
 }
 
 @media (max-width: 992px) {
     .res-nav {
         display: none;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px){
+    .nav-btn{
+        width: 48vw !important;
     }
 }

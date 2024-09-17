@@ -4,6 +4,7 @@ import AirlineSeatFlatIcon from "@mui/icons-material/AirlineSeatFlat";
 import AirIcon from "@mui/icons-material/Air";
 import EventSeatIcon from "@mui/icons-material/EventSeat";
 import { filterType, toggleStop } from "../slice";
+import "../style/BusTypes.scss";
 
 const busTypes = [
   {
@@ -12,7 +13,7 @@ const busTypes = [
     icon: <AcUnitIcon />,
   },
   {
-    title: "Non AC",
+    title: "NonAC",
     identifier: "NON_AC",
     icon: <AirIcon />,
   },
@@ -44,7 +45,7 @@ const BusTypes = () => {
   return (
     <div className="section">
       <span className="title">Bus Types</span>
-      <div className="boxes">
+      <div className="busType_boxes">
         {busTypes.map((busType) => (
           <div className="box" key={busType.identifier}>
             <input

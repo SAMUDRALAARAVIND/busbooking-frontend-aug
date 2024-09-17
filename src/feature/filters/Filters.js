@@ -1,22 +1,35 @@
+import { useDispatch } from "react-redux";
 import Toggle from "./Component/Toggle";
 import SearchItems from "./Component/SearchItem";
 import BusTypes from "./Component/BusTypes";
 import PriceRange from "./Component/PriceRange";
 import DepartureTime from "./Component/DepartureTime";
-import { filterType } from "./slice";
+import { clearAllFilters, filterType } from "./slice";
 import { busPartners, cities } from "./data";
 import "./style/filter.scss";
+import { Divider } from "antd";
 
 const Filters = ({ width, padding }) => {
+  const dispatch = useDispatch();
+
+  const handleReset = () => {
+    dispatch(clearAllFilters()); // Reset to default values
+  };
+
   const sidebarStyle = {
     width: width || "300px",
     padding: padding || "20px",
   };
+
   return (
     <div className="filters-container" style={sidebarStyle}>
-      <div className="filter-title">
-        <p>Filters</p>
+      <div className="header">
+        <p className="subheading">Filters</p>
+        <button className="clear_all_btn" onClick={handleReset}>
+          Clear All
+        </button>
       </div>
+      <Divider style={{ margin: "0px 0px" }} />
       <BusTypes />
       <PriceRange />
       <DepartureTime />

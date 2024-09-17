@@ -3,9 +3,21 @@
     flex-direction: column;
     gap: 5px;
     height: 200px;
+    padding: 5px;
 
     .search-input {
         margin-bottom: 10px;
+        padding: 10px;
+    }
+
+    .custom-icon {
+        color: #b0b0b0;
+        font-size: 25px;
+        cursor: pointer;
+    }
+
+    .search-input .ant-input {
+        padding-right: 30px;
     }
 
     .selected-items {
@@ -27,7 +39,7 @@
             color: #868686;
 
             label {
-                font-size: 0.8rem;
+                font-size: 1rem;
             }
         }
     }
@@ -35,8 +47,11 @@
 }
 
 .custom-checkbox .ant-checkbox-inner {
-    border-color: #DC635B;
+    .ant-checkbox-inner {
+        border-color: #868686 !important; // Default border color
+    }
 }
+
 
 .custom-checkbox .ant-checkbox-checked .ant-checkbox-inner {
     background-color: #DC635B;
