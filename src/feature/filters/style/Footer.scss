@@ -2,7 +2,7 @@
 
     .res-sidebar {
         display: flex;
-        flex-direction: row;
+        // flex-direction: row;
         position: fixed;
         bottom: 15px;
         left: 20px;
@@ -15,20 +15,23 @@
 
         .amenities-list {
             display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
+            // flex-direction: row;
+            // flex-wrap: wrap;
             gap: 10px;
             margin: 14px;
             height: 50%;
             border-radius: 8px;
+
+            overflow-x: auto;
             /* Removed margin-bottom to align with filter section */
 
             .amenities-button {
                 display: flex;
+                // flex: 1 1 100px;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                width: 80px;
+                min-width: 80px;
                 height: 50px;
                 // margin: 5px;
                 cursor: pointer;
@@ -158,4 +161,8 @@
     .res-nav {
         display: none;
     }
+}
+
+.amenities-list::-webkit-scrollbar {
+    width: 0px;
 }
