@@ -1,8 +1,11 @@
 @media (max-width: 991px) {
-
+    .filters-container{
+        position: relative;
+    }
     .res-sidebar {
         display: flex;
         flex-direction: row;
+        justify-content: center;
         position: fixed;
         bottom: 15px;
         left: 20px;
@@ -95,12 +98,12 @@
 
         .ant-drawer-body {
             margin: 2px;
-            padding: 0;
+            padding: 0px;
         }
 
         .nav-btn {
             margin: 20px;
-            width: 89vw;
+            width: calc(100% - 40px);
             padding: 15px;
             border-radius: 5px;
             border: 1px solid transparent;

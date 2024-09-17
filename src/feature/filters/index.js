@@ -158,10 +158,10 @@ const SideBar = () => {
           placement="right"
           onClose={closeToggleSidebar}
           open={isSidebarOpen} // Use open instead of visible
-          width={470}
+          width={500}
           className="custom-drawer" // Use className instead of classNames
         >
-          <Filters width={320} padding={20} />
+          <Filters width={330} padding={20} />
           <button className="nav-btn" onClick={handleClearAllFilters}>
             Reset
           </button>
