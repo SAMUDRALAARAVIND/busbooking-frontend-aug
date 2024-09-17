@@ -1,5 +1,5 @@
 import Navbar from "./Navbar";
-import SearchBar from "./SearchBar";
+// import SearchBar from "./SearchBar";
 import SearchBarMobile from "./SearchBarMobile";
 
 const CitySearch = () => {
@@ -10,9 +10,9 @@ const CitySearch = () => {
         <div className="search-bg-img">
           <div className="search-form-container">
             <h1>Book Bus Tickets</h1>
-            <div className="bg-white">
+            {/* <div className="bg-white">
               <SearchBar />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

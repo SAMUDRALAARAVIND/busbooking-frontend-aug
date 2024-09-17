@@ -36,7 +36,10 @@ const SearchBar = () => {
   const [search, setSearch] = useState({
     source: "",
     destination: "",
+    date:"",
   });
+
+  console.log(search)
   const dispatch = useDispatch();
 
   const todayDate = dayjs();
@@ -62,9 +65,15 @@ const SearchBar = () => {
     };
   }, []);
 
-  const onDateChange = (date) => {
+  const onDateChange = (date, dateString) => {
+    console.log("Selected date:", date);
+    console.log("Formatted date string:", dateString);
     setToday(date);
     dispatch(addDate(date.unix()));
+    setSearch({
+      ...search, 
+      date:dateString
+    })
   };
 
   const handleCityClick = (identifier, city) => {
@@ -104,6 +113,8 @@ const SearchBar = () => {
       destination: swappedDestination,
     });
 
+   
+
     dispatch(addSourceCity(swappedSource));
     dispatch(addDestinationCity(swappedDestination));
   };
@@ -116,6 +127,17 @@ const SearchBar = () => {
       alert("Please fill in all search fields.");
     }
   };
+
+  // const [search, setSearch] = useState({
+  //   source: "",
+  //   destination: "",
+  //   date:"",
+  // });
+  const handelSublit = () => {
+    console.log(search)
+    const url = `/trips/search/${search.source}/01/${search.destination}/02`;
+    navigate(url) 
+  }
 
   return (
     <div>
@@ -255,7 +277,7 @@ const SearchBar = () => {
                 </button>
               </div>
             </div>
-            <button className="search-button" onClick={()=> navigate('/trips/search')}>Search</button>
+            <button className="search-button" onClick={()=> handelSublit()}>Search</button>
           </div>
       </form>
  

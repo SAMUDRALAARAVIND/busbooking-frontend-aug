@@ -3,8 +3,17 @@ import tagImg from "../../../assets/tagImg.jpg";
 import { tripsData } from "../../data"; 
 import { formatDate, formatTime } from "./formatDatetime";
 import { TripDetails } from "./TripsDetails";
+import { useParams } from "react-router-dom";
+
+import "../../search/styles/Header.scss"
 
 export default function TripsCard() {
+
+  const { source, sourceId, destination, destinationId } = useParams();
+
+  console.log(source)
+
+
   return (
     <div className="trips container">
       {tripsData[0].trips.map((trip, index) => (
