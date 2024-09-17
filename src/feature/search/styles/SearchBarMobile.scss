@@ -1,0 +1,110 @@
+.search-mobile-container{
+    .oranger-div{
+        background-color: #DC635B;
+        width: 100vw;
+        height: 47vh;
+        border-bottom-left-radius: 19rem;
+        border-bottom-right-radius: 19rem;
+    }
+    .search-form-mobile{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        background-color: white;
+        padding: 0.5rem 0.2rem;
+        border-radius: 1rem;
+        top: 8rem;
+        left: 0.5rem;
+        row-gap: 1.5rem;
+        padding-bottom: 1.5rem;
+        box-shadow: 0 2px 5px rgba(211, 211, 211, 0.5), 0 -2px 5px rgba(211, 211, 211, 0.5), 2px 0 5px rgba(211, 211, 211, 0.5), -2px 0 5px rgba(211, 211, 211, 0.5);
+        hr{
+            width: 66vw;
+            border-top: 1px solid #D3D3D3;
+            position: absolute;
+            top: 5rem;
+            left: 1rem;
+        }
+        .swap-icon{
+            position: absolute;
+            top: 3.7rem;
+            right: 1.7rem;
+            padding: 0.6rem;
+            border-radius: 50%;
+            font-size: 24px;
+            transform: rotate(90deg);
+            border: 1px solid #D3D3D3;
+        }
+        .select-city{
+            display: flex;
+            justify-content: left;
+            width: 93vw;
+            padding: 1rem;
+            column-gap: 0.5rem;
+
+            span{
+                color: #616161;
+            }
+            p{
+                color: #B7B0B2;
+                font-size: 25px;
+            }
+        }
+        .select-date{
+            display: flex;
+            flex-direction: column;
+            row-gap: 1rem;
+            margin-bottom: 1rem;
+            p{
+                width: 71vw;
+                text-align: left;
+                font-size: small;
+            }
+            .date-p{
+                border: 1px solid #BFBFBF;
+                padding: 1rem;
+                border-radius: 1rem;
+                text-align: center;
+            }
+            .calendar{
+                position: absolute;
+                top: 12.2rem;
+                left: 4rem;
+            }
+              
+        }
+        .search-button{
+            background-color: #DC635B;
+            color: white;
+            font-weight: 500;
+            font-size: large;
+            padding: 7px;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.8rem 2rem;
+            cursor: pointer;
+            position: absolute;
+            top: 15.3rem;
+            width: 53%;
+        }
+    }
+}
+
+.mobile-search-input{
+    padding: 0.5rem;
+    border-radius: 1rem;
+    border: 1px solid #D9D9D9;
+    width: 86vw;
+    margin-bottom: 1rem;
+}:focus{
+    outline: none;
+}
+
+.heading{
+    position: absolute;
+    color: white;
+    top: 5.3rem;
+    left: 25%;
+    font-size: 1.2rem;
+}
