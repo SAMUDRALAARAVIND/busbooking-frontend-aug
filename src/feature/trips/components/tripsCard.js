@@ -11,7 +11,7 @@ export default function TripsCard() {
         <div key={trip.tripId} className="TripContainer">
           <div className="leftWrapper">
             <div className="upperItems">
-              <div className="ads absolute">
+              <div className="ads">
                 <p>AD</p>
               </div>
               <img src={tagImg} className="tagImg" alt="abhiAssuaranceTag" />
