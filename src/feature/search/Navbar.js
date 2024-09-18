@@ -29,19 +29,28 @@ const Navbar = () => {
         </div>
         <nav>
           <Link to='#'>
-            <DirectionsBusIcon /> Buses
+          <img src="https://www.abhibus.com/assets/svg/bus.svg" style={{width:"30px", marginRight:"15px"}} />
+            {/* <DirectionsBusIcon />  */}
+            Buses
           </Link>
           <Link to='#'>
-            <TrainIcon /> Trains
+          <img src="https://www.abhibus.com/assets/svg/train.svg" style={{width:"30px", marginRight:"15px"}} />
+            {/* <TrainIcon /> */}
+             Trains
           </Link>
           <Link to='#'>
-            <FlightIcon /> Flights
+          <img src="https://www.abhibus.com/assets/svg/flight.svg" style={{width:"30px", marginRight:"15px"}} />
+            {/* <FlightIcon />  */}
+            Flights
           </Link>
           <Link to='#'>
-            <HotelIcon /> Hotels
+          <img src="https://www.abhibus.com/assets/svg/hotel.svg" style={{width:"30px", marginRight:"15px"}} />
+            {/* <HotelIcon />  */}
+            Hotels
           </Link>
           <Link to="#">
-            <LocalOfferIcon /> Offers
+            <LocalOfferIcon /> 
+            Offers
           </Link>
           <Link to="#">
             <ConfirmationNumberIcon /> Track Ticket
@@ -50,10 +59,10 @@ const Navbar = () => {
             <HelpOutlineIcon /> Need Help?
           </Link>
         </nav>
-        <div className='auth'>
-          <Link to='#'>
-            <AccountCircleIcon /> Login
-          </Link> / <Link to="#">Sign Up</Link>
+        <div className='auth' style={{color:"#dc635b"}}>
+          <Link to='#' style={{color:"#dc635b" , fontSize:"12px"}}>
+            <AccountCircleIcon  style={{color:"#dc635b", }}/> Login
+          </Link>/<Link style={{color:"#dc635b" , fontSize:"12px"}} to="#"> Sign Up</Link>
         </div>
       </div>
   
