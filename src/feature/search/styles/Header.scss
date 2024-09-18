@@ -7,8 +7,9 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 10px 20px;
-        height: 70px; 
+        // padding: 10px 20px;
+        height: fit-content; 
+        flex-wrap: wrap;
         width: 100%;
         .logo {
             img {
@@ -21,7 +22,7 @@
         nav {
             display: flex;
             align-items: center;
-
+            flex-wrap: wrap;
             a {
                 margin: 0 10px;
                 text-decoration: none;

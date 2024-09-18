@@ -4,10 +4,6 @@ import "./styles/Header.scss";
 import React from 'react';
 // import "./styles/SearchBar.scss";
 
-import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
-import TrainIcon from '@mui/icons-material/Train';
-import FlightIcon from '@mui/icons-material/Flight';
-import HotelIcon from '@mui/icons-material/Hotel';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
@@ -29,27 +25,27 @@ const Navbar = () => {
         </div>
         <nav>
           <Link to='#'>
-          <img src="https://www.abhibus.com/assets/svg/bus.svg" style={{width:"30px", marginRight:"15px"}} />
+            <img src="https://www.abhibus.com/assets/svg/bus.svg" alt="Buses" style={{ width: "30px", marginRight: "15px" }} />
             {/* <DirectionsBusIcon />  */}
             Buses
           </Link>
           <Link to='#'>
-          <img src="https://www.abhibus.com/assets/svg/train.svg" style={{width:"30px", marginRight:"15px"}} />
+            <img src="https://www.abhibus.com/assets/svg/train.svg" alt="Trains" style={{ width: "30px", marginRight: "15px" }} />
             {/* <TrainIcon /> */}
-             Trains
+            Trains
           </Link>
           <Link to='#'>
-          <img src="https://www.abhibus.com/assets/svg/flight.svg" style={{width:"30px", marginRight:"15px"}} />
+            <img src="https://www.abhibus.com/assets/svg/flight.svg" alt="Flights" style={{ width: "30px", marginRight: "15px" }} />
             {/* <FlightIcon />  */}
             Flights
           </Link>
           <Link to='#'>
-          <img src="https://www.abhibus.com/assets/svg/hotel.svg" style={{width:"30px", marginRight:"15px"}} />
+            <img src="https://www.abhibus.com/assets/svg/hotel.svg" alt="Hotels" style={{ width: "30px", marginRight: "15px" }} />
             {/* <HotelIcon />  */}
             Hotels
           </Link>
           <Link to="#">
-            <LocalOfferIcon /> 
+            <LocalOfferIcon />
             Offers
           </Link>
           <Link to="#">
@@ -59,13 +55,13 @@ const Navbar = () => {
             <HelpOutlineIcon /> Need Help?
           </Link>
         </nav>
-        <div className='auth' style={{color:"#dc635b"}}>
-          <Link to='#' style={{color:"#dc635b" , fontSize:"12px"}}>
-            <AccountCircleIcon  style={{color:"#dc635b", }}/> Login
-          </Link>/<Link style={{color:"#dc635b" , fontSize:"12px"}} to="#"> Sign Up</Link>
+        <div className='auth' style={{ color: "#dc635b" }}>
+          <Link to='#' style={{ color: "#dc635b", fontSize: "12px" }}>
+            <AccountCircleIcon style={{ color: "#dc635b", }} /> Login
+          </Link>/<Link style={{ color: "#dc635b", fontSize: "12px" }} to="#"> Sign Up</Link>
         </div>
       </div>
-  
+
       {/* <div className="sort_section">
         <div className='sort'>Sort By: </div>
         <button>Price</button>
