@@ -1,10 +1,13 @@
+
+
 .container {
     width: 100%;
-    padding: 0;
+    // padding: 0;
     margin-left: 23rem;
     height: 90vh;
     // border: 1px solid black;
-    margin-top: 2px;
+    // position: sticky;
+    margin-top: 23px;
     overflow: scroll;
   }
   .trips p{
@@ -21,6 +24,7 @@
     border-radius: 10px;
     gap: .6rem;
     justify-content: space-between;
+    margin-top: 2px;
   }
   .TripContainer:hover {
     box-shadow: 0px 0px 5px 5px rgba(121, 120, 120, 0.2);

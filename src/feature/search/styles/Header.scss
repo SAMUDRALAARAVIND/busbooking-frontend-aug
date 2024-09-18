@@ -1,7 +1,13 @@
 .header {
     background-color: #fff !important;
     border: none;
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    // padding: 10px 20px;
+    width: 100%;
+    
+
     transition: position 0.3s ease-in-out;
     .top_navbar {
         display: flex;
