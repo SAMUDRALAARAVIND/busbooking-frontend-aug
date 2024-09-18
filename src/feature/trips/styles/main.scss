@@ -2,4 +2,8 @@
     // border: 1px solid;
     height: 85vh !important;
     overflow-y: scroll;
+    width: 90%;
+    display: grid;
+    margin: auto;
+    grid-template-columns: 1fr 11fr;
   }

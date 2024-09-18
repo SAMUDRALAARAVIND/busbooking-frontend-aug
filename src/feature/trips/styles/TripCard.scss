@@ -1,14 +1,15 @@
 
 
 .container {
-    width: 100%;
+    // width: 100%;
     // padding: 0;
-    margin-left: 23rem;
+    margin-left: 20rem;
     height: 90vh;
     // border: 1px solid black;
     // position: sticky;
     margin-top: 23px;
     overflow: scroll;
+    // border: 1px solid;
   }
   .trips p{
     font-size: 0.8rem;
@@ -19,8 +20,9 @@
     text-align: start;
     margin: 17px;
     display: flex;
+    // justify-content: center;
     margin-top: 20px;
-    max-width: 66vw;
+    width: 90%;
     border-radius: 10px;
     gap: .6rem;
     justify-content: space-between;
