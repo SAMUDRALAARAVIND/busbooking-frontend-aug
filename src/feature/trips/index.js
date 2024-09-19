@@ -1,11 +1,16 @@
 import Filters from "../filters";
+import Navbar from "../search/Navbar";
+import TripsCard from "./components/tripsCard";
 
 const TripsScreen = () => {
   return (
-    <div>
-      <p>This is the trips screen where user can find all trips</p>
-      <Filters />
-    </div>
+    <>
+      <Navbar />
+      <div className="trips-screen flex">
+        <Filters />
+        <TripsCard />
+      </div>
+    </>
   );
 };
 
