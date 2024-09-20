@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './LoginPage.scss';
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
 
@@ -104,7 +105,8 @@ const LoginPage = () => {
                     Sign in with Google
                 </button>
                 <p>
-                    By logging in, I understand & agree to AbhiBus <a href="#">terms of use</a> & <a href="#">privacy policy</a>
+                    By logging in, I understand & agree to AbhiBus <Link to="#">terms of use</Link> 
+                    & <Link to="#">privacy policy</Link>
                 </p>
             </div>
         </div>

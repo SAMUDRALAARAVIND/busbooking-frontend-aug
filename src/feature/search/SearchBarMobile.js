@@ -38,6 +38,9 @@ const SearchBarMobile = () => {
   const [search, setSearch] = useState({
     source: "",
     destination: "",
+    date: suggestions.search.date
+    ? dayjs.unix(suggestions.search.date).format('YYYY-MM-DD')
+    : dayjs().format('YYYY-MM-DD'),
   });
   const navigate = useNavigate();
   const todayDate = dayjs();
@@ -87,6 +90,13 @@ const SearchBarMobile = () => {
 
     return `${day}/${month}/${year}`;
   }
+
+  const handelSublit = () => {
+    console.log(search)
+    const url = `/trips/search/${search.source}/01/${search.destination}/02/${search.date}/05`;
+    navigate(url) 
+  }
+
 
   return (
     <div className="search-mobile-container">
@@ -162,7 +172,7 @@ const SearchBarMobile = () => {
                 : today.format("DD/MM/YYYY")}
             </p>
           </div>
-          <button className="search-button" onClick={()=> navigate('/trips/search')}>Submit</button>
+          <button className="search-button" onClick={()=> handelSublit()}>Submit</button>
         </div>
       </form>
 

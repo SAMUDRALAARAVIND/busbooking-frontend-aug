@@ -7,6 +7,8 @@ import { useEffect } from "react";
 import { fetchTripsList } from "./thunk";
 import { useParams } from "react-router-dom";
 
+import "./styles/main.scss"
+
 const TripsScreen = () => {
   const { sourceId, destinationId, date } = useParams();
 
@@ -28,7 +30,7 @@ const TripsScreen = () => {
   return (
     <>
       <Navbar />
-      <div className="trips-screen flex">
+      <div className="trips-screen">
         <Filters />
         <TripsList />
       </div>

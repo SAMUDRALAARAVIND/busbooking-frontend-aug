@@ -1,5 +1,5 @@
 .filters-container {
-    max-height: 90vh;
+    max-height: 78vh;
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
     position: fixed;
@@ -24,8 +24,9 @@
 
     .header {
         display: flex;
-        margin-top: -10px;
+        // margin-top: -10px;
         margin-bottom: -10px;
+       
 
         .subheading {
             font-size: 1rem;
