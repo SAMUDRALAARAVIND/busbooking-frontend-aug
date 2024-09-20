@@ -9,12 +9,7 @@ import EventSeatIcon from "@mui/icons-material/EventSeat";
 import Brightness6Icon from "@mui/icons-material/Brightness6";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import {
-  filterType,
-  toggleStop,
-  departureTime,
-  clearAllFilters,
-} from "./slice";
+import { filterType, toggleStop, departureTime } from "./slice";
 import "./style/Footer.scss";
 
 const busTypes = [
@@ -94,10 +89,6 @@ const SideBar = () => {
     }
   };
 
-  const handleClearAllFilters = () => {
-    dispatch(clearAllFilters());
-  };
-
   useEffect(() => {
     window.addEventListener("resize", handleResize);
     handleResize();
@@ -157,14 +148,14 @@ const SideBar = () => {
           title="Filters"
           placement="right"
           onClose={closeToggleSidebar}
-          open={isSidebarOpen}
-          width={470}
-          className="custom-drawer"
+          open={isSidebarOpen} // Use open instead of visible
+          width={420}
+          className="custom-drawer" // Use className instead of classNames
         >
-          <Filters width={420} padding={20} />
-          <button className="nav-btn" onClick={handleClearAllFilters}>
+          <Filters width={340} padding={20} />
+          {/* <button className="nav-btn" onClick={handleClearAllFilters}>
             Reset
-          </button>
+          </button> */}
         </Drawer>
       </div>
     </>
