@@ -104,7 +104,7 @@ const LoginPage = () => {
                     Sign in with Google
                 </button>
                 <p>
-                    By logging in, I understand & agree to AbhiBus <a href="#">terms of use</a> & <a href="#">privacy policy</a>
+                    By logging in, I understand & agree to AbhiBus <a href="/">terms of use</a> & <a href="/">privacy policy</a>
                 </p>
             </div>
         </div>

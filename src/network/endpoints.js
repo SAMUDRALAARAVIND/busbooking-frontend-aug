@@ -1,6 +1,8 @@
-const baseUrl = "http://localhost:8080";
+const baseUrl = "http://localhost:8000";
 
-// TODO: add REST endpoints int this
-const Endpoints = {};
+// Add the cities API endpoint
+const Endpoints = {
+  citiesApi: `${baseUrl}/city/cities`, 
+};
 
 export default Endpoints;

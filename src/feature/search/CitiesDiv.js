@@ -2,8 +2,7 @@ import "./styles/SearchBar.scss";
 
 const CitiesDiv = ({ city, onCityClick, identifier }) => {
   return (
-    //TODO - add "cityId" as a custom attribute after fetching data from server
-    <div className="singleCity" onClick={() => onCityClick(identifier, city)}>
+    <div className="singleCity" onClick={() => onCityClick(identifier, city.name,city.cityId)}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="1rem"
@@ -19,9 +18,9 @@ const CitiesDiv = ({ city, onCityClick, identifier }) => {
           clipRule="evenodd"
         />
       </svg>
-      <div>
-            <p className="city-name">{city}</p>
-            <p className="state-name">State</p>
+      <div id={city.cityId}>
+            <p className="city-name">{city.name}</p>
+            <p className="state-name">{city.state}</p>
       </div>
     </div>
   );
