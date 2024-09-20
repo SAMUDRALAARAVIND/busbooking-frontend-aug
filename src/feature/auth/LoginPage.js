@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './LoginPage.scss';
-import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
 
@@ -25,7 +24,7 @@ const LoginPage = () => {
     };
 
     return (
-        <div className='login-container'>
+        <div className='login-container' >
             <div className='left-section'>
                 <div className='logo'>
                     <svg
@@ -94,7 +93,7 @@ const LoginPage = () => {
 
                     <button type="submit" className="login-btn">Login</button>
                 </form>
-                <div className="divider">
+                {/* <div className="divider">
                     <span>Or Continue With</span>
                 </div>
                 <button className="google-btn">
@@ -105,12 +104,11 @@ const LoginPage = () => {
                     Sign in with Google
                 </button>
                 <p>
-                    By logging in, I understand & agree to AbhiBus <Link to="#">terms of use</Link> 
-                    & <Link to="#">privacy policy</Link>
-                </p>
+                    By logging in, I understand & agree to AbhiBus <a href="#">terms of use</a> & <a href="#">privacy policy</a>
+                </p> */}
             </div>
         </div>
     )
 }
 
-export default LoginPage
+export default LoginPage

@@ -35,7 +35,7 @@ const initialState = {
   [filterType.PRICE_RANGE]: initialPriceRange,
 };
 
-const filtersSlice = createSlice({
+const filterSlice = createSlice({
   name: "filters",
   initialState,
   reducers: {
@@ -62,6 +62,6 @@ export const {
   toggleUpdatedPriceRange,
   toggleStop,
   clearAllFilters,
-} = filtersSlice.actions;
+} = filterSlice.actions;
 
-export default filtersSlice;
+export default filterSlice;

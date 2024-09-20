@@ -3,17 +3,18 @@
     overflow-y: scroll;
     width: 90%;
     display: grid;
-    margin: auto;
+    margin: 0 auto;
     grid-template-columns: 4fr 8fr;
+
   }
 
 
-  @media  (max-width: 650px){
+  @media  (max-width: 992px){
     .trips-screen{
       width: 90%;
-      margin: auto;
-      display: flex;
-      border: 1px solid;
+      margin: 0 auto;
+      display: block;
+      // border: 1px solid;
       justify-content: center;
       align-items: center;
       flex-direction: column-reverse;

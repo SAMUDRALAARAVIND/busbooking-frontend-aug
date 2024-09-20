@@ -1,0 +1,8 @@
+.tripmain {
+    display: grid;
+    grid-template-columns: auto 1fr;
+
+    .trips {
+        margin-left: 25rem;
+    }
+}

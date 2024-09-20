@@ -24,9 +24,9 @@ export const cities = [
   "San Jose",
 ];
 
-export const priceRangeSelector = () => {
-  return {
-    range: [0, 5000],
-    selectedRange: [0, 5000],
-  };
-};
+// export const priceRangeSelector = () => {
+//   return {
+//     range: [0, 5000],
+//     selectedRange: [0, 5000],
+//   };
+// };
