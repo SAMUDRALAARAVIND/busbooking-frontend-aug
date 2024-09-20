@@ -1,5 +1,7 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import LoginPage from "./feature/auth/Component/LoginPage";
+import SignUpPage from "./feature/auth/Component/SignUpPage";
 const Search = lazy(() => import("./feature/search/index"));
 const TripsScreen = lazy(() => import("./feature/trips/index"));
 const BookingScreen = lazy(() => import("./feature/booking/index"));
