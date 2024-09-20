@@ -4,7 +4,7 @@ import tagImg from "../assets/tagImg.jpg";
 import { formatDate, formatTime } from "./formatDatetime";
 import { TripDetails } from "./TripsDetails";
 import { useSelector } from "react-redux";
-import { tripsSelector } from "../selectors";
+import { tripsSelector } from "../redux/selectors";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 
@@ -14,7 +14,6 @@ export default function TripsList() {
   const { source, destination, travelDate } = useParams();
 
   // const [activeTripId, setActiveTripId] = useState(null);
-
   // const handleModalToggle = (tripId) => {
   //   if (activeTripId === tripId) {
   //     setActiveTripId(null);
@@ -22,7 +21,6 @@ export default function TripsList() {
   //     setActiveTripId(tripId);
   //   }
   // };
-
 
 console.log("tripsList", tripsList)
   return (

@@ -6,27 +6,36 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import { SwapOutlined } from "@ant-design/icons";
 import CitiesDiv from "./CitiesDiv";
 import { useDispatch, useSelector } from "react-redux";
-import { addSourceCity, addDestinationCity, addDate } from "./slice";
+import {
+  addSourceCity,
+  addDestinationCity,
+  addDate,
+  updateSourceCityId,
+  updateDestinationCityId,
+} from "./slice";
 import { useNavigate } from "react-router-dom";
+import { fetchCitiesList } from "./thunk";
 dayjs.extend(customParseFormat);
- 
+
 function filterCities(type, cities, search) {
   const searchVal = search[type]?.toLowerCase();
   return cities
-    .filter((city) => {
-      return city?.toLowerCase().includes(searchVal);
+    .filter((cityObj) => {
+      return cityObj.name?.toLowerCase().includes(searchVal);
     })
-    .filter((city) => {
+    .filter((cityObj) => {
       if (type === "source") {
-        return city.toLowerCase() !== search["destination"]?.toLowerCase();
+        return (
+          cityObj.name?.toLowerCase() !== search["destination"]?.toLowerCase()
+        );
       } else {
-        return city.toLowerCase() !== search["source"]?.toLowerCase();
+        return cityObj.name?.toLowerCase() !== search["source"]?.toLowerCase();
       }
     });
 }
 
 const SearchBar = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const suggestions = useSelector((state) => state);
   const [today, setToday] = useState(dayjs());
   const [showPopOver, setShowPopOver] = useState({
@@ -43,6 +52,14 @@ const SearchBar = () => {
   const maxDate = todayDate.add(3, "month");
 
   useEffect(() => {
+    const fetchCities = async () => {
+      await dispatch(fetchCitiesList());
+    };
+
+    fetchCities();
+  }, [dispatch]);
+
+  useEffect(() => {
     const handleClickOutside = (event) => {
       if (
         !event.target.closest(".source-city-input") &&
@@ -57,6 +74,7 @@ const SearchBar = () => {
 
     document.addEventListener("click", handleClickOutside);
 
+    // Cleanup function to remove the event listener
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
@@ -69,15 +87,17 @@ console.log('epoch time', epochTimeInSeconds)
     dispatch(addDate(epochTimeInSeconds));
   };
 
-  const handleCityClick = (identifier, city) => {
+  const handleCityClick = (identifier, city, cityId) => {
     if (identifier === "source") {
       dispatch(addSourceCity(city));
+      dispatch(updateSourceCityId(cityId));
       setSearch({
         ...search,
         source: city,
       });
     } else {
       dispatch(addDestinationCity(city));
+      dispatch(updateDestinationCityId(cityId));
       setSearch({
         ...search,
         destination: city,
@@ -114,7 +134,11 @@ console.log('epoch time', epochTimeInSeconds)
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (search.source && search.destination && today) {
-      navigate(`/trips/search/${search.source}/66ecaf5225b386e4b0f055c9/${search.destination}/66ecaf5225b386e4b0f055d2/${today}`)
+      const source = suggestions.search.sourceCity;
+      const sourceId = suggestions.search.sourceCityId;
+      const destination = suggestions.search.destinationCity;
+      const destinationId = suggestions.search.destinationCityId;    
+      navigate(`/trips/search/${source}/${sourceId}/${destination}/${destinationId}/${today}`)
     } else {
       alert("Please fill in all search fields.");
     }
@@ -123,91 +147,91 @@ console.log('epoch time', epochTimeInSeconds)
   return (
     <div>
       <form onSubmit={handleSearchSubmit}>
-      <div className="search-form">
-            <div
-              tabIndex="0"
-              className="search-input source-city-input"
-              onClick={() => {
-                setShowPopOver({
-                  source: true,
-                  destination: false,
-                });
-              }}
+        <div className="search-form">
+          <div
+            tabIndex="0"
+            className="search-input source-city-input"
+            onClick={() => {
+              setShowPopOver({
+                source: true,
+                destination: false,
+              });
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              fill="none"
+              viewBox="0 0 23 22"
+              className={showPopOver.source ? "orange" : ""}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="1em"
-                height="1em"
-                fill="none"
-                viewBox="0 0 23 22"
-                className={showPopOver.source? "orange":""}
-              >
-                <path
-                  fill="currentColor"
-                  fillRule="evenodd"
-                  d="M3.552.065c-.74.18-1.384.81-1.643 1.608-.068.21-.08.488-.101 2.509l-.024 2.272-.27.097A2.378 2.378 0 0 0 .066 8.144C.019 8.324 0 8.61 0 9.138c0 .91.053 1.096.41 1.453.297.298.583.409 1.05.409h.341l.013 3.643.013 3.642.1.278c.147.407.293.634.61.948.281.278.7.529.976.584l.13.026.02.417c.031.656.265 1.056.777 1.326l.223.118 1.228.013c1.17.012 1.24.008 1.476-.08.17-.064.319-.164.476-.321.298-.299.41-.584.41-1.054v-.342h5.5v.342c0 .47.112.756.41 1.054.157.157.306.257.476.321.237.088.306.092 1.476.08l1.228-.013.223-.118c.512-.27.746-.67.778-1.326l.02-.418.129-.025c.276-.055.695-.306.975-.584.318-.314.465-.541.611-.948l.1-.278.013-3.642.013-3.643h.34c.467 0 .754-.111 1.051-.408a1.34 1.34 0 0 0 .305-.437 1.34 1.34 0 0 1 .112-.249c.048-.055.047-1.625-.002-1.596-.02.013-.049-.05-.063-.14-.045-.278-.32-.77-.58-1.035-.301-.306-.529-.458-.876-.584l-.27-.097-.024-2.272c-.026-2.5-.021-2.45-.308-2.993-.17-.319-.606-.755-.928-.927-.523-.279-.079-.264-7.98-.26-6.046.002-7.218.012-7.43.063Zm1.964 1.86a1.35 1.35 0 0 0-.548 2.198c.102.109.278.245.392.303l.206.105H16.44l.207-.105a1.73 1.73 0 0 0 .39-.303c.62-.662.42-1.736-.396-2.137l-.244-.12-5.33-.009c-5.028-.01-5.342-.005-5.551.067Zm-.73 3.618c-.397.08-.742.333-.942.694l-.126.229-.012 2.627c-.012 2.563-.01 2.634.076 2.864.118.316.446.644.759.761.23.086.308.087 6.462.087s6.232 0 6.462-.087c.314-.117.64-.445.759-.76.086-.231.088-.302.076-2.865l-.012-2.627-.126-.229c-.154-.278-.352-.457-.667-.605l-.238-.112-6.147-.006c-3.38-.004-6.226.01-6.324.029ZM.018 9.13c0 .45.006.627.014.396.008-.232.008-.6 0-.817-.008-.217-.014-.028-.014.421Zm5.505 5.623a1.418 1.418 0 0 0-.837.828c-.318.843.279 1.749 1.193 1.812a1.374 1.374 0 0 0 1.3-.75c.149-.294.168-.763.044-1.093a1.434 1.434 0 0 0-.76-.766c-.263-.099-.728-.114-.94-.03Zm10.009.03c-.304.12-.632.456-.75.767-.123.33-.104.799.045 1.094.245.484.769.786 1.3.749 1.148-.08 1.692-1.432.91-2.267-.274-.293-.524-.404-.94-.418-.265-.009-.396.009-.565.076Z"
-                  clipRule="evenodd"
-                />
-              </svg>
-
-              <input
-                type="text"
-                name="source-city-input"
-                id="source-city-input"
-                placeholder="From Station"
-                value={search["source"]}
-                onChange={(e) => {
-                  setSearch({ ...search, source: e.target.value });
-                }}
-              />
-            </div>
-
-            <div className="search-swap-icon" onClick={handleCitySwap}>
-              <SwapOutlined
-                style={{
-                  color: "#9B9B9B",
-                  backgroundColor: "#EEEEEE",
-                  padding: "0.5rem",
-                  borderRadius: "5px",
-                  fontSize: "24px",
-                }}
-              />
-            </div>
-
-            <div
-              tabIndex="0"
-              className="search-input destination-city-input"
-              onClick={() => {
-                setShowPopOver({
-                  destination: true,
-                  source: false,
-                });
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="1em"
-                height="1em"
+              <path
                 fill="currentColor"
-                viewBox="0 0 10 12"
-                className={showPopOver.destination?"orange":""}
-              >
-                <path
-                  d="M5 0a4.789 4.789 0 0 0-5 4.532c0 3.552 4.53 7.218 4.723 7.373a.453.453 0 0 0 .554 0C5.47 11.751 10 8.084 10 4.532A4.789 4.789 0 0 0 5 0Zm0 7a2.514 2.514 0 1 1 2.778-2.5A2.652 2.652 0 0 1 5 7Z"
-                  data-name="Path 1660"
-                />
-              </svg>
-              <input
-                type="text"
-                name="destination-city-input"
-                id="destination-city-input"
-                placeholder="To Station"
-                value={search["destination"]}
-                onChange={(e) => {
-                  setSearch({ ...search, destination: e.target.value });
-                }}
+                fillRule="evenodd"
+                d="M3.552.065c-.74.18-1.384.81-1.643 1.608-.068.21-.08.488-.101 2.509l-.024 2.272-.27.097A2.378 2.378 0 0 0 .066 8.144C.019 8.324 0 8.61 0 9.138c0 .91.053 1.096.41 1.453.297.298.583.409 1.05.409h.341l.013 3.643.013 3.642.1.278c.147.407.293.634.61.948.281.278.7.529.976.584l.13.026.02.417c.031.656.265 1.056.777 1.326l.223.118 1.228.013c1.17.012 1.24.008 1.476-.08.17-.064.319-.164.476-.321.298-.299.41-.584.41-1.054v-.342h5.5v.342c0 .47.112.756.41 1.054.157.157.306.257.476.321.237.088.306.092 1.476.08l1.228-.013.223-.118c.512-.27.746-.67.778-1.326l.02-.418.129-.025c.276-.055.695-.306.975-.584.318-.314.465-.541.611-.948l.1-.278.013-3.642.013-3.643h.34c.467 0 .754-.111 1.051-.408a1.34 1.34 0 0 0 .305-.437 1.34 1.34 0 0 1 .112-.249c.048-.055.047-1.625-.002-1.596-.02.013-.049-.05-.063-.14-.045-.278-.32-.77-.58-1.035-.301-.306-.529-.458-.876-.584l-.27-.097-.024-2.272c-.026-2.5-.021-2.45-.308-2.993-.17-.319-.606-.755-.928-.927-.523-.279-.079-.264-7.98-.26-6.046.002-7.218.012-7.43.063Zm1.964 1.86a1.35 1.35 0 0 0-.548 2.198c.102.109.278.245.392.303l.206.105H16.44l.207-.105a1.73 1.73 0 0 0 .39-.303c.62-.662.42-1.736-.396-2.137l-.244-.12-5.33-.009c-5.028-.01-5.342-.005-5.551.067Zm-.73 3.618c-.397.08-.742.333-.942.694l-.126.229-.012 2.627c-.012 2.563-.01 2.634.076 2.864.118.316.446.644.759.761.23.086.308.087 6.462.087s6.232 0 6.462-.087c.314-.117.64-.445.759-.76.086-.231.088-.302.076-2.865l-.012-2.627-.126-.229c-.154-.278-.352-.457-.667-.605l-.238-.112-6.147-.006c-3.38-.004-6.226.01-6.324.029ZM.018 9.13c0 .45.006.627.014.396.008-.232.008-.6 0-.817-.008-.217-.014-.028-.014.421Zm5.505 5.623a1.418 1.418 0 0 0-.837.828c-.318.843.279 1.749 1.193 1.812a1.374 1.374 0 0 0 1.3-.75c.149-.294.168-.763.044-1.093a1.434 1.434 0 0 0-.76-.766c-.263-.099-.728-.114-.94-.03Zm10.009.03c-.304.12-.632.456-.75.767-.123.33-.104.799.045 1.094.245.484.769.786 1.3.749 1.148-.08 1.692-1.432.91-2.267-.274-.293-.524-.404-.94-.418-.265-.009-.396.009-.565.076Z"
+                clipRule="evenodd"
               />
-            </div>
+            </svg>
+
+            <input
+              type="text"
+              name="source-city-input"
+              id="source-city-input"
+              placeholder="From Station"
+              value={search["source"]}
+              onChange={(e) => {
+                setSearch({ ...search, source: e.target.value });
+              }}
+            />
+          </div>
+
+          <div className="search-swap-icon" onClick={handleCitySwap}>
+            <SwapOutlined
+              style={{
+                color: "#9B9B9B",
+                backgroundColor: "#EEEEEE",
+                padding: "0.5rem",
+                borderRadius: "5px",
+                fontSize: "24px",
+              }}
+            />
+          </div>
+
+          <div
+            tabIndex="0"
+            className="search-input destination-city-input"
+            onClick={() => {
+              setShowPopOver({
+                destination: true,
+                source: false,
+              });
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              fill="currentColor"
+              viewBox="0 0 10 12"
+              className={showPopOver.destination ? "orange" : ""}
+            >
+              <path
+                d="M5 0a4.789 4.789 0 0 0-5 4.532c0 3.552 4.53 7.218 4.723 7.373a.453.453 0 0 0 .554 0C5.47 11.751 10 8.084 10 4.532A4.789 4.789 0 0 0 5 0Zm0 7a2.514 2.514 0 1 1 2.778-2.5A2.652 2.652 0 0 1 5 7Z"
+                data-name="Path 1660"
+              />
+            </svg>
+            <input
+              type="text"
+              name="destination-city-input"
+              id="destination-city-input"
+              placeholder="To Station"
+              value={search["destination"]}
+              onChange={(e) => {
+                setSearch({ ...search, destination: e.target.value });
+              }}
+            />
+          </div>
 
             <div className="search-date search-input">
               <div className="datePicker">
@@ -261,18 +285,18 @@ console.log('epoch time', epochTimeInSeconds)
             <button className="search-button" >Search</button>
           </div>
       </form>
- 
+
       <div className="source-city-div city-div">
         {showPopOver.source && (
           <div className="search-city-div">
             {filterCities("source", suggestions.search.cities, search).length >
             0 ? (
               filterCities("source", suggestions.search.cities, search).map(
-                (city, index) => {
+                (cityObj, index) => {
                   return (
                     <CitiesDiv
                       key={index}
-                      city={city}
+                      city={cityObj}
                       identifier={"source"}
                       onCityClick={handleCityClick}
                     />
@@ -295,12 +319,11 @@ console.log('epoch time', epochTimeInSeconds)
                 "destination",
                 suggestions.search.cities,
                 search
-              ).map((city, index) => {
-                console.log("i am city", city);
+              ).map((cityObj, index) => {
                 return (
                   <CitiesDiv
                     key={index}
-                    city={city}
+                    city={cityObj}
                     identifier={"destination"}
                     onCityClick={handleCityClick}
                   />

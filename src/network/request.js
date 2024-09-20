@@ -17,6 +17,7 @@ const request = async (httpConfig) => {
     });
     return { success: true, data: response.data };
   } catch (error) {
+    console.log("error", error)
     return { success: false, data: error.message ?? "Something went wrong!!!" };
   }
 };

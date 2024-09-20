@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import searchSlice from "../feature/search/slice";
 import filtersSlice from "../feature/filters/slice";
 import bookingSlice from "../feature/booking/slice";
-import tripsSlice from "../feature/trips/slice";
+import tripsSlice from "../feature/trips/redux/slice";
 
 const store = configureStore({
   reducer: {

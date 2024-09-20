@@ -2,9 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Filters from "../filters";
 import Navbar from "../search/Navbar";
 import TripsList from "./components/TripsList";
-import { tripsStatusSelector } from "./selectors";
+import { tripsStatusSelector } from "./redux/selectors";
 import { useEffect } from "react";
-import { fetchTripsList } from "./thunk";
+import { fetchTripsList } from "./redux/thunk";
 import { useParams } from "react-router-dom";
 
 const TripsScreen = () => {
