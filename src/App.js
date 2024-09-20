@@ -22,11 +22,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LazyLoadingWrapper Component={Search} />} />
         <Route
-<<<<<<< HEAD
-          path="/trips/search/:source/:sourceId/:destionation/:destinationId/:date"
-=======
+          // path="/trips/search/:source/:sourceId/:destionation/:destinationId/:date"
           path="/trips/search/:source/:sourceId/:destionation/:destinationId/:date/:dateId" 
->>>>>>> dc060d190c6c637e6e2c088068ef548dcb580769
           // path="/trips/search"
           element={<LazyLoadingWrapper Component={TripsScreen} />}
         />
