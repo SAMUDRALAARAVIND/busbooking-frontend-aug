@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import './App.css'
-import 'material-icons/iconfont/material-icons.css';
+import "./App.css";
+import "material-icons/iconfont/material-icons.css";
 import LoginPage from "./feature/auth/LoginPage";
 
 const Search = lazy(() => import("./feature/search/index"));
@@ -9,7 +9,11 @@ const TripsScreen = lazy(() => import("./feature/trips/index"));
 const BookingScreen = lazy(() => import("./feature/booking/index"));
 
 const LazyLoadingWrapper = ({ Component }) => {
-  return <Suspense fallback={<h1>Loading ...</h1>}><Component/></Suspense>;
+  return (
+    <Suspense fallback={<h1>Loading ...</h1>}>
+      <Component />
+    </Suspense>
+  );
 };
 
 const App = () => {
@@ -18,8 +22,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LazyLoadingWrapper Component={Search} />} />
         <Route
-        // /trips/search/:source/:sourceId/:destionation/:destinationId
-          path="/trips/search"
+          path="/trips/search/:source/:sourceId/:destionation/:destinationId/:date"
+          // path="/trips/search"
           element={<LazyLoadingWrapper Component={TripsScreen} />}
         />
         <Route
