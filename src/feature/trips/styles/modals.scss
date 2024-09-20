@@ -4,7 +4,7 @@
     background-color: white;
     border-radius: 10px;
     box-shadow: 0px 5px 10px 5px rgba(121, 120, 120, 0.2);
-    width: 60%;
+    width: 50%;
     text-align: start;
     margin: 10px 23px;
     padding: 10px;
@@ -52,7 +52,7 @@
     gap: 10px;
     background-color: #ffffff;
     padding:  10px;
-    width: 60%;
+    // width: 60%;
     text-align: left;
     margin: auto;
     margin-left: 20%;
@@ -98,9 +98,9 @@
     height: 30vh;
     background-color: white;
     border-radius: 10px;
-    width: 70%;
+    // width: 70%;
     box-shadow: 0px 5px 10px 5px rgba(121, 120, 120, 0.2);
-    width: 45%;
+    // width: 45%;
     text-align: start;
     margin: 10px 23px;
     padding: 10px;
@@ -142,17 +142,17 @@
     height: 30vh;
     background-color: white;
     border-radius: 10px;
-    width: 70%;
+    // width: 70%;
     box-shadow: 0px 5px 10px 5px rgba(121, 120, 120, 0.2);
-    width: 45%;
+    max-width: 45%;
     text-align: start;
     margin: 10px 23px;
     padding: 10px 20px;
     padding-bottom: 20px;
     overflow-y: scroll;
     z-index: 1000;
-    margin-left: 30%;
-    margin-bottom: 20px;
+    // margin-left: 30%;
+    // margin-bottom: 20px;
   }
   
   .Travel-policy p{

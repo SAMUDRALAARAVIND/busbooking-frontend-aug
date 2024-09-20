@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const cityData = ["Hyderabad", "Banglore", "Chennai", "Delhi", "Jaipur"];
+// const cityData = ["Hyderabad", "Banglore", "Chennai", "Delhi", "Jaipur"];
 
 const searchSlice = createSlice({
   name: "search",
   initialState: {
-    cities: [...cityData],
+    cities: [],
     sourceCity: "",     // selected city
     destinationCity: "",    // selected city
     date: null,
@@ -23,8 +23,11 @@ const searchSlice = createSlice({
     addDate: (state, action) => {
       state.date = action.payload;
     },
+    getAllCity:(state, action) => {
+        state.cities = action.payload
+    }
   },
 });
 
-export const { addSourceCity, addDestinationCity, addDate } = searchSlice.actions;
+export const { addSourceCity, addDestinationCity, addDate, getAllCity } = searchSlice.actions;
 export default searchSlice;

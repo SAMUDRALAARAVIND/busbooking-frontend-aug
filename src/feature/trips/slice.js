@@ -7,6 +7,7 @@ const tripsSlice = createSlice({
   initialState: {
     tripsResponse: null,
     apiStatus: "init",
+    city:null
   },
   reducers: {
     updateTripsStatus: (state, action) => {

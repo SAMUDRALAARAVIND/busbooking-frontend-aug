@@ -15,12 +15,7 @@ export default function TripsList() {
       {tripsList.trips.map((trip, index) => (
         <div key={trip.tripId} className="TripContainer">
           <div className="leftWrapper">
-            <div className="upperItems">
-              <div className="ads">
-                <p>AD</p>
-              </div>
-              <img src={tagImg} className="tagImg" alt="abhiAssuaranceTag" />
-
+            <div className="upperItems">          
               <div className="flex tripInfo">
                 <div className="NameAndType">
                   <h5>{trip.busPartner}</h5>

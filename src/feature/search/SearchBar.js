@@ -7,7 +7,8 @@ import { SwapOutlined } from "@ant-design/icons";
 import CitiesDiv from "./CitiesDiv";
 import { useDispatch, useSelector } from "react-redux";
 import { addSourceCity, addDestinationCity, addDate } from "./slice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 dayjs.extend(customParseFormat);
  
 function filterCities(type, cities, search) {
@@ -34,6 +35,9 @@ const SearchBar = () => {
     destination: false,
   });
 
+const city = useSelector((state) => state.search.cities.data)
+console.log(city)
+  
   const [search, setSearch] = useState({
     source: "",
     destination: "",
@@ -126,11 +130,26 @@ const SearchBar = () => {
     }
   };
 
+
   const handelSublit = () => {
-    console.log(search)
+
     const url = `/trips/search/${search.source}/01/${search.destination}/02/${search.date}/05`;
+    // const params = {
+    //   source: search.source,
+    //   destination: search.destination,
+    //   date: search.date
+    // };
+
+    // axios.post('http://localhost:8000/api/trips/details', params).then((res) =>{
+    //   console.log(res.data)
+    //   navigate(url) 
+    // }).catch((err) => console.error("There was an error!", err))
+
     navigate(url) 
   }
+
+  
+
 
   return (
     <div>
