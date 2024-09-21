@@ -183,6 +183,7 @@ const SearchBar = () => {
               onChange={(e) => {
                 setSearch({ ...search, source: e.target.value });
               }}
+              autoComplete="off"
             />
           </div>
 
@@ -230,6 +231,7 @@ const SearchBar = () => {
               onChange={(e) => {
                 setSearch({ ...search, destination: e.target.value });
               }}
+              autoComplete="off"
             />
           </div>
 
