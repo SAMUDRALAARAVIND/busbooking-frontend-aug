@@ -146,7 +146,7 @@ const SearchBar = () => {
 
   return (
     <div>
-      <form onSubmit={handleSearchSubmit}>
+      <form onSubmit={handleSearchSubmit} autoComplete="false">
         <div className="search-form">
           <div
             tabIndex="0"

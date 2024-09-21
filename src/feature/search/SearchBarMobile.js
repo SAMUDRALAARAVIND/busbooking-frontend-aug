@@ -111,7 +111,7 @@ const SearchBarMobile = () => {
   return (
     <div className="search-mobile-container">
       <div className="oranger-div"></div>
-      <form action="" onSubmit={handleSearchSubmit}>
+      <form action="" onSubmit={handleSearchSubmit} autoComplete="false">
         <p className="heading">Book Bus Tickets</p>
         <div className="search-form-mobile">
           <div
