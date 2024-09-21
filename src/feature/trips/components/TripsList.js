@@ -12,7 +12,7 @@ export default function TripsList() {
 
   return (
     <div className="trips container">
-      {tripsList.trips.map((trip, index) => (
+      {tripsList?.trips?.map((trip, index) => (
         <div key={trip.tripId} className="TripContainer">
           <div className="leftWrapper">
             <div className="upperItems">          

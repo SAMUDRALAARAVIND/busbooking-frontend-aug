@@ -5,21 +5,21 @@ import SearchBarMobile from "./SearchBarMobile";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCity } from "./slice";
+import Endpoints from "../../network/endpoints";
 
 const CitySearch = () => {
 
   const dispatch= useDispatch()
 
   useEffect(() => {
-    axios.get("http://localhost:8000/city/cities")
+    axios.get(Endpoints.CityData)
     .then((response) => {
       dispatch(getAllCity({data:response.data}))
-      console.log(response.data)
-    } )
+    }).catch(err => console.log(err))
   }, [])
 
   const city = useSelector((state) => state.search.cities.data)
-  console.log()
+  console.log(city)
 
   return (
     <div className="search-page">
@@ -29,14 +29,14 @@ const CitySearch = () => {
           <div className="search-form-container">
             <h1>Book Bus Tickets</h1>
             <div className="bg-white">
-              <SearchBar />
+              <SearchBar city={city} />
             </div>
           </div>
         </div>
       </div>
-      <div className="mobile-search-component">
-        <SearchBarMobile />
-      </div>
+      {/* <div className="mobile-search-component">
+        <SearchBarMobile city={city} />
+      </div> */}
     </div>
   )
 };

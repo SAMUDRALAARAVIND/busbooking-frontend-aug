@@ -10,13 +10,15 @@ import { useParams } from "react-router-dom";
 import "./styles/main.scss"
 
 const TripsScreen = () => {
-  const { sourceId, destinationId, date } = useParams();
+  const { sourceId, destinationId, dateId } = useParams();
+
+  console.log(sourceId, destinationId, dateId)
 
   const dispatch = useDispatch();
   const apiStatus = useSelector(tripsStatusSelector);
 
   useEffect(() => {
-    dispatch(fetchTripsList({ sourceId, destinationId, date }));
+    dispatch(fetchTripsList({ sourceId, destinationId, dateId }));
   }, []);
 
   if (apiStatus === "init" || apiStatus === "pending") {

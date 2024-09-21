@@ -26,7 +26,7 @@ function filterCities(type, cities, search) {
     });
 }
 
-const SearchBarMobile = () => {
+const SearchBarMobile = ({city}) => {
   const suggestions = useSelector((state) => state);
   const dispatch = useDispatch();
   const [today, setToday] = useState(dayjs());
@@ -194,9 +194,9 @@ const SearchBarMobile = () => {
           }}
         />
         <div className="search-city-div">
-        {filterCities("source", suggestions.search.cities, search).length >
+        {filterCities("source", city.name, search).length >
             0 ? (
-              showPopOver.source && filterCities("source", suggestions.search.cities, search).map(
+              showPopOver.source && filterCities("source", city.name, search).map(
                 (city, index) => {
                   return (
                     <CitiesDiv
@@ -232,9 +232,9 @@ const SearchBarMobile = () => {
           }}
         />
         <div className="search-city-div">
-        {filterCities("destination", suggestions.search.cities, search).length >
+        {filterCities("destination", city.name, search).length >
             0 ? (
-              showPopOver.destination && filterCities("destination", suggestions.search.cities, search).map(
+              showPopOver.destination && filterCities("destination", city.name, search).map(
                 (city, index) => {
                   return (
                     <CitiesDiv
