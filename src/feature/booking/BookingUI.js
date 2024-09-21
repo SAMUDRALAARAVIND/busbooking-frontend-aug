@@ -336,7 +336,7 @@ const BookingUI = () => {
           </div>
           <hr style={{ border: "none", borderBottom: "1px solid #f2f2f2" }} />
           <div className="fare-bottom">
-            <p>Total amount to Paid</p>
+            <p>Total Amount To Be Paid</p>
             <p>₹ 1833.20</p>
           </div>
         </div>
