@@ -1,0 +1,394 @@
+@mixin flex-dynamic($justify: space-between, $align: center) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin flex-column($gap: 10px) {
+    display: flex;
+    flex-direction: column;
+    gap: $gap;
+}
+
+@mixin flex-start-center($gap: 10px) {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: $gap;
+}
+
+@mixin flex-column-alignment($align: flex-start) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: $align;
+}
+
+@mixin text-styles($font-size: 1rem, $color: #000000, $font-weight: 600) {
+    font-size: $font-size;
+    color: $color;
+    font-weight: $font-weight;
+}
+
+@mixin flex-column-custom($align: flex-start, $gap: 0px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: $align;
+    gap: $gap;
+}
+
+.booking-desktop {
+    margin: 2rem 0rem;
+}
+
+.parent {
+    background-color: #F4F4F4;
+    width: 82vw;
+    height: 100vh;
+    margin: auto;
+    display: grid;
+    gap: 15px;
+    grid-template-columns: 8fr 4fr;
+}
+
+.left-div {
+    @include flex-column;
+    min-height: 100vh;
+}
+
+.trip-details {
+    @include flex-start-center;
+}
+
+.trip-details .para {
+    font-weight: 700;
+}
+
+.trip-details-body {
+    @include flex-column;
+}
+
+.bus-partner-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bus-partner-details-left {
+    @include flex-column-alignment(flex-start);
+}
+
+.bus-partner-details-left .span-top {
+    @include text-styles(14px, #878787, 500);
+}
+
+.bus-partner-details-left .span-bottom {
+    @include text-styles(1rem, #000000, 600);
+}
+
+.bus-partner-details-right {
+    @include flex-column-alignment(flex-end);
+}
+
+.bus-partner-details-right .span-top {
+    @include text-styles(14px, #878787, 500);
+}
+
+.bus-partner-details-right .span-bottom {
+    @include text-styles(1rem, #000000, 600);
+}
+
+.trip-devider {
+    width: 100%;
+    border: 1px dashed rgb(209, 209, 209);
+}
+
+.boarding-droping-details {
+    @include flex-dynamic(space-between, center);
+}
+
+.boarding-point {
+    @include flex-column-custom(flex-start);
+    text-align: left;
+}
+
+.boarding-point .source-name {
+    background-color: #878787;
+}
+
+.distance {
+    @include flex-dynamic(center, center);
+    height: 20px;
+    box-sizing: border-box;
+    position: relative;
+    gap: 8px;
+}
+
+.dashline-wrraper {
+    height: 100%;
+    @include flex-dynamic(center, center);
+    gap: 6px;
+}
+
+.dashline-wrraper .dashed-line {
+    width: 100px;
+    border-bottom: 2px dashed rgb(209, 209, 209);
+    margin-bottom: 0.3px;
+}
+
+.time-border {
+    border: 2px solid #D1D1D1;
+    border-radius: 3px;
+    padding: 3px;
+}
+
+.droping-point {
+    @include flex-column-custom(flex-end);
+}
+
+.Passenger-Details-head {
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.Passenger-Details-head .title {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.Passenger-Details-body {
+    display: flex;
+    flex-direction: column;
+    height: 30vh;
+}
+
+.Add-Passenger {
+    display: flex;
+    margin-bottom: 2%;
+}
+
+.Add-Passenger .text-success {
+    color: rgb(61, 192, 112);
+}
+
+.add-details {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 12%;
+}
+
+.add-details .form-control {
+    width: 30%;
+    padding: 10px;
+    border-radius: 5px;
+    background: #F4F4F4;
+}
+
+.add-details .form-control input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 99%;
+    height: 97%;
+}
+
+.add-details .form-control::placeholder {
+    color: #B0B0B0;
+    font-weight: 600;
+}
+
+.add-details .age {
+    width: 10%;
+}
+
+.gemder-wrraper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: ease-in 100ms;
+    height: 12%;
+}
+
+.gender-option {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f8f8;
+    color: black;
+    font-weight: 600;
+    width: 50%;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.gender-option .age-radio {
+    display: none;
+}
+
+.gender-option:hover {
+    background: #A34943;
+    color: #f8f8f8;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: relative;
+}
+
+.contact-details h6 {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.contact-details .text-grey {
+    color: rgb(134, 134, 134);
+    font-size: smaller;
+    text-align: left;
+    margin-top: -4%;
+    margin-bottom: 2%;
+}
+
+.input-container {
+    height: 12%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    top: -15%;
+}
+
+.input-container .passenger-details-mob-input {
+    background-color: #F4F4F4;
+    width: 30%;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.input-container .passenger-details-mob-input input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 80%;
+    height: 97%;
+}
+
+.input-container .passenger-details-mob-input::placeholder {
+    color: #B0B0B0;
+    font-weight: 600;
+}
+
+.tnc-wrraper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.tnc-wrraper .tnc {
+    color: #dc635b;
+    cursor: pointer;
+}
+
+.tnc-wrraper .tnc:hover {
+    color: black;
+}
+
+.pay-btn-wrraper {
+    height: 8%;
+}
+
+.pay-btn-wrraper .pay-button {
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #dc635b;
+    border: none;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: ease-in 100ms;
+}
+
+.pay-btn-wrraper .pay-button:hover {
+    background-color: #A34943;
+}
+
+.right-div {
+    height: fit-content;
+    width: 80%;
+    border-radius: 5px;
+    background-color: white;
+    @include flex-column(10px);
+}
+
+.right-div h2 {
+    text-align: left;
+    margin-left: 0.4vw;
+}
+
+.fare {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 18px;
+    width: 95%;
+    margin: auto;
+}
+
+.fare-left {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fare-left p {
+    color: #868686;
+    font-size: 14px;
+}
+
+.fare-right {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: -10px;
+}
+
+.fare-right p {
+    color: #868686;
+    font-size: 14px;
+}
+
+.fare-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    font-size: 18px;
+    font-weight: 700;
+    width: 95%;
+    margin: auto;
+}
+
+.booking-mobile {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .booking-mobile {
+        display: block;
+    }
+
+    .booking-desktop {
+        display: none;
+    }
+}

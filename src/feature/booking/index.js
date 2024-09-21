@@ -1,5 +1,17 @@
+import BookingMobileUI from "./BookingMobileUI";
+import BookingUI from "./BookingUI";
+
 const BookingScreen = () => {
-  return <div>Booking screen</div>;
+  return (
+    <>
+      <div className="booking-desktop">
+        <BookingUI />
+      </div>
+      <div className="booking-mobile">
+        <BookingMobileUI />
+      </div>
+    </>
+  );
 };
 
 export default BookingScreen;

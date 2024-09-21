@@ -1,0 +1,232 @@
+.city-info-mobile{
+    display: flex;
+    flex-direction: column;
+    color: white;
+    background-color: #424242;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+
+    p{
+        text-align: left;
+        padding-left: 2.5rem;
+        font-size: small;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+    .cities{
+        display: flex;
+        margin: 1rem 1rem 0rem 1rem;
+        gap: 0.6rem;
+        align-items: center;
+
+        i{
+            font-size: medium;
+        }
+
+        h4{
+            font-size: large;
+            font-weight: 500;
+        }
+    }
+}
+
+.trip-info-mobile{
+    display: flex;
+    justify-content: space-around;
+    line-height: 2;
+    background-color: white;
+    border-radius: 1rem;
+    width: 90%;
+    margin: 1rem;
+    padding: 0.5rem 0rem;
+    align-items: center;
+
+    p{
+        font-size: smaller;
+        color: #868686;
+        text-align: left;
+    }
+    h3{
+        font-size: medium;
+        text-align: left;
+    }
+
+    .divider{
+        display: flex;
+        align-items: center;
+        i{
+            font-size: 8px;
+            color: #B0B0B0;
+        }
+        hr{
+            min-width: 2.4rem;
+        }
+    }
+}
+
+.contact-details-mobile{
+    text-align: left;
+    background-color: white;
+    width: 90%;
+    padding:0.5rem 1rem ;
+    margin: 1rem;
+    border-radius: 1rem;
+
+    h2{
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    hr{
+        color: #868686;
+    }
+
+    p{
+        color:#868686;
+        font-size: small;
+        font-weight: 100;
+        margin-bottom: 1rem;
+    }
+
+    .form{
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .input-div{
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        i{
+            font-size: large;
+        }
+
+        input{
+            outline: none;
+            border: none;
+            font-size: large;
+
+            &::placeholder{
+                color: #B0B0B0;
+                font-weight: 100 !important;
+            }
+        }
+    }
+}
+
+.passenger-details-mobile{
+    text-align: left;
+    background-color: white;
+    width: 90%;
+    padding:0.5rem 1rem ;
+    margin: 1rem;
+    border-radius: 1rem;
+
+    h2{
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    hr{
+        color: #868686;
+    }
+
+    p{
+        color:#868686;
+        font-size: small;
+        font-weight: 100;
+        margin-bottom: 1rem;
+    }
+
+    .form{
+
+        p{
+            color: black;
+            font-size: medium;
+
+            span{
+                color: #3dc070;
+            }
+        }
+
+        .user-info{
+
+            display: flex;
+
+            input{
+                outline: none;
+                border: none;
+                width: 30%;
+                margin-bottom: 0.5rem;
+                &::placeholder{
+                    color: #B0B0B0;
+                    font-weight: 100 !important;
+                }
+            }
+
+            .btn-mobile{
+                display: flex;
+                gap: 0.2rem;
+                border: 1px solid #B0B0B0;
+                border-radius: 1rem;
+                padding: 0rem 0.5rem;
+                align-items: center;
+
+                hr{
+                    height: 80%;
+                }
+
+                button{
+                    background-color: transparent;
+                    font-size: 11.5px;
+                    border: none;
+                    border-radius: 1rem;
+                    padding: 0.15rem 0.3rem;
+                    color: #B0B0B0;
+                }
+                .male:focus{
+                    background-color: #cde8f0;
+                    color: #3983cd;
+                }
+                .female:focus{
+                    background-color: #ffdced;
+                    color: #ff7fd4;
+                }
+            }
+        }
+    }
+}
+
+.proceed-btn{
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: space-around;
+    text-align: left;
+    background-color: rgb(209, 209, 209);
+    padding: 1rem 0rem;
+    width: 90%;
+    margin: 1rem;
+    border-radius: 1rem;
+    color: white;
+    align-items: center;
+    hr{
+        min-height: 2.5rem;
+        border: 1px solid white;
+    }
+    i{
+        font-size: small;
+    }
+
+    .seat-detail{
+        h3{
+            font-weight: 300;
+        }
+        p{
+            font-size: smaller;
+        }
+    }
+}

@@ -102,6 +102,7 @@ const SearchBarMobile = () => {
 
       navigate(
         `/trips/search/${source}/${sourceId}/${destination}/${destinationId}`
+        // `/book`
       );
     } else {
       alert("Please fill in all search fields.");
