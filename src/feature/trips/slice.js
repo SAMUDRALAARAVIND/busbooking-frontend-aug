@@ -5,7 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const tripsSlice = createSlice({
   name: "trips",
   initialState: {
-    tripsResponse: null,
+    tripsResponse: [],
     apiStatus: "init",
     city:null
   },
@@ -15,6 +15,9 @@ const tripsSlice = createSlice({
       state.apiStatus = action.payload.status;
       if (action.payload.status === "success") {
         state.tripsResponse = action.payload.data;
+      }
+      if (action.payload.error) {
+        state.error = action.payload.error;
       }
     },
   },

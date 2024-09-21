@@ -19,7 +19,7 @@ const TripsScreen = () => {
 
   useEffect(() => {
     dispatch(fetchTripsList({ sourceId, destinationId, dateId }));
-  }, []);
+  });
 
   if (apiStatus === "init" || apiStatus === "pending") {
     return <h1>Loading trips ..</h1>;

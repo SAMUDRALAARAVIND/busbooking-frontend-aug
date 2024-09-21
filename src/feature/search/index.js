@@ -1,23 +1,24 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import Navbar from "./Navbar";
 import SearchBar from "./SearchBar";
-import SearchBarMobile from "./SearchBarMobile";
-import axios from "axios";
+// import SearchBarMobile from "./SearchBarMobile";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCity } from "./slice";
-import Endpoints from "../../network/endpoints";
 
 const CitySearch = () => {
 
   const dispatch= useDispatch()
 
-  useEffect(() => {
-    axios.get(Endpoints.CityData)
-    .then((response) => {
-      dispatch(getAllCity({data:response.data}))
-    }).catch(err => console.log(err))
-  }, [])
+  // console.log('hi')
 
+  // useEffect(() => {
+  //   console.log("useEffect is running");
+  //   axios.get(Endpoints.CityData)
+  //     .then((response) => {
+  //       dispatch(getAllCity({ data: response.data }));
+  //     })
+  //     .catch(err => console.log(err));
+  // }, []);
+  
   const city = useSelector((state) => state.search.cities.data)
   console.log(city)
 

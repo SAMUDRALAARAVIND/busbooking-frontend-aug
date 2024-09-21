@@ -15,7 +15,7 @@ dayjs.extend(customParseFormat);
 function filterCities(type, cities, search) {
   const searchVal = search[type]?.toLowerCase();
   return cities
-    .filter((city) => {
+    ?.filter((city) => {
       return city.name.toLowerCase().includes(searchVal);
     })
     .map((city) => city.name); 
@@ -53,7 +53,7 @@ const SearchBar = ({ city }) => {
 
 
   const filteredSourceCities = filterCities("source", suggestions, search);
-
+  
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -135,18 +135,20 @@ const SearchBar = ({ city }) => {
 
 
   const handelSublit = () => {
-    // console.log(suggestions)
+    console.log(suggestions)
     let sourceId = suggestions.find
-    ((city) => city.name.toLowerCase() == search.source.toLowerCase())
+    ((city) => city.name.toLowerCase() === search.source.toLowerCase())
 
     let destinationId = suggestions.find
-    ((city) => city.name.toLowerCase() == search.destination.toLowerCase())
+    ((city) => city.name.toLowerCase() === search.destination.toLowerCase())
+
+    // console.log()
 
 
     const appochDate = new Date (search.date)
     const epochTime = Math.floor(appochDate.getTime() / 1000)
 
-    console.log(epochTime)
+    // console.log(sourceId)
 
     const url = `/trips/search/${search.source}/${sourceId.cityId}/${search.destination}/${destinationId.cityId}/${search.date}/${epochTime}`;
 

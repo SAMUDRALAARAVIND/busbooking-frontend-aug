@@ -1,5 +1,5 @@
 import "../styles/TripCard.scss";
-import tagImg from "../assets/tagImg.jpg";
+// import tagImg from "../assets/tagImg.jpg";
 
 import { formatDate, formatTime } from "./formatDatetime";
 import { TripDetails } from "./TripsDetails";
