@@ -1,7 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+.topContainer{
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
 .login-container {
-    // background-color: #fff;
     text-align: left;
     border-radius: 20px;
     height: 70%;
@@ -9,10 +16,8 @@
     box-sizing: border-box;
     margin: 1rem auto;
     display: flex;
-    // justify-content: space-between;
     border: 1px solid #f4f4f4;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
     overflow: hidden;
     max-width: 100%;
 

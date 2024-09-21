@@ -11,7 +11,7 @@ const searchSlice = createSlice({
     date: null,
     // TODO - save the source city id and destination city id after fetching data from server
     sourceCityId: "",
-    destinationCityId: ""
+    destinationCityId: "",
   },
   reducers: {
     addSourceCity: (state, action) => {

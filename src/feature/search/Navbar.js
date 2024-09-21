@@ -1,7 +1,7 @@
 import "./styles/SearchBar.scss";
 import "./styles/Header.scss";
 
-import React from 'react';
+import React, { useState } from 'react';
 // import "./styles/SearchBar.scss";
 
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
@@ -10,10 +10,22 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 // import Searchinput from './Searchinput';
 import { Link } from 'react-router-dom';
+import LoginPage from "../auth/LoginPage";
 
 
 
 const Navbar = () => {
+
+  const[ toggle, settoggle] = useState(false)
+
+
+  console.log(toggle)
+  // const showLogin = () => {
+
+  // }
+
+
+
   return (
     <header className='header'>
       <div className='top_navbar'>
@@ -56,7 +68,7 @@ const Navbar = () => {
           </Link>
         </nav>
         <div className='auth' style={{ color: "#dc635b" }}>
-          <Link to='#' style={{ color: "#dc635b", fontSize: "12px" }}>
+          <Link to='#' style={{ color: "#dc635b", fontSize: "12px" }} onClick={() => settoggle(prev => !prev)}>
             <AccountCircleIcon style={{ color: "#dc635b", }} /> Login
           </Link>/<Link style={{ color: "#dc635b", fontSize: "12px" }} to="#"> Sign Up</Link>
         </div>
@@ -70,6 +82,11 @@ const Navbar = () => {
         <button>Arrival Time</button>
         <button>Departure Time</button>
       </div> */}
+      {
+        toggle && <LoginPage />
+      }
+
+
     </header>
   );
 };
