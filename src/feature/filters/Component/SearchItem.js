@@ -1,12 +1,16 @@
 import { Checkbox, Empty, Input } from "antd";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleStop } from "../slice";
 import "../style/Search.scss";
 
 const SearchItems = ({ list, placeholder, identifier }) => {
   const [searchValue, setSearchValue] = useState("");
-  const [selectedStops, setSelectedStops] = useState({}); // Local state for selected items
+  // const [selectedStops, setSelectedStops] = useState({});
+  const selectedStops = useSelector((state) => {
+    return state.filters[identifier];
+  });
+  // Local state for selected items
   const dispatch = useDispatch();
 
   const filteredItems = list.filter((item) =>
@@ -14,8 +18,8 @@ const SearchItems = ({ list, placeholder, identifier }) => {
   );
 
   const onCheckInput = (stopId, add) => {
-    const updatedSelectedStops = { ...selectedStops, [stopId]: add };
-    setSelectedStops(updatedSelectedStops);
+    // const updatedSelectedStops = { ...selectedStops, [stopId]: add };
+    // setSelectedStops(updatedSelectedStops);
     dispatch(toggleStop({ add, stopId, identifier }));
   };
 
@@ -40,7 +44,7 @@ const SearchItems = ({ list, placeholder, identifier }) => {
               <div key={item.stopId} className="search-item">
                 <Checkbox
                   className="custom-checkbox"
-                  checked={selectedStops[item.stopId] || false}
+                  checked={selectedStops[item.stopId]}
                   id={item.stopId}
                   onChange={(e) => onCheckInput(item.stopId, e.target.checked)}
                 />

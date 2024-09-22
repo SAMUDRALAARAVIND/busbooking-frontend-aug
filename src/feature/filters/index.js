@@ -9,7 +9,7 @@ import EventSeatIcon from "@mui/icons-material/EventSeat";
 import Brightness6Icon from "@mui/icons-material/Brightness6";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import { clearAllFilters, filterType, toggleStop, departureTime } from "./slice";
+import { filterType, toggleStop, departureTime } from "./slice";
 import "./style/Footer.scss";
 
 const busTypes = [
@@ -58,9 +58,6 @@ const SideBar = () => {
   const departureTimeState = useSelector(
     (state) => state.filters[filterType.DEPARTURE_TIME]
   );
-  const handleReset = () => {
-    dispatch(clearAllFilters()); 
-  };
 
   const updateBusTypeFilter = (add, value) => {
     dispatch(
@@ -156,9 +153,9 @@ const SideBar = () => {
           className="custom-drawer" // Use className instead of classNames
         >
           <Filters width={340} padding={20} />
-          <button className="nav-btn reset-btn" onClick={handleReset}>
+          {/* <button className="nav-btn" onClick={handleClearAllFilters}>
             Reset
-          </button>
+          </button> */}
         </Drawer>
       </div>
     </>
