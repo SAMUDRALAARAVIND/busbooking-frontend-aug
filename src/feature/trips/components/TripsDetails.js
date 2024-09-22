@@ -3,11 +3,24 @@ import { svg, aminitiesSvg } from "./svg";
 import { CancellationModal, TravelPolicy, DroppingBoardingPoint, Aminities } from './modals'
 import { DownOutlined } from "@ant-design/icons";
 
-export const TripDetails = ({ trip }) => {
+export const TripDetails = ({ trip , activeTripId, handleModalToggle}) => {
   const [toggleAminities, setToggleAminities] = useState(false);
   const [boardingDroppingPoints, setBoardingDroppingPoints] = useState(false);
   const [cancellationPolicy, setCancellationPolicy] = useState(false);
   const [travelPolicy, setTravelPolicy] = useState(false);
+
+  const isActive = activeTripId === trip.tripId;
+  const [openModal, setOpenModal] = useState(null);
+  useEffect(() => {
+    // Close modals if the active trip changes
+    if (!isActive) {
+      setOpenModal(null);
+    }
+  }, [isActive]);
+
+  const handleModalOpen = (modalType) => {
+    setOpenModal((prevModal) => (prevModal === modalType ? null : modalType));
+  };
 
   useEffect(() => {
     const closeModals = () => {
@@ -28,28 +41,36 @@ export const TripDetails = ({ trip }) => {
     <>
       <TripRecord
         {...{ setToggleAminities, setBoardingDroppingPoints, setCancellationPolicy, setTravelPolicy }}
-        trip={trip}
+        trip={trip} 
       />
       <MoreDetails
         {...{ setToggleAminities, setBoardingDroppingPoints, setCancellationPolicy , setTravelPolicy}}
-        trip={trip}
+        trip={trip}   handleModalToggle={handleModalToggle}
+        handleModalOpen={handleModalOpen}
+        isActive={isActive}
+        openModal={openModal}
       />
       
       {/* Conditional rendering of modals */}
-      {boardingDroppingPoints && <DroppingBoardingPoint />}
-      {toggleAminities && <Aminities trip={trip}/>}
-      {cancellationPolicy && <CancellationModal  trips={trip}/>}
-      {travelPolicy && <TravelPolicy  />}
+      {isActive && (
+        <>
+     {openModal === "boardingDroppingPoints" && <DroppingBoardingPoint />}
+          {openModal === "aminities" && <Aminities trip={trip} />}
+          {openModal === "cancellationPolicy" && <CancellationModal trips={trip} />}
+          {openModal === "travelPolicy" && <TravelPolicy />}
+       
+      </>
+      )}
     </>
   );
 };
 
 export const MoreDetails = ({
-  setBoardingDroppingPoints,
-  setToggleAminities,
-  setCancellationPolicy,
-  setTravelPolicy,
+  handleModalOpen,
+  isActive,
   trip,
+  openModal,
+  handleModalToggle,
 }) => {
   return (
     <div className="moreDetails flex">
@@ -57,10 +78,8 @@ export const MoreDetails = ({
         className="flex"
         onClick={(e) => {
           e.stopPropagation();
-          setBoardingDroppingPoints((prev) => !prev);
-          setToggleAminities(false);
-          setCancellationPolicy(false);
-          setTravelPolicy(false)
+          handleModalToggle();
+          handleModalOpen("boardingDroppingPoints");
         }}
       >
         <p className="grey">Boarding & Dropping Points</p>
@@ -74,10 +93,8 @@ export const MoreDetails = ({
       <div
         onClick={(e) => {
           e.stopPropagation();
-          setToggleAminities((prev) => !prev);
-          setBoardingDroppingPoints(false);
-          setCancellationPolicy(false);
-          setTravelPolicy(false)
+          handleModalToggle();
+          handleModalOpen("aminities");
         }}
         className="flex"
       >
@@ -92,10 +109,8 @@ export const MoreDetails = ({
         className="flex"
         onClick={(e) => {
           e.stopPropagation();
-          setCancellationPolicy((prev) => !prev);
-          setBoardingDroppingPoints(false);
-          setToggleAminities(false);
-          setTravelPolicy(false)
+          handleModalToggle();
+          handleModalOpen("cancellationPolicy");
         }}
       >
         <p className="grey">Cancellation Policy</p>
@@ -109,10 +124,8 @@ export const MoreDetails = ({
         className="flex"
         onClick={(e) => {
           e.stopPropagation();
-          setTravelPolicy((prev) => !prev);
-          setBoardingDroppingPoints(false);
-          setToggleAminities(false);
-          setCancellationPolicy(false)
+          handleModalToggle();
+          handleModalOpen("travelPolicy");
         }}
       >
         <p className="grey">Travel Policy</p>

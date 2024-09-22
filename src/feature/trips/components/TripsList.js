@@ -13,15 +13,11 @@ export default function TripsList() {
   const tripsList = useSelector(tripsSelector);
   const { source, destination, travelDate } = useParams();
 
-  // const [activeTripId, setActiveTripId] = useState(null);
+  const [activeTripId, setActiveTripId] = useState(null);
 
-  // const handleModalToggle = (tripId) => {
-  //   if (activeTripId === tripId) {
-  //     setActiveTripId(null);
-  //   } else {
-  //     setActiveTripId(tripId);
-  //   }
-  // };
+  const handleModalToggle = (tripId) => {
+    setActiveTripId((prevId) => (prevId === tripId ? null : tripId));
+  };
 
   console.log("tripsList", tripsList);
   return (
@@ -56,7 +52,8 @@ export default function TripsList() {
                 </div>
               </div>
             </div>
-            <TripDetails trip={trip} />
+            <TripDetails trip={trip}    activeTripId={activeTripId}
+              handleModalToggle={() => handleModalToggle(trip.tripId)}/>
           </div>
           <div className="rightWrapper">
             <div className="text-end">
