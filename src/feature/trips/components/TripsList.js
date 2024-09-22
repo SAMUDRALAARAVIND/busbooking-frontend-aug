@@ -23,8 +23,7 @@ export default function TripsList() {
   //   }
   // };
 
-
-console.log("tripsList", tripsList)
+  console.log("tripsList", tripsList);
   return (
     <div className="trips container">
       {tripsList.trips.map((trip, index) => (
@@ -57,7 +56,7 @@ console.log("tripsList", tripsList)
                 </div>
               </div>
             </div>
-            <TripDetails trip={trip}  />
+            <TripDetails trip={trip} />
           </div>
           <div className="rightWrapper">
             <div className="text-end">
