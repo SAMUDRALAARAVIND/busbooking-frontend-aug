@@ -160,10 +160,8 @@ export const TripRecord = ({
         <div className="aminities flex">
           {trip.amenities.slice(0, 3).map((item, index) => {
             const matchedAmenity = aminitiesSvg.find((amenity) => {
-              console.log("Checking against:", amenity.name); // Debug the amenity names
               return amenity.name === item;
             });
-            console.log("match", matchedAmenity);
   
             return matchedAmenity ? (
               <span

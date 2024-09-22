@@ -22,7 +22,7 @@ export default function TripsList() {
   console.log("tripsList", tripsList);
   return (
     <div className="trips container ">
-      {tripsList.trips.map((trip, index) => (
+      {tripsList?.map((trip, index) => (
         <div key={trip.tripId} className="TripContainer">
           <div className="leftWrapper">
             <div className="upperItems">

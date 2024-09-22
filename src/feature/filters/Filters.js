@@ -5,7 +5,7 @@ import BusTypes from "./Component/BusTypes";
 import PriceRange from "./Component/PriceRange";
 import DepartureTime from "./Component/DepartureTime";
 import { clearAllFilters, filterType } from "./slice";
-import { busPartners, cities } from "./data";
+import { busPartners, cities, droppingPoints, boardingPoints } from "./data";
 import "./style/filter.scss";
 import { Divider } from "antd";
 
@@ -43,14 +43,14 @@ const Filters = ({ width, padding }) => {
       <Toggle className="section" title="Boarding Points">
         <SearchItems
           placeholder="Search boarding points"
-          list={[...cities].map((i) => ({ stopId: i, name: i }))}
+          list={[...boardingPoints].map((i) => ({ stopId: i, name: i }))}
           identifier={filterType.BUS_PARTNER}
         />
       </Toggle>
       <Toggle className="section" title="Dropping Points">
         <SearchItems
           placeholder="Search dropping points"
-          list={[...cities].map((i) => ({ stopId: i, name: i }))}
+          list={[...droppingPoints].map((i) => ({ stopId: i, name: i }))}
           identifier={filterType.BUS_PARTNER}
         />
       </Toggle>
