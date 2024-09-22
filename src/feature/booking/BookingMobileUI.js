@@ -33,7 +33,9 @@ const BookingMobileUI = () => {
           <p>10h 30m</p>
           <div className="divider">
             <i className="material-icons">circle</i>
-            <div><hr /></div>
+            <div>
+              <hr />
+            </div>
             <i className="material-icons">circle</i>
           </div>
         </div>
@@ -93,14 +95,16 @@ const BookingMobileUI = () => {
       </div>
 
       <div className="proceed-btn">
-        <p>
-          <i class="material-icons-outlined">currency_rupee</i>
-          3120
-        </p>
-        <hr />
-        <div className="seat-detail">
-          <h3>1LC</h3>
-          <p>Selected Seat</p>
+        <div className="proceed-btn-left">
+          <p>
+            <i class="material-icons-outlined">currency_rupee</i>
+            3120
+          </p>
+          <hr />
+          <div className="seat-detail">
+            <h3>1LC</h3>
+            <p>Selected Seat</p>
+          </div>
         </div>
         <p>Proceed</p>
       </div>

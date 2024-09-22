@@ -36,11 +36,12 @@
     justify-content: space-around;
     line-height: 2;
     background-color: white;
-    border-radius: 1rem;
-    width: 90%;
-    margin: 1rem;
+    border-radius: 0.5rem;
+    width: 96%;
+    margin: 0.6rem 0.4rem;
     padding: 0.5rem 0rem;
     align-items: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
 
     p{
         font-size: smaller;
@@ -68,14 +69,17 @@
 .contact-details-mobile{
     text-align: left;
     background-color: white;
-    width: 90%;
-    padding:0.5rem 1rem ;
-    margin: 1rem;
-    border-radius: 1rem;
+    width: 96%;
+    padding:1rem ;
+    margin: 0.6rem 0.4rem;
+    border-radius: 0.5rem;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
 
     h2{
-        font-weight: 500;
         margin-bottom: 5px;
+        font-weight: 600;
+        font-size: 1.3rem;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     hr{
@@ -111,6 +115,7 @@
             &::placeholder{
                 color: #B0B0B0;
                 font-weight: 100 !important;
+                font-size: medium;
             }
         }
     }
@@ -119,13 +124,16 @@
 .passenger-details-mobile{
     text-align: left;
     background-color: white;
-    width: 90%;
-    padding:0.5rem 1rem ;
-    margin: 1rem;
-    border-radius: 1rem;
+    width: 96%;
+    padding:1rem ;
+    margin: 0.6rem 0.4rem;
+    border-radius: 0.5rem;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
 
     h2{
-        font-weight: 500;
+        font-weight: 600;
+        font-size: 1.3rem;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         margin-bottom: 5px;
     }
 
@@ -204,13 +212,13 @@
     bottom: 0;
     z-index: 2;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     text-align: left;
     background-color: rgb(209, 209, 209);
-    padding: 1rem 0rem;
-    width: 90%;
-    margin: 1rem;
-    border-radius: 1rem;
+    padding: 0.4rem 0.6rem;
+    width: 96%;
+    margin: 0.4rem;
+    border-radius: 0.6rem;
     color: white;
     align-items: center;
     hr{
@@ -221,9 +229,16 @@
         font-size: small;
     }
 
+    .proceed-btn-left{
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
     .seat-detail{
         h3{
             font-weight: 300;
+            font-size: large;
         }
         p{
             font-size: smaller;
