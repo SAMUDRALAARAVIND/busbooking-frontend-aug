@@ -4,7 +4,7 @@ import tagImg from "../assets/tagImg.jpg";
 import { formatDate, formatTime } from "./formatDatetime";
 import { TripDetails } from "./TripsDetails";
 import { useSelector } from "react-redux";
-import { tripsSelector } from "../selectors";
+import { tripsSelector } from "../redux/selectors";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 
@@ -25,7 +25,7 @@ export default function TripsList() {
 
   console.log("tripsList", tripsList);
   return (
-    <div className="trips container">
+    <div className="trips container ">
       {tripsList.trips.map((trip, index) => (
         <div key={trip.tripId} className="TripContainer">
           <div className="leftWrapper">

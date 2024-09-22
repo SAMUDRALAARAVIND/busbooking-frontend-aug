@@ -28,7 +28,7 @@ const TripsScreen = () => {
   return (
     <>
       <Navbar />
-      <div className="trips-screen flex">
+      <div className="trips-screen flex ">
         <Filters />
         <TripsList />
       </div>
