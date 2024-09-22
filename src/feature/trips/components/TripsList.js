@@ -1,26 +1,36 @@
-import "../styles/TripCard.scss";
+import "../styles/TripList.scss";
 import tagImg from "../assets/tagImg.jpg";
 
 import { formatDate, formatTime } from "./formatDatetime";
 import { TripDetails } from "./TripsDetails";
 import { useSelector } from "react-redux";
 import { tripsSelector } from "../selectors";
+import { useParams } from "react-router-dom";
+import { useState } from "react";
 
 export default function TripsList() {
   // get the tripsList from redux store
   const tripsList = useSelector(tripsSelector);
+  const { source, destination, travelDate } = useParams();
 
+  // const [activeTripId, setActiveTripId] = useState(null);
+
+  // const handleModalToggle = (tripId) => {
+  //   if (activeTripId === tripId) {
+  //     setActiveTripId(null);
+  //   } else {
+  //     setActiveTripId(tripId);
+  //   }
+  // };
+
+
+console.log("tripsList", tripsList)
   return (
     <div className="trips container">
       {tripsList.trips.map((trip, index) => (
         <div key={trip.tripId} className="TripContainer">
           <div className="leftWrapper">
             <div className="upperItems">
-              <div className="ads absolute">
-                <p>AD</p>
-              </div>
-              <img src={tagImg} className="tagImg" alt="abhiAssuaranceTag" />
-
               <div className="flex tripInfo">
                 <div className="NameAndType">
                   <h5>{trip.busPartner}</h5>
@@ -30,7 +40,7 @@ export default function TripsList() {
                   <div className="departureData">
                     <p className="grey">{formatDate(trip.departureTime)}</p>
                     <span>{formatTime(trip.departureTime)}</span>
-                    <p className="grey">{tripsList.sourceCity.name}</p>
+                    <p className="grey">{source}</p>
                   </div>
                   <div className="duration flex grey">
                     - - -
@@ -42,12 +52,12 @@ export default function TripsList() {
                   <div className="arrivalData">
                     <p className="grey">{formatDate(trip.arrivalTime)}</p>
                     <span>{formatTime(trip.arrivalTime)}</span>
-                    <p className="grey">{tripsList.destinationCity.name}</p>
+                    <p className="grey">{destination}</p>
                   </div>
                 </div>
               </div>
             </div>
-            <TripDetails trip={trip} />
+            <TripDetails trip={trip}  />
           </div>
           <div className="rightWrapper">
             <div className="text-end">

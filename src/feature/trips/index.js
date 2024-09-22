@@ -8,13 +8,13 @@ import { fetchTripsList } from "./thunk";
 import { useParams } from "react-router-dom";
 
 const TripsScreen = () => {
-  const { sourceId, destinationId, date } = useParams();
+  const { sourceCityId, destinationCityId, travelDate } = useParams();
 
   const dispatch = useDispatch();
   const apiStatus = useSelector(tripsStatusSelector);
 
   useEffect(() => {
-    dispatch(fetchTripsList({ sourceId, destinationId, date }));
+    dispatch(fetchTripsList({ sourceCityId, destinationCityId, travelDate  }));
   }, []);
 
   if (apiStatus === "init" || apiStatus === "pending") {

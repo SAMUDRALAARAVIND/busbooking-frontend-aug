@@ -124,9 +124,6 @@ export const MoreDetails = ({
   );
 };
 
-
-
-
 export const TripRecord = ({
     setToggleAminities,
     setBoardingDroppingPoints,
@@ -136,7 +133,7 @@ export const TripRecord = ({
   }) => {
     return (
       <div className="tripRecords flex">
-        <div className="rating flex">
+        {/* <div className="rating flex">
           <div className="avgRating flex">
             <span dangerouslySetInnerHTML={{ __html: svg.ratingSvg }} />
             <p>{trip.averageRating}</p>
@@ -145,7 +142,7 @@ export const TripRecord = ({
             <span dangerouslySetInnerHTML={{ __html: svg.usersRating }} />
             <p className="grey">{formatRatings(trip.numberOfRatings)}</p>
           </div>
-        </div>
+        </div> */}
   
         <div className="aminities flex">
           {trip.amenities.slice(0, 3).map((item, index) => {

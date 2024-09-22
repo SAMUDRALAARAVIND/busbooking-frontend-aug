@@ -42,7 +42,7 @@ export  const svg = {
     },
     {
       name: "LIVE_TRACKING",
-      img: `<svg width="20px" height="20px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#DC635B"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="1.2"> <path d="M20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12Z" stroke="#DC635B" stroke-width="2.4"></path> <path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" stroke="#DC635B" stroke-width="2.4"></path> <path d="M2 12L4 12" stroke="#DC635B" stroke-width="2.4" stroke-linecap="round"></path> <path d="M20 12L22 12" stroke="#DC635B" stroke-width="2.4" stroke-linecap="round"></path> <path d="M12 4V2" stroke="#DC635B" stroke-width="2.4" stroke-linecap="round"></path> <path d="M12 22V20" stroke="#000000" stroke-width="2.4" stroke-linecap="round"></path> </g><g id="SVGRepo_iconCarrier"> <path d="M20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12Z" stroke="#000000" stroke-width="2.4"></path> <path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" stroke="#000000" stroke-width="2.4"></path> <path d="M2 12L4 12" stroke="#000000" stroke-width="2.4" stroke-linecap="round"></path> <path d="M20 12L22 12" stroke="#000000" stroke-width="2.4" stroke-linecap="round"></path> <path d="M12 4V2" stroke="#000000" stroke-width="2.4" stroke-linecap="round"></path> <path d="M12 22V20" stroke="#000000" stroke-width="2.4" stroke-linecap="round"></path> </g></svg>`,
+      img: `<svg fill="#DC635B" width="16px" height="22px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M20.992,9.98A8.991,8.991,0,0,0,3.01,9.932a13.95,13.95,0,0,0,8.574,12.979A1,1,0,0,0,12,23a1.012,1.012,0,0,0,.419-.09A13.948,13.948,0,0,0,20.992,9.98ZM12,20.9A11.713,11.713,0,0,1,5.008,10a6.992,6.992,0,1,1,13.984,0c0,.021,0,.045,0,.065A11.7,11.7,0,0,1,12,20.9ZM12,6a4,4,0,1,0,4,4A4,4,0,0,0,12,6Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,12Z"></path></g></svg>`,
     },
     {
       name: "WIFI",
@@ -50,7 +50,7 @@ export  const svg = {
     },
     {
       name:"EMERGENCY_EXIT",
-      img:``,
+      img:`<svg fill="#DC635B" width="14px" height="16px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12.207 9H5V7h7.136L11.05 5.914 12.464 4.5 16 8.036l-3.536 3.535-1.414-1.414L12.207 9zM10 4H8V2H2v12h6v-2h2v4H0V0h10v4z" fill-rule="evenodd"></path> </g></svg>`,
     },
   
   

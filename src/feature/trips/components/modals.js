@@ -72,6 +72,7 @@ export function CancellationModal({ trips }) {
   return (
     <div className='cancellation-policy overflow'>
       <h5>Cancellation Policy</h5>
+
       <div className='heading flex'>
         <div>
           <h5>Cancellation Time</h5>
@@ -80,6 +81,7 @@ export function CancellationModal({ trips }) {
           <h5>Refund Amount with Percentage</h5>
         </div>
       </div>
+
       <div>
         {refundTimes.map((policy, index) => {
           let statement = '';
@@ -99,6 +101,7 @@ export function CancellationModal({ trips }) {
           );
         })}
       </div>
+      
       <div className='desc'>
         <p>Refund Amount is Indicative</p>
         <p>Additional Rs. 15 per seat cancellation fee is applicable</p>

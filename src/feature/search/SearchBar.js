@@ -63,8 +63,10 @@ const SearchBar = () => {
   }, []);
 
   const onDateChange = (date) => {
-    setToday(date);
-    dispatch(addDate(date.unix()));
+    const epochTimeInSeconds = dayjs(date).unix(); 
+console.log('epoch time', epochTimeInSeconds)
+  setToday(epochTimeInSeconds);
+    dispatch(addDate(epochTimeInSeconds));
   };
 
   const handleCityClick = (identifier, city) => {
@@ -85,13 +87,14 @@ const SearchBar = () => {
 
   const handleTodayClick = () => {
     const todayDate = dayjs();
-    setToday(todayDate);
+    setToday(todayDate.unix());
     dispatch(addDate(todayDate.unix()));
   };
 
   const handleTomorrowClick = () => {
     const tomorrowDate = dayjs().add(1, "day");
-    setToday(tomorrowDate);
+    console.log("tomorrowDate", tomorrowDate.unix())
+    setToday(tomorrowDate.unix());
     dispatch(addDate(tomorrowDate.unix()));
   };
 
@@ -111,7 +114,7 @@ const SearchBar = () => {
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (search.source && search.destination && today) {
-      // Dispatch or call search action here
+      navigate(`/trips/search/${search.source}/66ecaf5225b386e4b0f055c9/${search.destination}/66ecaf5225b386e4b0f055d2/${today}`)
     } else {
       alert("Please fill in all search fields.");
     }
@@ -255,7 +258,7 @@ const SearchBar = () => {
                 </button>
               </div>
             </div>
-            <button className="search-button" onClick={()=> navigate('/trips/search')}>Search</button>
+            <button className="search-button" >Search</button>
           </div>
       </form>
  

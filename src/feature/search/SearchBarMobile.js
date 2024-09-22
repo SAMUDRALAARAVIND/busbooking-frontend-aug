@@ -162,7 +162,7 @@ const SearchBarMobile = () => {
                 : today.format("DD/MM/YYYY")}
             </p>
           </div>
-          <button className="search-button" onClick={()=> navigate('/trips/search')}>Submit</button>
+          <button className="search-button">Submit</button>
         </div>
       </form>
 

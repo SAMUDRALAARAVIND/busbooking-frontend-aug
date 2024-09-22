@@ -4,11 +4,12 @@
     background-color: white;
     border-radius: 10px;
     box-shadow: 0px 5px 10px 5px rgba(121, 120, 120, 0.2);
-    width: 60%;
+    width: 35%;
     text-align: start;
     margin: 10px 23px;
     padding: 10px;
     z-index: 1000;
+    zoom: 0.9;
   }
   .boardingList,
   .DroppingList {
@@ -52,7 +53,7 @@
     gap: 10px;
     background-color: #ffffff;
     padding:  10px;
-    width: 60%;
+    width: 40%;
     text-align: left;
     margin: auto;
     margin-left: 20%;
@@ -98,19 +99,18 @@
     height: 30vh;
     background-color: white;
     border-radius: 10px;
-    width: 70%;
     box-shadow: 0px 5px 10px 5px rgba(121, 120, 120, 0.2);
-    width: 45%;
+    width: 38%;
     text-align: start;
     margin: 10px 23px;
     padding: 10px;
     overflow-y: scroll;
     z-index: 1000;
-    margin-left: 30%;
+    margin-left: 25%;
   }
   .cancellation-policy .flex{
     justify-content: space-between;
-    align-items: center;
+    align-items: start;
     padding: 5px 10px;
     margin: 5px;
     gap: 5px;
@@ -142,9 +142,8 @@
     height: 30vh;
     background-color: white;
     border-radius: 10px;
-    width: 70%;
     box-shadow: 0px 5px 10px 5px rgba(121, 120, 120, 0.2);
-    width: 45%;
+    width: 35%;
     text-align: start;
     margin: 10px 23px;
     padding: 10px 20px;
