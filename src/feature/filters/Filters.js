@@ -1,16 +1,28 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Toggle from "./Component/Toggle";
 import SearchItems from "./Component/SearchItem";
 import BusTypes from "./Component/BusTypes";
 import PriceRange from "./Component/PriceRange";
 import DepartureTime from "./Component/DepartureTime";
 import { clearAllFilters, filterType } from "./slice";
-import { busPartners, cities, droppingPoints, boardingPoints } from "./data";
+import { busPartners, cities } from "./data";
+import {
+  getBoardingPoints,
+  getDroppingPoints,
+  getUniqueBusPartners,
+} from "./selectors";
 import "./style/filter.scss";
 import { Divider } from "antd";
+// import { droppingPoints } from "./../trips/data";
 
 const Filters = ({ width, padding }) => {
   const dispatch = useDispatch();
+  const boardingPoints = useSelector(getBoardingPoints);
+  const dropingPoints = useSelector(getDroppingPoints);
+  const busPartners = useSelector(getUniqueBusPartners);
+  console.log("boarding", boardingPoints);
+  console.log("dropping", dropingPoints);
+  console.log("busPartner", busPartners);
 
   const handleReset = () => {
     dispatch(clearAllFilters()); // Reset to default values
@@ -50,7 +62,7 @@ const Filters = ({ width, padding }) => {
       <Toggle className="section" title="Dropping Points">
         <SearchItems
           placeholder="Search dropping points"
-          list={[...droppingPoints].map((i) => ({ stopId: i, name: i }))}
+          list={[...dropingPoints].map((i) => ({ stopId: i, name: i }))}
           identifier={filterType.BUS_PARTNER}
         />
       </Toggle>

@@ -7,14 +7,13 @@
     background-color: #fff;
     margin-top: 20px;
     padding-top: 20px;
-    padding-bottom: 2rem !important;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
     gap: 10px;
     border: 1px solid #e3e3e3;
+    // box-shadow: 1px 1px 0.5px #e3e3e3;
     overflow-y: scroll;
-    width: 26vw !important;
 
 
     &::-webkit-scrollbar {
@@ -30,8 +29,6 @@
         .subheading {
             font-size: 1rem;
             font-weight: 500;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 3;
         }
 
         .clear_all_btn {
@@ -57,8 +54,6 @@
             display: block;
             margin: 10px 0;
             color: #3d3d3d;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: left;
         }
 
         .boxes {
@@ -114,6 +109,30 @@
 
 }
 
+// .filters-container::-webkit-scrollbar {
+//     width: 8px;
+// }
+
+// .filters-container::-webkit-scrollbar-thumb {
+//     background-color: #DC635B;
+//     border-radius: 4px;
+// }
+
+// .filters-container::-webkit-scrollbar-track {
+//     background: #f0f0f0;
+// }
+
+// .filters-container {
+//     scrollbar-width: thin;
+//     scrollbar-color: #f0f0f0;
+// }
+
+@media (max-width: 991px) {
+    .filters-container {
+        max-height: 80vh;
+    }
+}
+
 .search-box .items::-webkit-scrollbar {
     width: 2px !important;
 }
@@ -125,31 +144,4 @@
 
 .search-box .items::-webkit-scrollbar-track {
     background: #f0f0f0;
-}
-
-@media (max-width: 991px) {
-    .filters-container {
-        max-height: 80vh;
-        width: 90vw !important;
-        position: relative;
-    }
-    .clear_all_btn{
-        display: none !important;
-    }
-    .box label{
-        padding: 7px !important;
-    }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-    .filters-container{
-        width: 51vw !important;
-        position: relative;
-    }
-    .box label{
-        padding: 7px !important;
-    }
-    .clear_all_btn{
-        display: none !important;
-    }
 }

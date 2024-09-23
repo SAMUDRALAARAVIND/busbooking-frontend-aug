@@ -1,18 +1,19 @@
 import { Slider } from "antd";
 import { toggleUpdatedPriceRange } from "../slice";
 import { useDispatch, useSelector } from "react-redux";
+import { getPriceRange } from "../selectors";
 import "../style/PriceRange.scss";
 
 const PriceRange = () => {
+  // const { range, selectedRange } = useSelector(getPriceRange);
   const dispatch = useDispatch();
-  const { range, selectedRange } = useSelector(
-    (state) => state.filters.priceRange
-  );
   // const [localRange, setLocalRange] = useState(selectedRange);
 
   // useEffect(() => {
   //   setLocalRange(selectedRange);
   // }, [selectedRange]);
+  const { range, selectedRange } = useSelector(getPriceRange);
+  console.log("price", range);
 
   const onChangeRange = (value) => {
     // setLocalRange(value);
