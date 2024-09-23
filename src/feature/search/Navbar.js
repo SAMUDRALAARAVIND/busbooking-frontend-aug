@@ -1,19 +1,47 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import "./styles/SearchBar.scss";
 import "./styles/Header.scss";
-
-import React from 'react';
 // import "./styles/SearchBar.scss";
 
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LoginPage from '../auth/LoginPage';
+import SignUpPage from '../auth/SignUp';
+import Modal from '../auth';
 // import Searchinput from './Searchinput';
-import { Link } from 'react-router-dom';
 
 
 
 const Navbar = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [isLogin, setLogin] = useState(true);
+
+  const handleSignupClick = () => {
+    setLogin(false);
+    setModalOpen(true);
+  };
+
+  const handleLoginClick = () => {
+    setLogin(true);
+    setModalOpen(true);
+  };
+
+  const handleSignUpSuccess = () => {
+    setLogin(true);
+    setModalOpen(true);
+  };
+
+  const handleLoginSuccess = () => {
+    setLogin(false);
+    setModalOpen(false);
+  };
+
+  const modalHeight = isLogin ? '500px' : '550px';
+
   return (
     <header className='header'>
       <div className='top_navbar'>
@@ -56,9 +84,9 @@ const Navbar = () => {
           </Link>
         </nav>
         <div className='auth' style={{ color: "#dc635b" }}>
-          <Link to='#' style={{ color: "#dc635b", fontSize: "12px" }}>
+          <Link to='#' onClick={handleLoginClick} style={{ color: "#dc635b", fontSize: "12px" }}>
             <AccountCircleIcon style={{ color: "#dc635b", }} /> Login
-          </Link>/<Link style={{ color: "#dc635b", fontSize: "12px" }} to="#"> Sign Up</Link>
+          </Link>/<Link to='#' onClick={handleSignupClick} style={{ color: "#dc635b", fontSize: "12px" }} > Sign Up</Link>
         </div>
       </div>
 
@@ -70,6 +98,11 @@ const Navbar = () => {
         <button>Arrival Time</button>
         <button>Departure Time</button>
       </div> */}
+
+      <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)} height={modalHeight}>
+        {isLogin ? <LoginPage onLoginClick={handleLoginSuccess} onSignUpClick={handleSignupClick}/> : <SignUpPage onLoginClick={handleSignUpSuccess} />}
+      </Modal>
+
     </header>
   );
 };

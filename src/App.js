@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import "material-icons/iconfont/material-icons.css";
 import LoginPage from "./feature/auth/LoginPage";
+import SignUpPage from "./feature/auth/SignUp";
+import OtpVerificationPage from "./feature/auth/Otp";
 
 const Search = lazy(() => import("./feature/search/index"));
 const TripsScreen = lazy(() => import("./feature/trips/index"));
@@ -22,12 +24,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LazyLoadingWrapper Component={Search} />} />
         <Route
-<<<<<<< HEAD
-          path="/trips/search/:source/:sourceId/:destionation/:destinationId/:date"
-=======
           path="/trips/search/:source/:sourceId/:destionation/:destinationId/:date/:dateId" 
->>>>>>> dc060d190c6c637e6e2c088068ef548dcb580769
-          // path="/trips/search"
           element={<LazyLoadingWrapper Component={TripsScreen} />}
         />
         <Route
@@ -37,6 +34,14 @@ const App = () => {
         <Route
           path="/login"
           element={<LazyLoadingWrapper Component={LoginPage} />}
+        />
+        <Route
+          path="/signup"
+          element={<LazyLoadingWrapper Component={SignUpPage} />}
+        />
+        <Route
+          path="/otp"
+          element={<LazyLoadingWrapper Component={OtpVerificationPage} />}
         />
       </Routes>
     </BrowserRouter>

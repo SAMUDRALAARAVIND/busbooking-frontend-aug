@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './LoginPage.scss';
-import { Link } from 'react-router-dom';
 
-const LoginPage = () => {
+const LoginPage = ({ onLoginClick, onSignUpClick }) => {
 
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     });
+
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    const showToast = (message) => {
+        toast(message);
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -17,15 +25,50 @@ const LoginPage = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission logic
+
         console.log('Email:', formData.email);
         console.log('Password:', formData.password);
+
+        e.preventDefault();
+        setLoading(true);
+        setError(null); // Clear any previous error
+
+        try {
+            const response = await fetch('http://localhost:8000/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.error || 'Login failed. Please try again.');
+            }
+
+            const data = await response.json();
+            console.log('Login successful:', data.token);
+            
+            localStorage.setItem('token', data.token);
+            showToast('Login successfull');
+            onLoginClick();
+
+        } catch (err) {
+            console.error(err);
+            showToast(err.message)
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+
     };
 
     return (
         <div className='login-container'>
+        {/* <ToastContainer /> */}
             <div className='left-section'>
                 <div className='logo'>
                     <svg
@@ -72,7 +115,7 @@ const LoginPage = () => {
                 />
             </div>
             <div className='right-section'>
-                <h2 className='heading'>Login to AbhiBus</h2>
+                <h2 className='main_heading'>Login to AbhiBus</h2>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="email">Enter Email to Continue</label>
                     <input
@@ -83,7 +126,7 @@ const LoginPage = () => {
                         onChange={handleChange}
                         placeholder="Enter Email" />
 
-                    <label htmlFor="referral-code">Have a referral code?</label>
+                    <label htmlFor="referral-code">Enter Password</label>
                     <input
                         type="text"
                         name="password"
@@ -92,9 +135,24 @@ const LoginPage = () => {
                         id="referral-code"
                         placeholder="Enter Referral Code if Available" />
 
-                    <button type="submit" className="login-btn">Login</button>
+                    {error && <p className="error">{error}</p>}
+                    <button type="submit" className="login-btn" disabled={loading}>
+                        {loading ? 'Logging in...' : 'Login'}
+                    </button>
+
+                    <p className='para'>Don't have an account?
+                        {" "}
+                        <span
+                            className="sign-up-link"
+                            onClick={onSignUpClick}
+                        >
+                            Sign Up
+                        </span>
+                    </p>
+
+                    {/* <button type="submit" className="login-btn">Login</button> */}
                 </form>
-                <div className="divider">
+                {/* <div className="divider">
                     <span>Or Continue With</span>
                 </div>
                 <button className="google-btn">
@@ -107,7 +165,7 @@ const LoginPage = () => {
                 <p>
                     By logging in, I understand & agree to AbhiBus <Link to="#">terms of use</Link> 
                     & <Link to="#">privacy policy</Link>
-                </p>
+                </p> */}
             </div>
         </div>
     )
