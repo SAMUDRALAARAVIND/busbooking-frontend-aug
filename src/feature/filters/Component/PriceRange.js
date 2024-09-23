@@ -2,7 +2,6 @@ import { Slider } from "antd";
 import { toggleUpdatedPriceRange } from "../slice";
 import { useDispatch, useSelector } from "react-redux";
 import { getPriceRange } from "../selectors";
-import { filterType } from "../slice";
 import "../style/PriceRange.scss";
 
 const PriceRange = () => {

@@ -1,40 +1,45 @@
-import { busPartners } from "./data";
+//
+import { createSelector } from "reselect";
 import { filterType } from "./slice";
 
-export const getBoardingPoints = (state) => {
-  return (
-    state.trips?.tripsResponse?.boardingPoints?.map(({ title }) => title) || {}
-  );
-};
+export const getBoardingPoints = createSelector(
+  (state) => state.trips?.tripsResponse?.boardingPoints,
+  (boardingPoints) => boardingPoints?.map(({ title }) => title) || {}
+);
+// export const getBoardingPoints = (state) => {
+//   return state.trips?.tripsResponse?.boardingPoints?.map(({ title }) => title);
+// };
 
-export const getDroppingPoints = (state) => {
-  return (
-    state.trips?.tripsResponse?.dropingPoints?.map(({ title }) => title) || {}
-  );
-};
+export const getDroppingPoints = createSelector(
+  (state) => state.trips?.tripsResponse?.dropingPoints,
+  (dropingPoints) => dropingPoints?.map(({ title }) => title) || {}
+);
 
-export const getUniqueBusPartners = (state) => {
-  return new Set(
-    state.trips?.tripsResponse?.trips?.map(({ busPartner }) => busPartner)
-  );
-};
+export const getUniqueBusPartners = createSelector(
+  (state) => state.trips?.tripsResponse?.trips,
+  (trips) => {
+    const partners = trips?.map(({ busPartner }) => busPartner);
+    return new Set(partners);
+  }
+);
 
-export const getPriceRange = (state) => {
-  const trips = state.trips?.tripsResponse?.trips || [];
-  let allPrices = [];
-  let minPrices;
-  let maxPrices;
-  if (trips.length > 0) {
-    allPrices = trips.map((trip) => ({
+// Memoized Selector for Price Range
+export const getPriceRange = createSelector(
+  (state) => state.trips?.tripsResponse?.trips || [],
+  (trips) => {
+    if (trips.length === 0) return { range: [0, 0], selectedRange: [0, 0] };
+
+    let allPrices = trips.map((trip) => ({
       minPrice: trip.minPrice,
       maxPrice: trip.maxPrice,
     }));
 
-    minPrices = Math.min(...allPrices.map((price) => price.minPrice));
-    maxPrices = Math.max(...allPrices.map((price) => price.maxPrice));
+    const minPrices = Math.min(...allPrices.map((price) => price.minPrice));
+    const maxPrices = Math.max(...allPrices.map((price) => price.maxPrice));
+
+    return {
+      range: [minPrices, maxPrices],
+      selectedRange: [minPrices, maxPrices],
+    };
   }
-  return {
-    range: [minPrices, maxPrices],
-    selectedRange: [minPrices, maxPrices],
-  };
-};
+);
