@@ -14,6 +14,7 @@ const PriceRange = () => {
   // }, [selectedRange]);
   const { range, selectedRange } = useSelector(getPriceRange);
   console.log("price", range);
+  console.log("sell", selectedRange);
 
   const onChangeRange = (value) => {
     // setLocalRange(value);

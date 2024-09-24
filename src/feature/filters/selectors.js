@@ -2,18 +2,18 @@
 import { createSelector } from "reselect";
 import { filterType } from "./slice";
 
-export const getBoardingPoints = createSelector(
-  (state) => state.trips?.tripsResponse?.boardingPoints,
-  (boardingPoints) => boardingPoints?.map(({ title }) => title) || {}
+export const getBoardingDroppingPoints = createSelector(
+  (state) => state?.trips?.tripsResponse || {},
+  (tripsResponse) => {
+    const { boardingPoints = [], dropingPoints = [] } = tripsResponse;
+    return { boardingPoints, dropingPoints };
+  }
 );
-// export const getBoardingPoints = (state) => {
-//   return state.trips?.tripsResponse?.boardingPoints?.map(({ title }) => title);
-// };
 
-export const getDroppingPoints = createSelector(
-  (state) => state.trips?.tripsResponse?.dropingPoints,
-  (dropingPoints) => dropingPoints?.map(({ title }) => title) || {}
-);
+// export const getDroppingPoints = createSelector(
+//   (state) => state.trips?.tripsResponse?.dropingPoints,
+//   (dropingPoints) => dropingPoints?.map(({ title }) => title) || {}
+// );
 
 export const getUniqueBusPartners = createSelector(
   (state) => state.trips?.tripsResponse?.trips,
