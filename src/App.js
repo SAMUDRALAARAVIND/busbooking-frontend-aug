@@ -4,7 +4,6 @@ import "./App.css";
 import "material-icons/iconfont/material-icons.css";
 import LoginPage from "./feature/auth/LoginPage";
 import SignUpPage from "./feature/auth/SignUp";
-import OtpVerificationPage from "./feature/auth/Otp";
 
 const Search = lazy(() => import("./feature/search/index"));
 const TripsScreen = lazy(() => import("./feature/trips/index"));
@@ -38,10 +37,6 @@ const App = () => {
         <Route
           path="/signup"
           element={<LazyLoadingWrapper Component={SignUpPage} />}
-        />
-        <Route
-          path="/otp"
-          element={<LazyLoadingWrapper Component={OtpVerificationPage} />}
         />
       </Routes>
     </BrowserRouter>

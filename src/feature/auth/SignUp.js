@@ -17,6 +17,7 @@ const SignUpPage = ({ onLoginClick }) => {
   const [otp, setOtp] = useState('');
   const [otpGenerated, setOtpGenerated] = useState(false);
   const [otpVerified, setOtpVerified] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const showToast = (message) => {
     toast(message);
@@ -24,20 +25,22 @@ const SignUpPage = ({ onLoginClick }) => {
 
   // Function to generate OTP
   const generateOtp = async () => {
+
+    setLoading(true);
+
     try {
       const response = await axios.post('http://localhost:8000/otp/generate-otp', { email: formData.email });
-      //alert(response.data.message);
       showToast(response.data.message);
       setOtpGenerated(true);
     } catch (error) {
       console.error('Error generating OTP', error);
       if (error.response) {
-        //alert(`Error: ${error.response.data.error || 'Please try again.'}`);
         showToast(`${error.response.data.error || 'Please try again.'}`);
       } else {
-        //alert('Network Error: Unable to reach the server.');
         showToast('Network Error: Unable to reach the server.');
       }
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -45,16 +48,13 @@ const SignUpPage = ({ onLoginClick }) => {
   const verifyOtp = async () => {
     try {
       const response = await axios.post('http://localhost:8000/otp/verify-otp', { email: formData.email, otp });
-      //alert(response.data.message);
       showToast(response.data.message);
       setOtpVerified(true);
     } catch (error) {
       console.error('Error verifying OTP', error);
       if (error.response) {
-        //alert(`Error: ${error.response.data.error || 'Please try again.'}`);
         showToast(`${error.response.data.error || 'Please try again.'}`);
       } else {
-        //alert('Network Error: Unable to reach the server.');
         showToast('Network Error: Unable to reach the server.');
       }
     }
@@ -74,7 +74,6 @@ const SignUpPage = ({ onLoginClick }) => {
 
     console.log(otpVerified);
     if (!otpVerified) {
-      //alert('Please verify your OTP before submitting the form.');
       showToast('Please verify your OTP before submitting the form.');
       return;
     }
@@ -83,29 +82,25 @@ const SignUpPage = ({ onLoginClick }) => {
 
     const dataToSubmit = {
       ...formData,
-      dob: dobTimestamp, // Set the dob to the timestamp
+      dob: dobTimestamp, 
     };
 
     try {
       const response = await axios.post('http://localhost:8000/register/signUp', dataToSubmit);
       if (response.data.message) {
-        //alert('Sign up successful!');
         showToast(response.data.message);
         onLoginClick();
       } else {
-        //alert('Sign up failed. Please try again.');
         showToast('Sign up failed. Please try again.');
       }
     } catch (error) {
-      console.error('Error signing up', error.response.data.error);
-      //alert(`Error: ${error.response.data.error || 'Please try again.'}`);
       showToast(`Error: ${error.response.data.error || 'Please try again.'}`);
     }
   };
 
   return (
     <div className="register-container">
-    <ToastContainer /> 
+      <ToastContainer />
       <div className="register-left-section">
         <div className="register-logo">
           <svg
@@ -208,7 +203,6 @@ const SignUpPage = ({ onLoginClick }) => {
             placeholder="Enter your password"
           />
 
-          {/* OTP Section */}
           {otpGenerated ? (
             <>
               <input
@@ -225,7 +219,7 @@ const SignUpPage = ({ onLoginClick }) => {
             </>
           ) : (
             <button type="button" className="register-btn" onClick={generateOtp}>
-              Generate OTP
+            {loading ? 'Generating...' : 'Generate OTP'}
             </button>
           )}
 
@@ -238,110 +232,3 @@ const SignUpPage = ({ onLoginClick }) => {
 
 export default SignUpPage;
 
-// import { useState } from "react";
-// import "./SignUp.scss";
-// import axios from 'axios';
-
-// const SignUpPage = () => {
-//   const [formData, setFormData] = useState({
-//     fullName: "",
-//     gender: "",
-//     dob: "",
-//     contactNumber: "",
-//     email: "",
-//     password: "",
-//   });
-
-//   const [otp, setOtp] = useState('');
-//   const [otpGenerated, setOtpGenerated] = useState(false);
-//   const [otpVerified, setOtpVerified] = useState(false);
-
-//   // Function to generate OTP
-//   const generateOtp = async () => {
-//     try {
-//       const response = await axios.post('http://localhost:8000/otp/generate-otp', { email: formData.email });
-//       alert(response.data.message); // Adjusted for response message
-//       setOtpGenerated(true);
-//     } catch (error) {
-//       console.error('Error generating OTP', error);
-//       alert('Error generating OTP, please try again.');
-//     }
-//   };
-
-//   // Function to verify OTP
-//   const verifyOtp = async () => {
-//     try {
-//       const response = await axios.post('http://localhost:8000/otp/verify-otp', { email: formData.email, otp });
-//       alert(response.data.message); // Adjusted for response message
-//       setOtpVerified(true);
-//     } catch (error) {
-//       console.error('Error verifying OTP', error);
-//       alert('Invalid OTP, please try again.');
-//     }
-//   };
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData((prevState) => ({
-//       ...prevState,
-//       [name]: value,
-//     }));
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     if (!otpVerified) {
-//       alert('Please verify your OTP before submitting the form.');
-//       return;
-//     }
-
-//     try {
-//       const response = await axios.post('http://localhost:8000/signup', formData);
-//       alert(response.data.message); // Adjusted for response message
-//     } catch (error) {
-//       console.error('Error signing up', error);
-//       alert('Failed to sign up. Please try again.');
-//     }
-//   };
-
-//   return (
-//     <div className="register-container">
-//       {/* Left section omitted for brevity */}
-//       <div className="register-right-section">
-//         <h2 className="register-heading">SignUp to AbhiBus</h2>
-//         <form onSubmit={handleSubmit}>
-//           <label htmlFor="fullName">Full Name</label>
-//           <input type="text" id="fullName" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="Enter your full name" />
-//           <label>Gender</label>
-//           <label className="gender-type">
-//             <input type="radio" name="gender" value="male" onChange={handleChange} /> Male
-//             <input type="radio" name="gender" value="female" onChange={handleChange} /> Female
-//             <input type="radio" name="gender" value="others" onChange={handleChange} /> Others
-//           </label>
-//           <label htmlFor="dob">Date of Birth</label>
-//           <input type="date" id="dob" name="dob" onChange={handleChange} />
-//           <label htmlFor="email">Email</label>
-//           <input type="email" name="email" value={formData.email} onChange={handleChange} id="email" placeholder="Enter your email" />
-//           <label htmlFor="contactNumber">Contact Number</label>
-//           <input type="text" name="contactNumber" value={formData.contactNumber} onChange={handleChange} id="contactNumber" placeholder="Enter your contact number" />
-//           <label htmlFor="password">Password</label>
-//           <input type="password" name="password" value={formData.password} onChange={handleChange} id="password" placeholder="Enter your password" />
-
-//           {/* OTP Section */}
-//           {otpGenerated ? (
-//             <>
-//               <input type="text" value={otp} onChange={(e) => setOtp(e.target.value)} placeholder="Enter OTP" required />
-//               <button type="button" onClick={verifyOtp}>Verify OTP</button>
-//             </>
-//           ) : (
-//             <button type="button" onClick={generateOtp}>Generate OTP</button>
-//           )}
-
-//           <button className="register-btn" type="submit">Sign Up</button>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default SignUpPage;

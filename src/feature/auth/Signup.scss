@@ -1,5 +1,4 @@
 .register-container {
-    // background-color: #fff;
     text-align: left;
     border-radius: 20px;
     height: 100%;
@@ -7,7 +6,6 @@
     box-sizing: border-box;
     margin: 0 auto;
     display: flex;
-    // justify-content: space-between;
     border: 1px solid #f4f4f4;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
@@ -23,12 +21,9 @@
         padding-left: 50px;
         padding-bottom: 0px;
         padding-right: 50px;
-        //justify-content: center;
-        //overflow: hidden;
-        // word-wrap: break-word;
+        word-wrap: break-word;
 
         .register-logo {
-            // padding-top: 15px;
             display: flex;
             justify-content: center;
         }
@@ -39,7 +34,7 @@
             li {
                 &::marker {
                     font-size: 20px;
-                    color: #ccc; // Set the color to grey
+                    color: #ccc;
                 }
             }
 
@@ -79,27 +74,26 @@
         &::-webkit-scrollbar {
             width: 10px;
         }
-    
+
         &::-webkit-scrollbar-track {
             background: #f0f0f0;
             border-radius: 8px;
         }
-    
+
         &::-webkit-scrollbar-thumb {
             background: #dc635b;
             border-radius: 8px;
         }
-    
+
         &::-webkit-scrollbar-thumb:hover {
-            background: #8a3b34; 
+            background: #8a3b34;
         }
-    
+
         // Optional: Styling for Firefox
-        scrollbar-width: thin; 
+        scrollbar-width: thin;
         scrollbar-color: #dc635b #f0f0f0;
 
         .register-heading {
-            // font-size: 1.4rem;
             font-weight: 500;
         }
 
@@ -153,6 +147,16 @@
         p {
             font-size: 0.9rem;
             color: #868686;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .register-left-section {
+            display: none; 
+        }
+
+        .register-right-section {
+            width: 100%; 
         }
     }
 }
