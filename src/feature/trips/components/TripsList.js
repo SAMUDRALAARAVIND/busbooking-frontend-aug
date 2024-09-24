@@ -8,6 +8,7 @@ import { tripsSelector } from "../redux/selectors";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import SeatLayout from "../seatLayout/SeatLayout.js";
+import {tripsResponse} from '../data.js'
 
 export default function TripsList() {
   // get the tripsList from redux store
@@ -20,15 +21,15 @@ export default function TripsList() {
     setActiveTripId((prevId) => (prevId === tripId ? null : tripId));
   };
 
-  console.log("tripsList", tripsList);
+  console.log("tripsList123", tripsList);
   return (
     <div className="trips container ">
-      {tripsList?.map((trip, index) => (
+      {tripsList?.filteredTrips?.length >0 ? tripsList?.filteredTrips?.map((trip, index) => (
         <SingleTrip
           key={trip.tripId}
           {...{ trip, source, destination, activeTripId, handleModalToggle }}
         />
-      ))}
+      )): <p>No Trips Available for this date </p>}
     </div>
   );
 }

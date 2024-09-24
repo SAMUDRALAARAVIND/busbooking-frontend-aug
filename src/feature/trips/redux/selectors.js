@@ -1,25 +1,27 @@
 import { filterType, departureTime } from "../../filters/slice";
 import { busPartners, cities, boardingPoints, droppingPoints } from "../../filters/data";
-
+import {tripsResponse} from '../data'
+import TripsList from "../components/TripsList";
 export const tripsStatusSelector = (state) => state.trips.apiStatus;
 
 export const tripsSelector = (state) => {
-  const trips = Array.isArray(state?.trips?.tripsResponse.trips) ? state.trips.tripsResponse.trips : []; 
-
+  const tripslist = state?.trips?.tripsResponse ; 
+//  console.log("selcetor", tripslist)
   const filters = state?.filters;
-
+  const mainBoardingPoints = state?.trips?.tripsResponse?.boardingPoints || [];
+  const mainDroppingPoints = state?.trips?.tripsResponse?.dropingPoints || [];
   console.log("filters", filters);
-  const filteredTrips = trips
-    // Filter by bus types
+
+  // filtering Trips Data
+  const filteredTrips = tripslist.trips
     .filter((trip) => {
       const busTypes = Object.keys(filters[filterType.BUS_TYPES]).filter(
         (key) => filters[filterType.BUS_TYPES][key]
       );
-      if (busTypes.length === 0) return true; 
+      if (busTypes.length === 0) return tripslist; 
       return busTypes.includes(trip.busType);
     })
     .filter((trip) => {
-      // console.log()
       const [min, max] = filters[filterType.PRICE_RANGE].selectedRange || [0, Infinity];
       return trip.maxPrice >= min && trip.minPrice <= max;
     })
@@ -32,7 +34,7 @@ export const tripsSelector = (state) => {
       const selectedBoardingPoints = filters[filterType.BOARDING_POINTS];
       if (Object.keys(selectedBoardingPoints).length === 0) return true; 
  const  mainBoardingPoints = state?.trips?.tripsResponse.boardingPoints
-      // Compare with main boarding points
+     
       const sourceStops = trip?.boardingPoints ?? [];
       return sourceStops.some((stop) => {
         const mainStop = mainBoardingPoints.find(point => point.stopId === stop.stopId);
@@ -45,7 +47,7 @@ export const tripsSelector = (state) => {
       if (Object.keys(selectedDroppingPoints).length === 0) return true; 
       const  mainDroppingPoints = state?.trips?.tripsResponse.droppingPoints
 
-      // Compare with main dropping points
+  // drropping points
       const destinationStops = trip?.droppingPoints ?? [];
       return destinationStops.some((stop) => {
         const mainStop = mainDroppingPoints.find(point => point.stopId === stop.stopId);
@@ -84,5 +86,23 @@ export const tripsSelector = (state) => {
     });
     console.log("filteredTrips", filteredTrips)
 
-  return filteredTrips.length > 0 ? filteredTrips : trips;
+    console.log("filteredTrips", filteredTrips);
+
+    //  boardingPoints and droppingPoints with each filtered trip
+    // const enhancedTrips = filteredTrips.map((trip) => ({
+    //   ...trip,
+    //   boardingPoints: trip.boardingPoints.filter(stop => {
+    //     return mainBoardingPoints.find(point => point.stopId === stop.stopId) ;
+    //   }),
+    //   droppingPoints: trip.droppingPoints.filter(stop => {
+    //     return mainDroppingPoints.find(point => point.stopId === stop.stopId);
+    //   }),
+    // }));
+  
+    return {
+      filteredTrips: filteredTrips.length > 0 ? filteredTrips : tripslist.trips,
+      mainBoardingPoints,
+      mainDroppingPoints,
+    };
+
 };

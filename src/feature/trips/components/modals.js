@@ -3,18 +3,36 @@ import "../styles/modals.scss";
 import { boardingPoints, droppingPoints } from "../data";
 import { formatDate, formatTime } from './formatDatetime';
 import { aminitiesSvg } from "./svg";
+import { useSelector } from 'react-redux';
+import { tripsSelector } from "../redux/selectors";
 
-export function DroppingBoardingPoint () {
+export function DroppingBoardingPoint ({trip}) {
+  const tripsList = useSelector(tripsSelector);
+  console.log("boarding123", tripsList.mainDroppingPoints)
+
+
+  const filteredBoardingPoints = tripsList.mainBoardingPoints.filter((mainPoint) =>
+    trip.boardingPoints.some((stopPoint) => stopPoint.stopId === mainPoint.stopId)
+  );
+
+
+  const filteredDroppingPoints = tripsList.mainDroppingPoints.filter((mainPoint) =>
+    trip.droppingPoints.some((stopPoint) => stopPoint.stopId === mainPoint.stopId)
+  );
+  console.log("trip", trip)
+console.log("drop",tripsList.mainBoardingPoints)
+  console.log("filteredDroppingPoints", filteredDroppingPoints)
   return (
     <div className="bdContainer flex">
       <div className="left">
         <h5>Boarding Points</h5>
         <div className="boardingList overflow">
-          {boardingPoints.map((data) => {
+          {filteredBoardingPoints.map((data) => {
+                
             return (
               <div>
-                <h6>{data.name}</h6>
-                <p className="grey">{data.address}</p>
+                <h6>{data.title}</h6>
+                <p className="grey">{data.directions}</p>
               </div>
             );
           })}
@@ -24,13 +42,13 @@ export function DroppingBoardingPoint () {
         <h5 className="">Dropping Points</h5>
 
         <div className=" DroppingList overflow ">
-          {droppingPoints.map((data) => {
+          {filteredDroppingPoints.map((data) => {
             return (
               <div>
-                <h6>{data.name}</h6>
+                <h6>{data.title}</h6>
                 <p className="grey">
-                  <span>{data.date} </span>
-                  <span> {data.time}</span>
+                  <span>{data.directions} </span>
+                  {/* <span> {data.time}</span> */}
                 </p>
               </div>
             );
