@@ -33,7 +33,6 @@ const SignUpPage = ({ onLoginClick }) => {
       showToast(response.data.message);
       setOtpGenerated(true);
     } catch (error) {
-      console.error('Error generating OTP', error);
       if (error.response) {
         showToast(`${error.response.data.error || 'Please try again.'}`);
       } else {
@@ -51,7 +50,6 @@ const SignUpPage = ({ onLoginClick }) => {
       showToast(response.data.message);
       setOtpVerified(true);
     } catch (error) {
-      console.error('Error verifying OTP', error);
       if (error.response) {
         showToast(`${error.response.data.error || 'Please try again.'}`);
       } else {
@@ -70,13 +68,6 @@ const SignUpPage = ({ onLoginClick }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data Submitted:", formData);
-
-    console.log(otpVerified);
-    if (!otpVerified) {
-      showToast('Please verify your OTP before submitting the form.');
-      return;
-    }
 
     const dobTimestamp = new Date(formData.dob).getTime();
 
@@ -87,14 +78,20 @@ const SignUpPage = ({ onLoginClick }) => {
 
     try {
       const response = await axios.post('http://localhost:8000/register/signUp', dataToSubmit);
-      if (response.data.message) {
+      showToast(response.data.message);
+      if (response.status === 200) {
         showToast(response.data.message);
+        alert('signup done')
         onLoginClick();
       } else {
         showToast('Sign up failed. Please try again.');
       }
     } catch (error) {
-      showToast(`Error: ${error.response.data.error || 'Please try again.'}`);
+      if (error.response && error.response.data.message) {
+        showToast(error.response.data.error);
+      } else {
+        showToast('An unexpected error occurred.');
+      }
     }
   };
 
@@ -211,7 +208,6 @@ const SignUpPage = ({ onLoginClick }) => {
                 value={otp}
                 onChange={(e) => setOtp(e.target.value)}
                 placeholder="Enter OTP"
-                required
               />
               <button type="button" className="register-btn" onClick={verifyOtp}>
                 Verify OTP

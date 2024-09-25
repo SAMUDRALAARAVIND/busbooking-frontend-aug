@@ -28,12 +28,9 @@ const LoginPage = ({ onLoginClick, onSignUpClick }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log('Email:', formData.email);
-        console.log('Password:', formData.password);
-
         e.preventDefault();
         setLoading(true);
-        setError(null); // Clear any previous error
+        setError(null);
 
         try {
             const response = await fetch('http://localhost:8000/auth/login', {
@@ -50,15 +47,13 @@ const LoginPage = ({ onLoginClick, onSignUpClick }) => {
             }
 
             const data = await response.json();
-            console.log('Login successful:', data.token);
             
             localStorage.setItem('token', data.token);
             showToast('Login successfull');
+            alert('Login Done');
             onLoginClick();
 
         } catch (err) {
-            console.error(err);
-            showToast(err.message)
             setError(err.message);
         } finally {
             setLoading(false);
@@ -68,7 +63,7 @@ const LoginPage = ({ onLoginClick, onSignUpClick }) => {
 
     return (
         <div className='login-container'>
-        {/* <ToastContainer /> */}
+        <ToastContainer />
             <div className='left-section'>
                 <div className='logo'>
                     <svg
