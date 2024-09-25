@@ -24,22 +24,25 @@ export const getUniqueBusPartners = createSelector(
 );
 
 // Memoized Selector for Price Range
-export const getPriceRange = createSelector(
-  (state) => state.trips?.tripsResponse?.trips || [],
-  (trips) => {
-    if (trips.length === 0) return { range: [0, 0], selectedRange: [0, 0] };
+// export const getPriceRange = createSelector(
+//   (state) => state.trips?.tripsResponse?.trips || [],
+//   (trips) => {
+//     if (trips.length === 0) return { range: [0, 0], selectedRange: [0, 0] };
 
-    let allPrices = trips.map((trip) => ({
-      minPrice: trip.minPrice,
-      maxPrice: trip.maxPrice,
-    }));
+//     let allPrices = trips.map((trip) => ({
+//       minPrice: trip.minPrice,
+//       maxPrice: trip.maxPrice,
+//     }));
 
-    const minPrices = Math.min(...allPrices.map((price) => price.minPrice));
-    const maxPrices = Math.max(...allPrices.map((price) => price.maxPrice));
+//     const minPrices = Math.min(...allPrices.map((price) => price.minPrice));
+//     const maxPrices = Math.max(...allPrices.map((price) => price.maxPrice));
 
-    return {
-      range: [minPrices, maxPrices],
-      selectedRange: [minPrices, maxPrices],
-    };
-  }
-);
+//     return {
+//       range: [minPrices, maxPrices],
+//       selectedRange: [minPrices, maxPrices],
+//     };
+//   }
+// );
+export const getPriceRange = (state) => {
+  return state.filter[filterType.PRICE_RANGE];
+};
