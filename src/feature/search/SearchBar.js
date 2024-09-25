@@ -82,7 +82,6 @@ const SearchBar = () => {
 
   const onDateChange = (date) => {
     const epochTimeInSeconds = dayjs(date).unix(); 
-console.log('epoch time', epochTimeInSeconds)
   setToday(epochTimeInSeconds);
     dispatch(addDate(epochTimeInSeconds));
   };
@@ -113,7 +112,6 @@ console.log('epoch time', epochTimeInSeconds)
 
   const handleTomorrowClick = () => {
     const tomorrowDate = dayjs().add(1, "day");
-    console.log("tomorrowDate", tomorrowDate.unix())
     setToday(tomorrowDate.unix());
     dispatch(addDate(tomorrowDate.unix()));
   };

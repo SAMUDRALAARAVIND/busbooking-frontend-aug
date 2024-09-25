@@ -2,38 +2,12 @@ import React, { useState, useEffect } from "react";
 import Filters from "./Filters";
 import { useDispatch, useSelector } from "react-redux";
 import { Drawer } from "antd";
-import AcUnitIcon from "@mui/icons-material/AcUnit";
-import AirlineSeatFlatIcon from "@mui/icons-material/AirlineSeatFlat";
-import AirIcon from "@mui/icons-material/Air";
-import EventSeatIcon from "@mui/icons-material/EventSeat";
 import Brightness6Icon from "@mui/icons-material/Brightness6";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { filterType, toggleStop, departureTime } from "./slice";
+import { busTypes } from "./enum";
 import "./style/Footer.scss";
-
-const busTypes = [
-  {
-    title: "AC",
-    identifier: "AC",
-    icon: <AcUnitIcon />,
-  },
-  {
-    title: "Non AC",
-    identifier: "NON_AC",
-    icon: <AirIcon />,
-  },
-  {
-    title: "Seater",
-    identifier: "SEATER",
-    icon: <EventSeatIcon />,
-  },
-  {
-    title: "Sleeper",
-    identifier: "SLEEPER",
-    icon: <AirlineSeatFlatIcon />,
-  },
-];
 
 const time = [
   {
@@ -148,9 +122,9 @@ const SideBar = () => {
           title="Filters"
           placement="right"
           onClose={closeToggleSidebar}
-          open={isSidebarOpen} // Use open instead of visible
+          open={isSidebarOpen}
           width={420}
-          className="custom-drawer" // Use className instead of classNames
+          className="custom-drawer"
         >
           <Filters width={340} padding={20} />
           {/* <button className="nav-btn" onClick={handleClearAllFilters}>

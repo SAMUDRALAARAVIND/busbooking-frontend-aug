@@ -1,5 +1,5 @@
 import { filterType, departureTime } from "../../filters/slice";
-import { busPartners } from "../../filters/data";
+import { busPartners } from "../../filters/enum";
 
 export const stopPointsSelector = (state, tripId) => {
   let sourceStops = [],
@@ -49,7 +49,6 @@ export const tripsSelector = (state) => {
 
   const filters = state?.filters;
 
-  console.log("filters", filters);
   const filteredTrips = trips
     // Filter by bus types
     .filter((trip) => {
@@ -60,7 +59,6 @@ export const tripsSelector = (state) => {
       return busTypes.includes(trip.busType);
     })
     .filter((trip) => {
-      // console.log()
       const [min, max] = filters[filterType.PRICE_RANGE].selectedRange || [
         0,
         Infinity,
@@ -132,7 +130,6 @@ export const tripsSelector = (state) => {
 
       return filtered;
     });
-  console.log("filteredTrips", filteredTrips);
 
   return filteredTrips.length > 0 ? filteredTrips : trips;
 };

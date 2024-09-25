@@ -43,7 +43,6 @@ const filtersSlice = createSlice({
     },
     toggleUpdatedPriceRange: (state, action) => {
       state[filterType.PRICE_RANGE].selectedRange = action.payload;
-      debugger;
     },
     toggleStop: (state, { payload: { add, stopId, identifier } }) => {
       if (add) {

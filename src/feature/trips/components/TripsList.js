@@ -19,7 +19,6 @@ export default function TripsList() {
     setActiveTripId((prevId) => (prevId === tripId ? null : tripId));
   };
 
-  console.log("tripsList", tripsList);
   return (
     <div className="trips container ">
       {tripsList?.map((trip, index) => (
@@ -52,8 +51,11 @@ export default function TripsList() {
                 </div>
               </div>
             </div>
-            <TripDetails trip={trip}    activeTripId={activeTripId}
-              handleModalToggle={() => handleModalToggle(trip.tripId)}/>
+            <TripDetails
+              trip={trip}
+              activeTripId={activeTripId}
+              handleModalToggle={() => handleModalToggle(trip.tripId)}
+            />
           </div>
           <div className="rightWrapper">
             <div className="text-end">

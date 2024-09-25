@@ -1,32 +1,7 @@
 import React from "react";
-import WbSunnyIcon from "@mui/icons-material/WbSunny";
-import Brightness6Icon from "@mui/icons-material/Brightness6";
-import NightsStayIcon from "@mui/icons-material/NightsStay";
-import { departureTime, filterType, toggleStop } from "../slice";
+import { filterType, toggleStop } from "../slice";
 import { useDispatch, useSelector } from "react-redux";
-
-const departureTimes = [
-  {
-    title: "Before 10AM",
-    identifier: departureTime.MORNING,
-    icon: <WbSunnyIcon />,
-  },
-  {
-    title: "10AM - 5PM",
-    identifier: departureTime.AFTERNOON,
-    icon: <Brightness6Icon />,
-  },
-  {
-    title: "5PM - 11PM",
-    identifier: departureTime.EVENING,
-    icon: <WbSunnyIcon />,
-  },
-  {
-    title: "After 11PM",
-    identifier: departureTime.NIGHT,
-    icon: <NightsStayIcon />,
-  },
-];
+import { departureTimes } from "../enum";
 
 const DepartureTime = () => {
   const dispatch = useDispatch();

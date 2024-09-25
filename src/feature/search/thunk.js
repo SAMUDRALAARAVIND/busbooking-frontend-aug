@@ -12,7 +12,6 @@ export const fetchCitiesList = () => {
         method: "GET",
       });
 
-      console.log(data,"in thunk");
       if (success) {
         dispatch(updateCitiesList({ cities: data.cities }));
         dispatch(updateCitiesStatus({ status: "success" }));

@@ -8,7 +8,7 @@ import "../styles/modals.scss";
 
 export function DroppingBoardingPoint() {
   const { boardingPoints, droppingPoints } = useSelector(stopPointsSelector);
-  console.log("boardingPoints", boardingPoints);
+
   return (
     <div className="bdContainer flex">
       <div className="left">
@@ -165,7 +165,6 @@ export const Aminities = ({ trip }) => {
             const matchedAmenity = aminitiesSvg.find((amenity) => {
               return amenity.name === item;
             });
-            console.log("match", matchedAmenity);
 
             return matchedAmenity ? (
               <p className="">

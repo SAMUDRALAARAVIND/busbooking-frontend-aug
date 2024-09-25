@@ -1,24 +1,18 @@
 import { Slider } from "antd";
 import { toggleUpdatedPriceRange } from "../slice";
 import { useDispatch, useSelector } from "react-redux";
-import { getPriceRange } from "../selectors";
+import { priceRangeSelector } from "../selectors";
 import "../style/PriceRange.scss";
 
 const PriceRange = () => {
-  // const { range, selectedRange } = useSelector(getPriceRange);
   const dispatch = useDispatch();
-  // const [localRange, setLocalRange] = useState(selectedRange);
 
-  // useEffect(() => {
-  //   setLocalRange(selectedRange);
-  // }, [selectedRange]);
-  const { range, selectedRange } = useSelector(getPriceRange);
-  console.log("price", range);
-  console.log("sell", selectedRange);
+  const { range, selectedRange } = useSelector(priceRangeSelector);
+  console.log("Selected", selectedRange);
 
   const onChangeRange = (value) => {
-    // setLocalRange(value);
     dispatch(toggleUpdatedPriceRange(value));
+    console.log(value);
   };
 
   return (
@@ -31,11 +25,9 @@ const PriceRange = () => {
       <Slider
         className="custom-range"
         range
-        min={range[0]}
-        max={range[1]}
-        // defaultValue={[selectedRange[0], selectedRange[1]]}
+        min={selectedRange[0]}
+        max={selectedRange[1]}
         value={selectedRange}
-        // defaultValue={localRange}
         onChange={onChangeRange}
       />
       <div className="range-val">
