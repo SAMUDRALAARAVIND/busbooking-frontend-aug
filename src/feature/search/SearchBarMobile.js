@@ -6,7 +6,7 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useState } from "react";
 import CitiesDiv from "./CitiesDiv";
 import { useDispatch, useSelector } from "react-redux";
-import { addSourceCity, addDestinationCity, addDate } from "./slice";
+import { addSourceCity, addDestinationCity, addDate, updateSourceCityId, updateDestinationCityId } from "./slice";
 import { useNavigate } from "react-router-dom";
 
 dayjs.extend(customParseFormat);
@@ -14,14 +14,16 @@ dayjs.extend(customParseFormat);
 function filterCities(type, cities, search) {
   const searchVal = search[type]?.toLowerCase();
   return cities
-    .filter((city) => {
-      return city?.toLowerCase().includes(searchVal);
+    .filter((cityObj) => {
+      return cityObj.name?.toLowerCase().includes(searchVal);
     })
-    .filter((city) => {
+    .filter((cityObj) => {
       if (type === "source") {
-        return city.toLowerCase() !== search["destination"]?.toLowerCase();
+        return (
+          cityObj.name?.toLowerCase() !== search["destination"]?.toLowerCase()
+        );
       } else {
-        return city.toLowerCase() !== search["source"]?.toLowerCase();
+        return cityObj.name?.toLowerCase() !== search["source"]?.toLowerCase();
       }
     });
 }
@@ -56,9 +58,10 @@ const SearchBarMobile = () => {
     dispatch(addDestinationCity(swappedDestination));
   };
 
-  const onCityClick = (identifier, city) => {
+  const onCityClick = (identifier, city, cityId) => {
     if (identifier === "source") {
       dispatch(addSourceCity(city));
+      dispatch(updateSourceCityId(cityId));
       setSearch({
         ...search,
         source: city,
@@ -66,6 +69,7 @@ const SearchBarMobile = () => {
       setShowPopOver({ ...showPopOver, source: false });
     } else {
       dispatch(addDestinationCity(city));
+      dispatch(updateDestinationCityId(cityId));
       setSearch({
         ...search,
         destination: city,
@@ -88,10 +92,27 @@ const SearchBarMobile = () => {
     return `${day}/${month}/${year}`;
   }
 
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (search.source && search.destination && today) {
+      const source = suggestions.search.sourceCity;
+      const sourceId = suggestions.search.sourceCityId;
+      const destination = suggestions.search.destinationCity;
+      const destinationId = suggestions.search.destinationCityId;
+
+      navigate(
+        `/trips/search/${source}/${sourceId}/${destination}/${destinationId}`
+        // `/book`
+      );
+    } else {
+      alert("Please fill in all search fields.");
+    }
+  };
+
   return (
     <div className="search-mobile-container">
       <div className="oranger-div"></div>
-      <form action="">
+      <form action="" onSubmit={handleSearchSubmit} autoComplete="false">
         <p className="heading">Book Bus Tickets</p>
         <div className="search-form-mobile">
           <div
@@ -112,7 +133,7 @@ const SearchBarMobile = () => {
             <p>{suggestions.search.sourceCity || "Leaving From"}</p>
           </div>
           <hr />
-          <SwapOutlined className="swap-icon"  onClick={handleCitySwap}/>
+          <SwapOutlined className="swap-icon" onClick={handleCitySwap} />
           <div
             className="select-city"
             onClick={() =>
@@ -162,7 +183,11 @@ const SearchBarMobile = () => {
                 : today.format("DD/MM/YYYY")}
             </p>
           </div>
-          <button className="search-button" onClick={()=> navigate('/trips/search')}>Submit</button>
+          <button
+            className="search-button"
+          >
+            Submit
+          </button>
         </div>
       </form>
 
@@ -184,23 +209,24 @@ const SearchBarMobile = () => {
           }}
         />
         <div className="search-city-div">
-        {filterCities("source", suggestions.search.cities, search).length >
-            0 ? (
-              showPopOver.source && filterCities("source", suggestions.search.cities, search).map(
-                (city, index) => {
-                  return (
-                    <CitiesDiv
-                      key={index}
-                      city={city}
-                      identifier={"source"}
-                      onCityClick={onCityClick}
-                    />
-                  );
-                }
-              )
-            ) : (
-              <div className="singleCity">No Data Found</div>
-            )}
+          {filterCities("source", suggestions.search.cities, search).length >
+          0 ? (
+            showPopOver.source &&
+            filterCities("source", suggestions.search.cities, search).map(
+              (city, index) => {
+                return (
+                  <CitiesDiv
+                    key={index}
+                    city={city}
+                    identifier={"source"}
+                    onCityClick={onCityClick}
+                  />
+                );
+              }
+            )
+          ) : (
+            <div className="singleCity">No Data Found</div>
+          )}
         </div>
       </Drawer>
 
@@ -222,23 +248,24 @@ const SearchBarMobile = () => {
           }}
         />
         <div className="search-city-div">
-        {filterCities("destination", suggestions.search.cities, search).length >
-            0 ? (
-              showPopOver.destination && filterCities("destination", suggestions.search.cities, search).map(
-                (city, index) => {
-                  return (
-                    <CitiesDiv
-                      key={index}
-                      city={city}
-                      identifier={"destination"}
-                      onCityClick={onCityClick}
-                    />
-                  );
-                }
-              )
-            ) : (
-              <div className="singleCity">No Data Found</div>
-            )}
+          {filterCities("destination", suggestions.search.cities, search)
+            .length > 0 ? (
+            showPopOver.destination &&
+            filterCities("destination", suggestions.search.cities, search).map(
+              (city, index) => {
+                return (
+                  <CitiesDiv
+                    key={index}
+                    city={city}
+                    identifier={"destination"}
+                    onCityClick={onCityClick}
+                  />
+                );
+              }
+            )
+          ) : (
+            <div className="singleCity">No Data Found</div>
+          )}
         </div>
       </Drawer>
 
@@ -249,7 +276,7 @@ const SearchBarMobile = () => {
         onClose={() => setShowPopOver({ ...showPopOver, date: false })}
         open={showPopOver.date}
         width="100%"
-        style={{textAlign:"left"}}
+        style={{ textAlign: "left" }}
       >
         <DatePicker
           defaultValue={

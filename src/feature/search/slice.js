@@ -1,17 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const cityData = ["Hyderabad", "Banglore", "Chennai", "Delhi", "Jaipur"];
-
 const searchSlice = createSlice({
   name: "search",
   initialState: {
-    cities: [...cityData],
-    sourceCity: "",     // selected city
-    destinationCity: "",    // selected city
-    date: null,
-    // TODO - save the source city id and destination city id after fetching data from server
-    sourceCityId: "",
-    destinationCityId: ""
+    cities: [],            
+    sourceCity: "",                                       //selected source city 
+    destinationCity: "",                                  // selected destination city
+    date: Math.floor(new Date().getTime() / 1000),
+    status: "idle",        
+    sourceCityId:"",                                      // selected source city id
+    destinationCityId:""                                  // selected destination city id
   },
   reducers: {
     addSourceCity: (state, action) => {
@@ -23,8 +21,29 @@ const searchSlice = createSlice({
     addDate: (state, action) => {
       state.date = action.payload;
     },
+    updateSourceCityId:(state,action) => {
+      state.sourceCityId = action.payload;
+    },
+    updateDestinationCityId:(state,action) => {
+      state.destinationCityId = action.payload;
+    },
+    updateCitiesList: (state, action) => {
+      state.cities = action.payload.cities;
+    },
+    updateCitiesStatus: (state, action) => {
+      state.status = action.payload.status;
+    },
   },
 });
 
-export const { addSourceCity, addDestinationCity, addDate } = searchSlice.actions;
+export const {
+  addSourceCity,
+  addDestinationCity,
+  addDate,
+  updateCitiesList,
+  updateCitiesStatus,
+  updateDestinationCityId,
+  updateSourceCityId
+} = searchSlice.actions;
+
 export default searchSlice;
