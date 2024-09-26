@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { boardingPoints, droppingPoints } from "../data";
 import { svg, aminitiesSvg } from "./svg";
 import {
-  CancellationModal,
-  TravelPolicy,
   DroppingBoardingPoint,
   Aminities,
 } from "./modals";
@@ -32,8 +30,7 @@ export const TripDetails = ({ trip }) => {
       {/* Conditional rendering of modals */}
       {activeModal === 'boardingDroppingPoints' && <DroppingBoardingPoint trip={trip}/>}
       {activeModal === 'aminities' && <Aminities trip={trip} />}
-      {activeModal === 'cancellationPolicy' && <CancellationModal trips={trip} />}
-      {activeModal === 'travelPolicy' && <TravelPolicy />}
+     
     </>
   );
 };
@@ -64,192 +61,16 @@ export const MoreDetails = ({ setActiveModal, trip }) => {
 
       <div className="straightLine"></div>
 
-      <div className="flex" onClick={(e) => handleToggle(e, 'cancellationPolicy')}>
-        <p className="grey">Cancellation Policy</p>
-        <p>
-          <DownOutlined className="downArrow grey" style={{ marginTop: "0px" }} />
-        </p>
-      </div>
-
-      <div className="straightLine"></div>
-
-      <div className="flex" onClick={(e) => handleToggle(e, 'travelPolicy')}>
-        <p className="grey">Travel Policy</p>
-        <p>
-          <DownOutlined className="downArrow grey" style={{ marginTop: "0px" }} />
-        </p>
-      </div>
+    
     </div>
   );
 };
 
-// export const MoreDetails = ({ trip, isActive }) => {
-//   return (
-//     <div className="moreDetails flex">
-//       {/* Boarding & Dropping Points */}
-//       <ToolTip title="Boarding & Dropping Points" id="boardingDroppingPoints">
-//         <div className="flex">
-//           <p className="grey">Boarding & Dropping Points</p>
-//           <DownOutlined className="downArrow grey" style={{ marginTop: "0px" }} />
-//         </div>
-//       </ToolTip>
-
-//       <div className="straightLine"></div>
-
-//       {/* Amenities */}
-//       <ToolTip title="Amenities" id="amenities">
-//         <div className="flex">
-//           <p className="grey">Amenities</p>
-//           <DownOutlined className="downArrow grey" style={{ marginTop: "0px" }} />
-//         </div>
-//       </ToolTip>
-
-//       <div className="straightLine"></div>
-
-//       {/* Cancellation Policy */}
-//       <ToolTip title="Cancellation Policy" id="cancellationPolicy">
-//         <div className="flex">
-//           <p className="grey">Cancellation Policy</p>
-//           <DownOutlined className="downArrow grey" style={{ marginTop: "0px" }} />
-//         </div>
-//       </ToolTip>
-
-//       <div className="straightLine"></div>
-
-//       {/* Travel Policy */}
-//       <ToolTip title="Travel Policy" id="travelPolicy">
-//         <div className="flex">
-//           <p className="grey">Travel Policy</p>
-//           <DownOutlined className="downArrow grey" style={{ marginTop: "0px" }} />
-//         </div>
-//       </ToolTip>
-//     </div>
-//   );
-// };
-
-
-// export const MoreDetails = ({ handleModalOpen, trip, openModal }) => {
-//   return (
-//     <div className="moreDetails flex">
-//       <ToolTip title="Boarding & Dropping Points" id="boardingDroppingPoints">
-//         <div
-//           className="flex"
-//           onClick={(e) => {
-//             e.stopPropagation();
-//             handleModalOpen("boardingDroppingPoints");
-//           }}
-//         >
-//           <p className="grey">Boarding & Dropping Points</p>
-//           <DownOutlined
-//             className="downArrow grey"
-//             style={{ marginTop: "0px" }}
-//           />
-//         </div>
-//       </ToolTip>
-
-//       <div className="straightLine"></div>
-
-//       <ToolTip title="Amenities" id="aminities">
-//         <div
-//           className="flex"
-//           onClick={(e) => {
-//             e.stopPropagation();
-//             handleModalOpen("aminities");
-//           }}
-//         >
-//           <p className="grey">Amenities</p>
-//           <DownOutlined
-//             className="downArrow grey"
-//             style={{ marginTop: "0px" }}
-//           />
-//         </div>
-//       </ToolTip>
-
-//       <div className="straightLine"></div>
-
-//       <ToolTip title="Cancellation Policy" id="cancellationPolicy">
-//         <div
-//           className="flex"
-//           onClick={(e) => {
-//             e.stopPropagation();
-//             handleModalOpen("cancellationPolicy");
-//           }}
-//         >
-//           <p className="grey">Cancellation Policy</p>
-//           <DownOutlined
-//             className="downArrow grey"
-//             style={{ marginTop: "0px" }}
-//           />
-//         </div>
-//       </ToolTip>
-
-//       <div className="straightLine"></div>
-
-//       <ToolTip title="Travel Policy" id="travelPolicy">
-//         <div
-//           className="flex"
-//           onClick={(e) => {
-//             e.stopPropagation();
-//             handleModalOpen("travelPolicy");
-//           }}
-//         >
-//           <p className="grey">Travel Policy</p>
-//           <DownOutlined
-//             className="downArrow grey"
-//             style={{ marginTop: "0px" }}
-//           />
-//         </div>
-//       </ToolTip>
-//     </div>
-//   );
-// };
-
-//       <div className="straightLine"></div>
-
-//       <ToolTip title="Cancellation Policy" id="cancellationPolicy">
-//         <div
-//           className="flex"
-//           onClick={(e) => {
-//             e.stopPropagation();
-//             handleModalOpen('cancellationPolicy');
-//           }}
-//         >
-//           <p className="grey">Cancellation Policy</p>
-//           <DownOutlined className="downArrow grey" style={{ marginTop: "0px" }} />
-//         </div>
-//       </ToolTip>
-
-//       <div className="straightLine"></div>
-
-//       <ToolTip title="Travel Policy" id="travelPolicy">
-//         <div
-//           className="flex"
-//           onClick={(e) => {
-//             e.stopPropagation();
-//             handleModalOpen('travelPolicy');
-//           }}
-//         >
-//           <p className="grey">Travel Policy</p>
-//           <DownOutlined className="downArrow grey" style={{ marginTop: "0px" }} />
-//         </div>
-//       </ToolTip>
-//     </div>
-//   );
-// };
 
 export const TripRecord = ({ setActiveModal, trip }) => {
   return (
     <div className="tripRecords flex">
-      {/* <div className="rating flex">
-        <div className="avgRating flex">
-          <span dangerouslySetInnerHTML={{ __html: svg.ratingSvg }} />
-          <p>{trip.averageRating}</p>
-        </div>
-        <div className="totalRating flex">
-          <span dangerouslySetInnerHTML={{ __html: svg.usersRating }} />
-          <p className="grey">{formatRatings(trip.numberOfRatings)}</p>
-        </div>
-      </div> */}
+   
 
       <div className="aminities flex"   onClick={(e) => {
               e.stopPropagation();

@@ -61,6 +61,7 @@ export const tripsSelector = (state) => {
       if (selectedDepartureTimes.length === 0) return true; 
 
       const date = new Date(window.location.href.split("/").slice(-1)[0]);
+      console.log("date", date )
       const time10AM = new Date(date).setHours(10, 0, 0, 0);
       const time5PM = new Date(date).setHours(17, 0, 0, 0);
       const time11PM = new Date(date).setHours(23, 0, 0, 0);
@@ -84,20 +85,8 @@ export const tripsSelector = (state) => {
 
       return filtered;
     });
-    console.log("filteredTrips", filteredTrips)
+  
 
-    console.log("filteredTrips", filteredTrips);
-
-    //  boardingPoints and droppingPoints with each filtered trip
-    // const enhancedTrips = filteredTrips.map((trip) => ({
-    //   ...trip,
-    //   boardingPoints: trip.boardingPoints.filter(stop => {
-    //     return mainBoardingPoints.find(point => point.stopId === stop.stopId) ;
-    //   }),
-    //   droppingPoints: trip.droppingPoints.filter(stop => {
-    //     return mainDroppingPoints.find(point => point.stopId === stop.stopId);
-    //   }),
-    // }));
   
     return {
       filteredTrips: filteredTrips.length > 0 ? filteredTrips : tripslist.trips,
