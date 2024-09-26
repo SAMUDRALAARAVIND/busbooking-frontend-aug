@@ -19,8 +19,10 @@ const SignUpPage = ({ onLoginClick }) => {
   const [otpVerified, setOtpVerified] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const showToast = (message) => {
-    toast(message);
+  const showToast = (message, onClose) => {
+    toast(message, {
+      onClose,
+    });
   };
 
   // Function to generate OTP
@@ -73,16 +75,13 @@ const SignUpPage = ({ onLoginClick }) => {
 
     const dataToSubmit = {
       ...formData,
-      dob: dobTimestamp, 
+      dob: dobTimestamp,
     };
 
     try {
       const response = await axios.post('http://localhost:8000/register/signUp', dataToSubmit);
-      showToast(response.data.message);
       if (response.status === 200) {
-        showToast(response.data.message);
-        alert('signup done')
-        onLoginClick();
+        showToast(response.data.message, onLoginClick);
       } else {
         showToast('Sign up failed. Please try again.');
       }
@@ -154,7 +153,7 @@ const SignUpPage = ({ onLoginClick }) => {
         <form onSubmit={handleSubmit}>
           <label htmlFor="fullName">Full Name</label>
           <input
-            type="text"
+            //type="text"
             id="fullName"
             name="fullName"
             value={formData.fullName}
@@ -174,7 +173,7 @@ const SignUpPage = ({ onLoginClick }) => {
           <input type="date" id="dob" name="dob" onChange={handleChange} />
           <label htmlFor="email">Email</label>
           <input
-            type="email"
+            // type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
@@ -215,7 +214,7 @@ const SignUpPage = ({ onLoginClick }) => {
             </>
           ) : (
             <button type="button" className="register-btn" onClick={generateOtp}>
-            {loading ? 'Generating...' : 'Generate OTP'}
+              {loading ? 'Generating...' : 'Generate OTP'}
             </button>
           )}
 

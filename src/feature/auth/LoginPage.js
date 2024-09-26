@@ -13,8 +13,10 @@ const LoginPage = ({ onLoginClick, onSignUpClick }) => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    const showToast = (message) => {
-        toast(message);
+    const showToast = (message, onClose) => {
+        toast(message, {
+            onClose,
+        });
     };
 
     const handleChange = (e) => {
@@ -47,11 +49,9 @@ const LoginPage = ({ onLoginClick, onSignUpClick }) => {
             }
 
             const data = await response.json();
-            
+
             localStorage.setItem('token', data.token);
-            showToast('Login successfull');
-            alert('Login Done');
-            onLoginClick();
+            showToast('Login successfull', onLoginClick);
 
         } catch (err) {
             setError(err.message);
@@ -63,7 +63,7 @@ const LoginPage = ({ onLoginClick, onSignUpClick }) => {
 
     return (
         <div className='login-container'>
-        <ToastContainer />
+            <ToastContainer />
             <div className='left-section'>
                 <div className='logo'>
                     <svg
@@ -128,7 +128,7 @@ const LoginPage = ({ onLoginClick, onSignUpClick }) => {
                         value={formData.password}
                         onChange={handleChange}
                         id="referral-code"
-                        placeholder="Enter Referral Code if Available" />
+                        placeholder="Enter Password Here" />
 
                     {error && <p className="error">{error}</p>}
                     <button type="submit" className="login-btn" disabled={loading}>
@@ -144,23 +144,7 @@ const LoginPage = ({ onLoginClick, onSignUpClick }) => {
                             Sign Up
                         </span>
                     </p>
-
-                    {/* <button type="submit" className="login-btn">Login</button> */}
                 </form>
-                {/* <div className="divider">
-                    <span>Or Continue With</span>
-                </div>
-                <button className="google-btn">
-                    <img
-                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAABzElEQVR4Ab2WAUQDURjHDw0QIAQkAVBaMwvDJiMbY7QgFgAkAAGZZUASFiyAnQUEotMIGUKgAAYNWxY20Gyv9+d57d52X99mN/zcuee933vv/b+7sxKnyX9pxUORVixUkNe6pCMRQN3XVVuEMxbZ2E4Ej7WARwd9phbKGa/Izg2+aIwGxmAJsTUSMRcmSP2UFcgVqm0UDBzJjcKhZYSQcWZZIsVZjgz8pTEaGniI6mYnQnzCKothzfruFteFKeXL+Fh9J7DdfwyI4ZMlcIUUQDhnmRZeQDTKV3ZLnYU/wmdTiNWenReXqY6xQq8suZ6C8m6psiKFS21TiGeUTAnFDCQsQ6aEgRd/hN3c4oWL3VIIjdAgMMzQNCXvHjS9z1CVxWgtHt4lxaadIcuCkWBhgpS6Cv/jYU0E7YyGL+Ftt+vVVr0PidXKgUu4Y2de57U6PNfCVDWVM2WzSGP5nzwRmg0tBHLgTwg8pD3JkZcoaKfDmFj08k3E84NJstrY9xAHaoi85I6kpMB9T7dX90Tk9sqUuhI/NlNCxkJJXaVgfg99keKKQmf9JmJ7iTNlkg5P/SOMoOgzYmK+MGghkUIMpEKiV457pFMFaJ8z1i/ATnOr+aZzdAAAAABJRU5ErkJggg=="
-                        alt=""
-                    />
-                    Sign in with Google
-                </button>
-                <p>
-                    By logging in, I understand & agree to AbhiBus <Link to="#">terms of use</Link> 
-                    & <Link to="#">privacy policy</Link>
-                </p> */}
             </div>
         </div>
     )
