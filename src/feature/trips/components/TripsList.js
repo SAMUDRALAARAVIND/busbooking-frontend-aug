@@ -9,20 +9,13 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 
 export default function TripsList() {
-  // get the tripsList from redux store
   const tripsList = useSelector(tripsSelector);
   const { source, destination, travelDate } = useParams();
+ 
 
-  const [activeTripId, setActiveTripId] = useState(null);
-
-  const handleModalToggle = (tripId) => {
-    setActiveTripId((prevId) => (prevId === tripId ? null : tripId));
-  };
-
-  console.log("tripsList", tripsList);
   return (
     <div className="trips container ">
-      {tripsList?.map((trip, index) => (
+      {tripsList?.filteredTrips?.length >0 ?  tripsList?.filteredTrips?.map((trip, index) => (
         <div key={trip.tripId} className="TripContainer">
           <div className="leftWrapper">
             <div className="upperItems">
@@ -52,8 +45,7 @@ export default function TripsList() {
                 </div>
               </div>
             </div>
-            <TripDetails trip={trip}    activeTripId={activeTripId}
-              handleModalToggle={() => handleModalToggle(trip.tripId)}/>
+            <TripDetails trip={trip}   />
           </div>
           <div className="rightWrapper">
             <div className="text-end">
@@ -68,7 +60,7 @@ export default function TripsList() {
             </div>
           </div>
         </div>
-      ))}
+      )) : <p>No Trips Available for this date </p>}
     </div>
   );
 }
