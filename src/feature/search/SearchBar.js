@@ -130,6 +130,10 @@ const SearchBar = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
+    if(suggestions.search.sourceCity === "" ||  suggestions.search.destinationCity === '' || suggestions.search.date === null){
+      alert("Please fill valid details.");
+      return;
+    }else {
     if (search.source && search.destination && today) {
       const source = suggestions.search.sourceCity;
       const sourceId = suggestions.search.sourceCityId;
@@ -142,6 +146,7 @@ const SearchBar = () => {
     } else {
       alert("Please fill in all search fields.");
     }
+  }
   };
 
   return (

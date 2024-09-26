@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:8000";
+const baseUrl = "http://localhost:8080";
 
 // Add the cities API endpoint
 const Endpoints = {
