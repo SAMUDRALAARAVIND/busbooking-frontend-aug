@@ -1,9 +1,11 @@
 .seatLayout_container {
   max-width: 950px;
+  border-radius: 12px;
   background-color: hsl(0, 0%, 96%);
   padding-block: 16px;
   padding-inline: 16px;
-  // margin-inline: auto;
+  margin-inline: auto;
+  text-align: left;
   @media (max-width: 550px) {
     padding-inline: 12px;
   }

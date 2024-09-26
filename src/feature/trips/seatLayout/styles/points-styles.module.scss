@@ -85,6 +85,31 @@
         }
       }
     }
+
+    @media (max-width: 450px) {
+      & div.pointsCard {
+        max-height: 300px;
+      }
+
+      ul.pointsListContainer {
+        max-height: 270px;
+      }
+
+      li.singlePointContainer {
+        margin-block: 20px;
+      }
+
+      div.singlePoint {
+        p {
+          max-width: 270px;
+          font-size: 0.8rem;
+        }
+
+        span.subContent {
+          max-width: 350px;
+        }
+      }
+    }
   }
 }
 

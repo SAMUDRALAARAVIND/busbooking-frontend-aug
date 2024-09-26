@@ -1,24 +1,42 @@
 .container {
   width: 100%;
   padding: 0;
-  margin-left: 25rem;
+  margin-left: 20rem;
 }
 .trips p {
   font-size: 0.8rem;
 }
-.TripContainer {
+.trips-screen {
+  display: inline-block;
+  margin: auto;
+}
+.tripsList {
   background-color: white;
   border: 1px solid white;
-  text-align: start;
-  margin: 17px;
-  display: flex;
+  width: min(95vw, 960px);
+  padding-bottom: 4px;
+  margin: 0px;
   margin-top: 20px;
-  max-width: 66vw;
   border-radius: 10px;
-  gap: 0.6rem;
-  justify-content: space-between;
+  .TripContainer {
+    text-align: start;
+    display: flex;
+    gap: 0.6rem;
+    justify-content: space-between;
+  }
+
+  @media screen {
+    @media (max-width: 1290px) {
+      width: min(95vw, 850px);
+    }
+
+    @media (max-width: 1160px) {
+      width: 97vw;
+    }
+  }
 }
-.TripContainer:hover {
+
+.tripsList:hover {
   box-shadow: 0px 0px 5px 5px rgba(121, 120, 120, 0.2);
 }
 
@@ -236,7 +254,7 @@
   height: 1.8rem;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1160px) {
   .container {
     margin-left: 0;
   }
@@ -245,18 +263,17 @@
     font-size: 15px;
   }
 }
-@media (min-width: 1024px) and (max-width: 1200px) {
-  .filters-container {
-    position: relative !important;
-  }
-}
+// @media (min-width: 1024px) and (max-width: 1200px) {
+//   .filters-container {
+//     position: relative !important;
+//   }
+// }
 @media only screen and (min-width: 862px) and (max-width: 1072px) {
-  .container {
-    margin-left: 0;
-  }
+  // .container {
+  //   margin-left: 0;
+  // }
   .TripContainer {
     zoom: 0.8;
-    max-width: 100%;
   }
 }
 
@@ -266,7 +283,6 @@
   }
   .TripContainer {
     zoom: 0.7;
-    max-width: 100%;
   }
 }
 

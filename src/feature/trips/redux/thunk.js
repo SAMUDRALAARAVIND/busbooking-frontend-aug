@@ -1,6 +1,6 @@
 import Endpoints from "../../../network/endpoints";
 import request from "../../../network/request";
-import { tripsResponse } from "../data";
+import { tripsResponse } from "../enum";
 import { updateTripsStatus } from "../redux/slice";
 
 export const fetchTripsList = (searchInfo) => {
@@ -13,7 +13,7 @@ export const fetchTripsList = (searchInfo) => {
       data: searchInfo,
     });
     if (success) {
-      // we received response
+      
       // TODO: integrate api with proper endpoint and test
       dispatch(updateTripsStatus({ status: "success", data: data }));
     } else {

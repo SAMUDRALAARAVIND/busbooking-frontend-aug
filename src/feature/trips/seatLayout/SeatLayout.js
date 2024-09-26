@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Spinner from "../../../utlis/Spiner";
 import SeatHeader from "./components/SeatHeader";
 import SeatContent from "./components/SeatContent";
@@ -77,6 +83,7 @@ const SeatLayout = ({ trip }) => {
   // const [error, seterror] = useState("");
   // const [seatData, setSeatData] = useState({});
   const dispatch = useDispatch();
+  const seatRef = useRef(null);
   useEffect(() => {
     // const getSeatData = () => {
     //   setSeatData(SEAT_DATA);
