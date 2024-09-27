@@ -1,14 +1,14 @@
 .container {
   width: 100%;
   padding: 0;
-  margin-left: 21rem;
+  margin-left: 22rem;
 }
 .trips p {
   font-size: 0.8rem;
 }
 .trips-screen {
-  display: inline-block;
-  margin: auto;
+  // display: inline-block;
+  // margin: auto;
   height: 90vh;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -47,12 +47,18 @@
 
   @media screen {
     @media (max-width: 1290px) {
-      width: min(95vw, 850px);
+      width: min(95vw, 800px);
     }
 
     @media (max-width: 1160px) {
       width: 97vw;
     }
+  }
+}
+
+@media only screen and (min-width: 459px) and (max-width: 809px) {
+  .TripContainer {
+    zoom: 0.7;
   }
 }
 
