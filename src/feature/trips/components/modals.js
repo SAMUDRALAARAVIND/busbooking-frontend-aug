@@ -1,20 +1,25 @@
-import React from 'react'
+import React from "react";
 import "../styles/modals.scss";
 import { aminitiesSvg } from "./svg";
 import { tripsSelector } from "../redux/selectors";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 
-export function DroppingBoardingPoint ({ trip }) {
-
+export function DroppingBoardingPoint({ trip }) {
   const tripsList = useSelector(tripsSelector);
-  console.log("boarding123", tripsList.mainDroppingPoints)
+  console.log("boarding123", tripsList.mainDroppingPoints);
 
   // filtering boarding and dropping pints from trips selector
-  const filteredBoardingPoints = tripsList.mainBoardingPoints.filter((mainPoint) =>
-    trip.boardingPoints.some((stopPoint) => stopPoint.stopId === mainPoint.stopId)
+  const filteredBoardingPoints = tripsList.mainBoardingPoints.filter(
+    (mainPoint) =>
+      trip.boardingPoints.some(
+        (stopPoint) => stopPoint.stopId === mainPoint.stopId
+      )
   );
-  const filteredDroppingPoints = tripsList.mainDroppingPoints.filter((mainPoint) =>
-    trip.droppingPoints.some((stopPoint) => stopPoint.stopId === mainPoint.stopId)
+  const filteredDroppingPoints = tripsList.mainDroppingPoints.filter(
+    (mainPoint) =>
+      trip.droppingPoints.some(
+        (stopPoint) => stopPoint.stopId === mainPoint.stopId
+      )
   );
 
   return (
@@ -25,8 +30,16 @@ export function DroppingBoardingPoint ({ trip }) {
           {filteredBoardingPoints.map((data) => {
             return (
               <div>
-                <h6>{data.title}</h6>
-                <p className="grey">{data.directions}</p>
+                {data.title.length > 17 ? (
+                  <h6>{data.title.slice(0, 17) + "..."}</h6>
+                ) : (
+                  <h6>{data.title}</h6>
+                )}
+                {data.directions.length > 65 ? (
+                  <p>{data.directions.slice(0, 65) + "..."}</p>
+                ) : (
+                  <p>{data.directions}</p>
+                )}
               </div>
             );
           })}
@@ -35,13 +48,23 @@ export function DroppingBoardingPoint ({ trip }) {
       <div className="  right">
         <h5 className="">Dropping Points</h5>
 
-        <div className=" DroppingList overflow ">
+        <div className="DroppingList overflow">
           {filteredDroppingPoints.map((data) => {
             return (
               <div>
-                <h6>{data.title}</h6>
+                <h6>
+                  {data.title.length > 18 ? (
+                    <h6>{data.title.slice(0, 18) + ".."} </h6>
+                  ) : (
+                    <h6>{data.title}</h6>
+                  )}
+                </h6>
                 <p className="grey">
-                  <span>{data.directions} </span>
+                  {data.directions.length > 55 ? (
+                    <p>{data.directions.slice(0, 55) + "..."}</p>
+                  ) : (
+                    <p>{data.directions}</p>
+                  )}
                 </p>
               </div>
             );
@@ -52,10 +75,9 @@ export function DroppingBoardingPoint ({ trip }) {
       </div>
     </div>
   );
-};
+}
 
-
-export const Aminities = ({trip}) => {
+export const Aminities = ({ trip }) => {
   return (
     <>
       <div

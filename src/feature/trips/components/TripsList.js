@@ -14,6 +14,8 @@ export default function TripsList() {
   const tripsList = useSelector(tripsSelector);
   const { source, destination, travelDate } = useParams();
   console.log("tripsList", tripsList);
+
+  
   return (
     <div className="trips container ">
       {tripsList?.filteredTrips?.length > 0 ? (

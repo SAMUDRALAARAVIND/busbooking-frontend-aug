@@ -15,8 +15,38 @@
   .DroppingList {
     height: 27vh;
     padding:  10px;
+    overflow-y: auto;
+    scrollbar-color: var(--mediumRed) #fce3e3;
+    scrollbar-width: thin;
+
+
+    &::-webkit-scrollbar {
+      width: 10px;
+  }
+  &::-webkit-scrollbar-track {
+      background: #f0f0f0;
+      border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+      background: #dc635b;
+      border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+      background: #8a3b34;
+  }
+
   }
   
+  .boardingList::-webkit-scrollbar,
+.DroppingList::-webkit-scrollbar {
+    width: 10px;
+}
+
+  .boardingList::-webkit-scrollbar {
+    width: 10px;
+}
   .bdContainer h5{
     font-size: 20px;
     font-weight: 500;
@@ -31,9 +61,10 @@
     margin: 3px 0px;
     margin-top: 10px;
   }
-  
+
   .boardingList p, .DroppingList p{
     font-size: 16px;
+    color: rgb(184, 184, 184);
   }
   
   .left h5,
@@ -45,7 +76,7 @@
   
   }
   .right{
-    width:44%;
+    width:47%;
   }
   
   
@@ -93,96 +124,9 @@
     align-self: center;
     color: #444492;
   }
-  
-  .cancellation-policy{
-    position: absolute;
-    height: 30vh;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0px 5px 10px 5px rgba(121, 120, 120, 0.2);
-    width: 38%;
-    text-align: start;
-    margin: 10px 23px;
-    padding: 10px;
-    overflow-y: scroll;
-    z-index: 1000;
-    margin-left: 25%;
-  }
-  .cancellation-policy .flex{
-    justify-content: space-between;
-    align-items: start;
-    padding: 5px 10px;
-    margin: 5px;
-    gap: 2px;
-  }
-  .cancellation-policy .heading{
-    color: var(--mediumRed);
-    font-size:18px;
-  
-  }
-  .cancellation-policy h5{
-    font-size:18px;
-    font-weight: 500;
-    margin: 10px 0px;
-  
-  }
-  .cancellation-policy .desc p{
-    padding: 5px;
-    margin: 5px;
-  }
-  .refundOnTime{
-    color: grey;
-  }
-  
-  .cancellation-policy .desc{
-  color: grey;
-  }
-  .Travel-policy{
-    position: absolute;
-    height: 30vh;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0px 5px 10px 5px rgba(121, 120, 120, 0.2);
-    width: 35%;
-    text-align: start;
-    margin: 10px 23px;
-    padding: 10px 20px;
-    padding-bottom: 20px;
-    overflow-y: scroll;
-    z-index: 1000;
-    margin-left: 30%;
-    margin-bottom: 20px;
-  }
-  
-  .Travel-policy p{
-  color: grey;
-  margin:0;
-  }
-  
-  .Travel-policy h4{
-    font-size: 20px;
-    font-weight: 500;
-  color: #703B3B;
-  margin: 18px 0px;
-  }
-  .Travel-policy h5{
-    font-size: 18px;
-    font-weight: 500;
-    color: #212121;
-  margin:  2px 0px;
-  margin-top: 12px;
-  }
-  
-  @media only screen and (min-width: 780px) and (max-width: 1300px) {
-    .cancellation-policy {
-      zoom: 0.8;
-    }
-  }
-  
+
   @media only screen and (min-width: 459px) and (max-width: 809px) {
     .TripContainer {
       zoom: 0.6;
     }
   }
-  @media only screen and (max-width: 599px) {
-  }  

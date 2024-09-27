@@ -18,7 +18,7 @@ export const tripsSelector = createSelector(
 
   console.log("filtersSelector", filtersSelector)
   // filtering Trips Data
-  const filteredTrips = tripsResponse?.trips
+  const filteredTrips = tripsResponseSelector?.trips
     .filter((trip) => {
       const busTypes = Object.keys(filtersSelector[filterType.BUS_TYPES]).filter(
         (key) => filtersSelector[filterType.BUS_TYPES][key]
@@ -101,7 +101,7 @@ export const tripsSelector = createSelector(
       });
     console.log("tripsResponse", filteredTrips)
     return {
-      filteredTrips: filteredTrips?.length > 0 ?  filteredTrips : tripsResponse?.trips,
+      filteredTrips: filteredTrips?.length > 0 ?  filteredTrips : tripsResponseSelector?.trips,
       mainBoardingPoints,
       mainDroppingPoints,
     };

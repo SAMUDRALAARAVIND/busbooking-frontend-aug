@@ -29,8 +29,8 @@ p {
 .grey {
   color: var(--grayFont);
 }
-.overflow {
+/* .overflow {
   overflow-y: auto;
   scrollbar-color: var(--mediumRed) #fce3e3;
   scrollbar-width: thin;
-}
+} */

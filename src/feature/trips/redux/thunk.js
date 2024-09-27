@@ -13,8 +13,9 @@ export const fetchTripsList = (searchInfo) => {
       data: searchInfo,
     });
     if (success) {
+
       const priceRange = [Number.MAX_SAFE_INTEGER, Number.MIN_SAFE_INTEGER];
-      tripsResponse?.trips?.forEach((trip) => {
+      data?.trips?.forEach((trip) => {
         priceRange[0] > trip.minPrice && (priceRange[0] = trip.minPrice);
         priceRange[1] < trip.maxPrice && (priceRange[1] = trip.maxPrice);
       });

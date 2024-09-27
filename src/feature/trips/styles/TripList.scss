@@ -1,7 +1,7 @@
 .container {
   width: 100%;
   padding: 0;
-  margin-left: 20rem;
+  margin-left: 21rem;
 }
 .trips p {
   font-size: 0.8rem;
@@ -9,6 +9,26 @@
 .trips-screen {
   display: inline-block;
   margin: auto;
+  height: 90vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 3px;
+}
+&::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 5px;
+}
+
+&::-webkit-scrollbar-thumb {
+    background: #dc635b;
+    border-radius: 8px;
+}
+
+&::-webkit-scrollbar-thumb:hover {
+    background: #8a3b34;
+}
 }
 .tripsList {
   background-color: white;
