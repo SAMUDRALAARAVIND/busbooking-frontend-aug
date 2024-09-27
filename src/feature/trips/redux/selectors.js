@@ -1,65 +1,33 @@
 import { filterType, departureTime } from "../../filters/slice";
-import { busPartners } from "../../filters/enum";
+import { busPartners, cities, boardingPoints, droppingPoints } from "../../filters/enum";
+import {tripsResponse} from '../enum'
+import TripsList from "../components/TripsList";
+import { createSelector } from "reselect";
 
-export const stopPointsSelector = (state, tripId) => {
-  let sourceStops = [],
-    destinationStops = [];
-
-  state.trips?.tripsResponse?.trips.forEach((tour) => {
-    if (tripId === tour.tripId) {
-      sourceStops = tour.boardingPoints || [];
-      destinationStops = tour.droppingPoints || [];
-    }
-  });
-
-  const boardingPoints = state.trips?.tripsResponse?.boardingPoints || [];
-  const droppingPoints = state.trips?.tripsResponse?.droppingPoints || [];
-
-  const source = sourceStops
-    .map((sourceStop) => {
-      const matchedBoardingPoint = boardingPoints.find(
-        (bp) => bp.stopId === sourceStop.stopId
-      );
-      return matchedBoardingPoint
-        ? { ...sourceStop, ...matchedBoardingPoint }
-        : null;
-    })
-    .filter(Boolean);
-
-  const dest = destinationStops
-    .map((destStop) => {
-      const matchedDroppingPoint = droppingPoints.find(
-        (dp) => dp.stopId === destStop.stopId
-      );
-      return matchedDroppingPoint
-        ? { ...destStop, ...matchedDroppingPoint }
-        : null;
-    })
-    .filter(Boolean);
-
-  return { boardingPoints: source, droppingPoints: dest };
-};
 
 export const tripsStatusSelector = (state) => state.trips.apiStatus;
+const tripsResponseSelector = (state) => state?.trips?.tripsResponse;
+const filtersSelector = (state) => state?.filters;
 
-export const tripsSelector = (state) => {
-  const trips = Array.isArray(state?.trips?.tripsResponse.trips)
-    ? state.trips.tripsResponse.trips
-    : [];
+export const tripsSelector = createSelector(
+  [tripsResponseSelector, filtersSelector],
+(tripsResponseSelector, filtersSelector) => {
 
-  const filters = state?.filters;
+  const mainBoardingPoints = tripsResponseSelector?.boardingPoints || [];
+  const mainDroppingPoints = tripsResponseSelector?.dropingPoints || [];
 
-  const filteredTrips = trips
-    // Filter by bus types
+  console.log("filtersSelector", filtersSelector)
+  // filtering Trips Data
+  const filteredTrips = tripsResponseSelector?.trips
     .filter((trip) => {
-      const busTypes = Object.keys(filters[filterType.BUS_TYPES]).filter(
-        (key) => filters[filterType.BUS_TYPES][key]
+      const busTypes = Object.keys(filtersSelector[filterType.BUS_TYPES]).filter(
+        (key) => filtersSelector[filterType.BUS_TYPES][key]
       );
       if (busTypes.length === 0) return true;
       return busTypes.includes(trip.busType);
     })
     .filter((trip) => {
-      const [min, max] = filters[filterType.PRICE_RANGE].selectedRange || [
+      const [min, max] = filtersSelector[filterType.PRICE_RANGE].selectedRange || [
         0,
         Infinity,
       ];
@@ -67,33 +35,32 @@ export const tripsSelector = (state) => {
     })
     .filter((trip) => {
       const selectedPartners = busPartners.filter(
-        (partner) => filters[filterType.BUS_PARTNER][partner]
+        (partner) => filtersSelector[filterType.BUS_PARTNER][partner]
       );
       if (selectedPartners.length === 0) return true;
       return selectedPartners.includes(trip.busPartner);
     })
     .filter((trip) => {
-      const selectedBoardingPoints = filters[filterType.BOARDING_POINTS];
+      const selectedBoardingPoints = filtersSelector[filterType.BOARDING_POINTS];
       if (Object.keys(selectedBoardingPoints).length === 0) return true;
-      const mainBoardingPoints = state?.trips?.tripsResponse.boardingPoints;
-      // Compare with main boarding points
+      // const mainBoardingPoints = state?.trips?.tripsResponse.boardingPoints;
       const sourceStops = trip?.boardingPoints ?? [];
       return sourceStops.some((stop) => {
         const mainStop = mainBoardingPoints.find(
           (point) => point.stopId === stop.stopId
         );
-
+      console.log("selectedbrdingpoints", selectedBoardingPoints)
+      console.log("mainStop", mainStop)
         return mainStop && selectedBoardingPoints[mainStop.stopId];
       });
     })
     .filter((trip) => {
-      const selectedDroppingPoints = filters[filterType.DROPPING_POINTS];
+      const selectedDroppingPoints = filtersSelector[filterType.DROPPING_POINTS];
       if (Object.keys(selectedDroppingPoints).length === 0) return true;
-      const mainDroppingPoints = state?.trips?.tripsResponse.droppingPoints;
 
-      // Compare with main dropping points
+  // drropping points
       const destinationStops = trip?.droppingPoints ?? [];
-      return destinationStops.some((stop) => {
+      return destinationStops?.some((stop) => {
         const mainStop = mainDroppingPoints.find(
           (point) => point.stopId === stop.stopId
         );
@@ -101,35 +68,43 @@ export const tripsSelector = (state) => {
       });
     })
     .filter((trip) => {
-      const selectedDepartureTimes = Object.keys(
-        filters[filterType.DEPARTURE_TIME]
-      ).filter((key) => filters[filterType.DEPARTURE_TIME][key]);
-      if (selectedDepartureTimes.length === 0) return true;
-
-      const date = new Date(window.location.href.split("/").slice(-1)[0]);
-      const time10AM = new Date(date).setHours(10, 0, 0, 0);
-      const time5PM = new Date(date).setHours(17, 0, 0, 0);
-      const time11PM = new Date(date).setHours(23, 0, 0, 0);
-
-      let filtered = false;
-      trip?.boardingPoints?.forEach((stop) => {
-        const arrivalTime = stop.arrivalTime;
-        if (selectedDepartureTimes.includes(departureTime.MORNING)) {
-          filtered ||= arrivalTime <= time10AM;
-        }
-        if (selectedDepartureTimes.includes(departureTime.AFTERNOON)) {
-          filtered ||= arrivalTime >= time10AM && arrivalTime <= time5PM;
-        }
-        if (selectedDepartureTimes.includes(departureTime.EVENING)) {
-          filtered ||= arrivalTime >= time5PM && arrivalTime <= time11PM;
-        }
-        if (selectedDepartureTimes.includes(departureTime.NIGHT)) {
-          filtered ||= arrivalTime >= time11PM;
-        }
+        console.log("tripsss", trip)
+        const selectedDepartureTimes = Object.keys(
+          filtersSelector[filterType.DEPARTURE_TIME]  ).filter((key) => filtersSelector[filterType.DEPARTURE_TIME][key]);
+        if (selectedDepartureTimes.length === 0) return true;
+         console.log("selectedDepartureTimes", selectedDepartureTimes)
+        const date = new Date((window.location.href.split("/").slice(-1)[0])*1000);
+        const time10AM = new Date(date).setHours(10, 0, 0, 0);
+        const time5PM = new Date(date).setHours(17, 0, 0, 0);
+        const time11PM = new Date(date).setHours(23, 0, 0, 0);
+          console.log("time!0am",time10AM/1000, time5PM/1000, time11PM/1000)
+        let filtered = false;
+        trip?.boardingPoints?.forEach((stop) => {
+          const arrivalTime = stop.arrivalTime;
+          // console.log("dpartre",departureTime.MORNING)
+          console.log("dpp",arrivalTime)
+          if (selectedDepartureTimes.includes(departureTime.MORNING)) {
+            filtered ||= arrivalTime <= (time10AM/1000) ;
+          }
+          if (selectedDepartureTimes.includes(departureTime.AFTERNOON)) {
+            filtered ||= arrivalTime >= (time10AM/1000) && arrivalTime <= (time5PM/1000);
+          }
+          if (selectedDepartureTimes.includes(departureTime.EVENING)) {
+            filtered ||= arrivalTime >= (time5PM/1000) && arrivalTime <= (time11PM/1000);
+          }
+          if (selectedDepartureTimes.includes(departureTime.NIGHT)) {
+            filtered ||= arrivalTime >= (time11PM/1000) ;
+          }
+        });
+  console.log("filtered", filtered)
+        return filtered;
       });
+    console.log("tripsResponse", filteredTrips)
+    return {
+      filteredTrips: filteredTrips?.length > 0 ?  filteredTrips : tripsResponseSelector?.trips,
+      mainBoardingPoints,
+      mainDroppingPoints,
+    };
 
-      return filtered;
-    });
-
-  return filteredTrips.length > 0 ? filteredTrips : trips;
-};
+  }
+)

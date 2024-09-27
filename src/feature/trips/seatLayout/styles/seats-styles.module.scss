@@ -41,28 +41,35 @@ li.seats {
       }
     }
 
+    @media (max-width: 415px) {
+      margin-inline: -12px;
+      div.seatContainer {
+        height: 170px;
+      }
+    }
+
     @media (max-width: 400px) {
-      margin-inline: -10px;
+      margin-inline: -20px;
       div.seatContainer {
         height: 170px;
       }
     }
 
     @media (max-width: 390px) {
-      margin-inline: -16px;
+      margin-inline: -24px;
       div.seatContainer {
         height: 170px;
       }
     }
     @media (max-width: 380px) {
-      margin-inline: -20px;
+      margin-inline: -32px;
       div.seatContainer {
         height: 160px;
       }
     }
 
     @media (max-width: 360px) {
-      margin-inline: -38px;
+      margin-inline: -48px;
       div.seatContainer {
         height: 160px;
         transform: scale(0.9);
