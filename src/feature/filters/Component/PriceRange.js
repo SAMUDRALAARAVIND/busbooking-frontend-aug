@@ -8,14 +8,8 @@ const PriceRange = () => {
   const { range, selectedRange } = useSelector(
     (state) => state.filters.priceRange
   );
-  // const [localRange, setLocalRange] = useState(selectedRange);
-
-  // useEffect(() => {
-  //   setLocalRange(selectedRange);
-  // }, [selectedRange]);
 
   const onChangeRange = (value) => {
-    // setLocalRange(value);
     dispatch(toggleUpdatedPriceRange(value));
   };
 
@@ -31,9 +25,7 @@ const PriceRange = () => {
         range
         min={range[0]}
         max={range[1]}
-        // defaultValue={[selectedRange[0], selectedRange[1]]}
         value={selectedRange}
-        // defaultValue={localRange}
         onChange={onChangeRange}
       />
       <div className="range-val">

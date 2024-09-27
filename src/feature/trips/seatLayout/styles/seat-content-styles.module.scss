@@ -1,0 +1,13 @@
+.seatLayout_content {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+  li {
+    flex: 1.5;
+  }
+  @media screen {
+    @media (max-width: 815px) {
+      flex-direction: column;
+    }
+  }
+}

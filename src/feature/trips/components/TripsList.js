@@ -6,28 +6,39 @@ import { TripDetails } from "./TripsDetails";
 import { useSelector } from "react-redux";
 import { tripsSelector } from "../redux/selectors";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import SeatLayout from "../seatLayout/SeatLayout.js";
+import { tripsResponse } from "../enum.js";
 
 export default function TripsList() {
-  // get the tripsList from redux store
   const tripsList = useSelector(tripsSelector);
   const { source, destination, travelDate } = useParams();
-
-  // const [activeTripId, setActiveTripId] = useState(null);
-
-  // const handleModalToggle = (tripId) => {
-  //   if (activeTripId === tripId) {
-  //     setActiveTripId(null);
-  //   } else {
-  //     setActiveTripId(tripId);
-  //   }
-  // };
-
   console.log("tripsList", tripsList);
+
+  
   return (
     <div className="trips container ">
-      {tripsList.trips.map((trip, index) => (
-        <div key={trip.tripId} className="TripContainer">
+      {tripsList?.filteredTrips?.length > 0 ? (
+        tripsList?.filteredTrips?.map((trip, index) => (
+          <SingleTrip key={trip.tripId} {...{ trip, source, destination }} />
+        ))
+      ) : (
+        <p>No Trips Available for this date </p>
+      )}
+    </div>
+  );
+}
+
+const SingleTrip = (props) => {
+  const { trip, source, destination } = props;
+  const [showSeat, setShowSeat] = useState(false);
+  const styles = { textAlign: "left", margin: "17px", maxWidth: "66vw" };
+  const tripRef = useRef(null);
+
+  return (
+    <>
+      <div ref={tripRef} key={trip.tripId} className="tripsList">
+        <div className="TripContainer">
           <div className="leftWrapper">
             <div className="upperItems">
               <div className="flex tripInfo">
@@ -64,17 +75,23 @@ export default function TripsList() {
               <span>₹ {trip.minPrice}</span>
             </div>
             <div className="text-end">
-              <button className="showSeat">Show Seat</button>
+              <button
+                onClick={() => setShowSeat((prev) => !prev)}
+                className="showSeat"
+              >
+                Show Seat
+              </button>
               <p className="grey seats-available">
                 {trip.availableSeats} Seats Available
               </p>
             </div>
           </div>
         </div>
-      ))}
-    </div>
+        {showSeat && <SeatLayout trip={trip} />}
+      </div>
+    </>
   );
-}
+};
 
 //  Total Duration
 const calculateDuration = (departureTime, arrivalTime) => {

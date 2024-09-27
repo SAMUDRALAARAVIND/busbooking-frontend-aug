@@ -1,33 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import AcUnitIcon from "@mui/icons-material/AcUnit";
-import AirlineSeatFlatIcon from "@mui/icons-material/AirlineSeatFlat";
-import AirIcon from "@mui/icons-material/Air";
-import EventSeatIcon from "@mui/icons-material/EventSeat";
 import { filterType, toggleStop } from "../slice";
+import { busTypes } from "../enum";
 import "../style/BusTypes.scss";
-
-const busTypes = [
-  {
-    title: "AC",
-    identifier: "AC",
-    icon: <AcUnitIcon />,
-  },
-  {
-    title: "NonAC",
-    identifier: "NON_AC",
-    icon: <AirIcon />,
-  },
-  {
-    title: "Seater",
-    identifier: "SEATER",
-    icon: <EventSeatIcon />,
-  },
-  {
-    title: "Sleeper",
-    identifier: "SLEEPER",
-    icon: <AirlineSeatFlatIcon />,
-  },
-];
 
 const BusTypes = () => {
   const dispatch = useDispatch();

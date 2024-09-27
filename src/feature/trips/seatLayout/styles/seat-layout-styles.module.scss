@@ -1,0 +1,23 @@
+.seatLayout_container {
+  max-width: 950px;
+  border-radius: 12px;
+  background-color: hsl(0, 0%, 96%);
+  padding-block: 16px;
+  padding-inline: 16px;
+  margin-inline: auto;
+  text-align: left;
+  @media (max-width: 550px) {
+    padding-inline: 12px;
+  }
+}
+
+.seatLayout_wrapper {
+  max-width: 66vw;
+  // text-align: left;
+  margin: 17px;
+  //
+  @media (max-width: 992px) {
+    max-width: 100%;
+    // margin: 17px;
+  }
+}

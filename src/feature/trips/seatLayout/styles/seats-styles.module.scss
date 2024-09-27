@@ -1,0 +1,186 @@
+li.seats {
+  max-width: 70%;
+  flex: 2;
+
+  div.seatContainer {
+    // min-height: 190px;
+    background-color: white;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    gap: 8px;
+    &:last-child {
+      margin-top: 10px;
+    }
+  }
+  @media screen {
+    @media (max-width: 815px) {
+      max-width: 100%;
+      & div.seatContainer {
+        max-width: 550px;
+        margin-inline: auto;
+        padding-inline: 24px;
+      }
+    }
+    @media (max-width: 480px) {
+      transform: rotate(90deg);
+      min-width: 400px;
+      margin-block: 45px;
+      margin-inline: 0px;
+      div.seatContainer {
+        gap: 0px;
+        height: 170px;
+        padding: 6px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      margin-inline: -4px;
+      div.seatContainer {
+        height: 170px;
+      }
+    }
+
+    @media (max-width: 415px) {
+      margin-inline: -12px;
+      div.seatContainer {
+        height: 170px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      margin-inline: -20px;
+      div.seatContainer {
+        height: 170px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      margin-inline: -24px;
+      div.seatContainer {
+        height: 170px;
+      }
+    }
+    @media (max-width: 380px) {
+      margin-inline: -32px;
+      div.seatContainer {
+        height: 160px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      margin-inline: -48px;
+      div.seatContainer {
+        height: 160px;
+        transform: scale(0.9);
+      }
+    }
+  }
+}
+
+div.deckTitle {
+  display: flex;
+  min-width: 40px;
+
+  justify-content: space-between;
+  flex-direction: column-reverse;
+  align-items: start;
+  padding-block: 8px;
+
+  // this is the title of deck
+  span:first-child {
+    transform: rotate(180deg);
+    writing-mode: vertical-lr;
+  }
+}
+
+div.deckSeats {
+  width: calc(100% - 40px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+
+  div.seatRow {
+    // height: 35px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  div.seatColumn {
+    height: 31px;
+    width: 62px;
+    // border: 2px solid gray;
+    border-width: 2px;
+    border-style: solid;
+    text-align: center;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.75rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+
+    span.seatColumnIcon {
+      height: 80%;
+      width: 8.5%;
+      border: inherit;
+      border-right: none;
+      position: absolute;
+      background-color: white;
+      right: -2px;
+      border-radius: 4px;
+    }
+  }
+
+  div.empty {
+    height: 60px;
+  }
+
+  @media screen {
+    @media (max-width: 815px) {
+    }
+    @media (max-width: 550px) {
+      div.seatRow {
+        gap: 4px;
+        transform: scale(0.9);
+      }
+      div.seatColumn {
+        transform: scale(0.9);
+        span.seatColumnIcon {
+          transform: rotate(-360deg);
+          height: 70%;
+          width: 10%;
+        }
+      }
+      div.empty {
+        height: 40px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      gap: 0px;
+      div.seatColumn {
+        span {
+          transform: rotate(-90deg);
+        }
+      }
+      div.empty {
+        height: 32px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      // div.seatRow {
+
+      //   transform: scale(0.85);
+      // }
+      div.seatColumn {
+        transform: scale(0.85);
+      }
+    }
+  }
+}

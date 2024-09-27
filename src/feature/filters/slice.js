@@ -16,11 +16,6 @@ export const departureTime = {
   NIGHT: "after11pm",
 };
 
-const initialPriceRange = {
-  range: [0, 5000],
-  selectedRange: [0, 5000],
-};
-
 const initialState = {
   [filterType.BUS_TYPES]: {},
   [filterType.DEPARTURE_TIME]: {
@@ -32,7 +27,10 @@ const initialState = {
   [filterType.BUS_PARTNER]: {},
   [filterType.BOARDING_POINTS]: {},
   [filterType.DROPPING_POINTS]: {},
-  [filterType.PRICE_RANGE]: initialPriceRange,
+  [filterType.PRICE_RANGE]: {
+    range: [],
+    selectedRange: [],
+  },
 };
 
 const filtersSlice = createSlice({
