@@ -6,10 +6,12 @@ import { tripsStatusSelector } from "./redux/selectors";
 import { useEffect } from "react";
 import { fetchTripsList } from "./redux/thunk";
 import { useParams } from "react-router-dom";
+import { tripsSelector } from "./redux/selectors";
+import Spinner from "../../utlis/Spiner";
 
 const TripsScreen = () => {
   const { sourceCityId, destinationCityId, travelDate } = useParams();
-
+  const tripsList = useSelector(tripsSelector);
   const dispatch = useDispatch();
   const apiStatus = useSelector(tripsStatusSelector);
 
@@ -18,11 +20,15 @@ const TripsScreen = () => {
   }, []);
 
   if (apiStatus === "init" || apiStatus === "pending") {
-    return <h1>Loading trips ..</h1>;
+    return <Spinner />;
   }
 
   if (apiStatus === "error") {
     return <h2>Error occured while fetching trips</h2>;
+  }
+console.log("tripsList", tripsList)
+  if(tripsList?.filteredTrips?.length <= 0){
+    return <h2> No trips Available for this Date </h2>
   }
 
   return (

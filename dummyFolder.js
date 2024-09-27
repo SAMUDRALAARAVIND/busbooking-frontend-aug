@@ -18,7 +18,7 @@ export const tripsSelector = createSelector(
 
   console.log("filtersSelector", filtersSelector)
   // filtering Trips Data
-  const filteredTrips = tripsResponse?.trips
+  const filteredTrips = tripsResponseSelector?.trips
     .filter((trip) => {
       const busTypes = Object.keys(filtersSelector[filterType.BUS_TYPES]).filter(
         (key) => filtersSelector[filterType.BUS_TYPES][key]
@@ -26,13 +26,13 @@ export const tripsSelector = createSelector(
       if (busTypes.length === 0) return true;
       return busTypes.includes(trip.busType);
     })
-    .filter((trip) => {
-      const [min, max] = filtersSelector[filterType.PRICE_RANGE].selectedRange || [
-        0,
-        Infinity,
-      ];
-      return trip.maxPrice >= min && trip.minPrice <= max;
-    })
+    // .filter((trip) => {
+    //   const [min, max] = filtersSelector[filterType.PRICE_RANGE].selectedRange || [
+    //     0,
+    //     Infinity,
+    //   ];
+    //   return trip.maxPrice >= min && trip.minPrice <= max;
+    // })
     .filter((trip) => {
       const selectedPartners = busPartners.filter(
         (partner) => filtersSelector[filterType.BUS_PARTNER][partner]
@@ -101,7 +101,7 @@ export const tripsSelector = createSelector(
       });
     console.log("tripsResponse", filteredTrips)
     return {
-      filteredTrips: filteredTrips?.length > 0 ?  filteredTrips : tripsResponse?.trips,
+      filteredTrips: filteredTrips?.length > 0 ?  filteredTrips : tripsResponseSelector?.trips,
       mainBoardingPoints,
       mainDroppingPoints,
     };
