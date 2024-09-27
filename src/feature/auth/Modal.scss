@@ -1,0 +1,62 @@
+// Modal.scss
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    //align-items: center;
+}
+
+.modal-content {
+    border-radius: 20px;
+    background: white;
+    // padding: 20px;
+    position: relative;
+    margin: auto 0;
+    // max-height: 500px;
+    // height: 100%;
+    max-width: 800px;
+    width: 100%;
+    border: 1px solid #f4f4f4;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    @media (max-width: 768px) {
+        max-width: 90%;
+    }
+
+    @media (min-width: 300px) and (max-width: 530px) {
+        max-width: 95%;
+    }
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #dc635b;
+    font-size: 18px;
+    transition: color 0.3s;
+
+    @media (max-width: 768px) {
+        font-size: 16px;
+        top: 10px;
+        right: 20px;
+    }
+
+    @media (min-width: 300px) and (max-width: 530px) {
+        font-size: 15px;
+        right: 25px;  // Adjust close button position for extra small screens
+        top: 20px;
+    }
+}
+
+.close-button:hover {
+    color: #a04b4b;
+}

@@ -1,7 +1,16 @@
+
+
 .container {
     width: 100%;
     padding: 0;
-    margin-left: 23rem;
+    // padding: 0;
+    // margin-left: 20rem;
+    height: 90vh;
+    // border: 1px solid black;
+    // position: sticky;
+    margin-top: 23px;
+    overflow: scroll;
+    // border: 1px solid;
   }
   .trips p{
     font-size: 0.8rem;
@@ -12,11 +21,13 @@
     text-align: start;
     margin: 17px;
     display: flex;
+    // justify-content: center;
     margin-top: 20px;
-    max-width: 66vw;
+    width: 90%;
     border-radius: 10px;
     gap: .6rem;
     justify-content: space-between;
+    margin-top: 2px;
   }
   .TripContainer:hover {
     box-shadow: 0px 0px 5px 5px rgba(121, 120, 120, 0.2);
@@ -133,16 +144,21 @@
     cursor: pointer;
   }
   .ads {
-    // position: absolute;
     background-color: #f2f2f2;
     text-align: center;
-    width: 20px;
-    height: 15px;
-    padding: 6px;
+    width: 25px;
+    height: 20px;
+    // padding: 6px;
+    text-align: center;
     color: #8697ba;
-    margin-top: 0px;
+    margin-top: auto;
     border-bottom-right-radius: 8px;
-    z-index: 5;
+    overflow: hidden;
+    z-index: 1;
+     p{
+      margin: auto;
+      overflow: hidden;
+     }
   }
   
   .tagImg {

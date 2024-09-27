@@ -33,12 +33,17 @@ const SearchBar = () => {
     source: false,
     destination: false,
   });
+
   const [search, setSearch] = useState({
     source: "",
     destination: "",
+    date: suggestions.search.date
+    ? dayjs.unix(suggestions.search.date).format('YYYY-MM-DD')
+    : dayjs().format('YYYY-MM-DD'),
   });
   const dispatch = useDispatch();
 
+  console.log(search)
   const todayDate = dayjs();
   const maxDate = todayDate.add(3, "month");
 
@@ -62,9 +67,13 @@ const SearchBar = () => {
     };
   }, []);
 
-  const onDateChange = (date) => {
+  const onDateChange = (date, dateString) => {
     setToday(date);
     dispatch(addDate(date.unix()));
+    setSearch({
+      ...search, 
+      date:dateString
+    })
   };
 
   const handleCityClick = (identifier, city) => {
@@ -116,6 +125,12 @@ const SearchBar = () => {
       alert("Please fill in all search fields.");
     }
   };
+
+  const handelSublit = () => {
+    console.log(search)
+    const url = `/trips/search/${search.source}/01/${search.destination}/02/${search.date}/05`;
+    navigate(url) 
+  }
 
   return (
     <div>
@@ -255,7 +270,7 @@ const SearchBar = () => {
                 </button>
               </div>
             </div>
-            <button className="search-button" onClick={()=> navigate('/trips/search')}>Search</button>
+            <button className="search-button" onClick={()=> handelSublit()}>Search</button>
           </div>
       </form>
  

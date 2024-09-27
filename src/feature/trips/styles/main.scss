@@ -1,0 +1,22 @@
+.trips-screen {
+    height: 85vh !important;
+    overflow-y: scroll;
+    width: 90%;
+    display: grid;
+    margin: auto;
+    grid-template-columns: 4fr 8fr;
+  }
+
+
+  @media  (max-width: 650px){
+    .trips-screen{
+      width: 90%;
+      margin: auto;
+      display: flex;
+      border: 1px solid;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column-reverse;
+    }
+  
+  }
