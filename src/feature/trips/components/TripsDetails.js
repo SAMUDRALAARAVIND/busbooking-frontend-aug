@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { boardingPoints, droppingPoints } from "../enum";
 import { svg, aminitiesSvg } from "./svg";
 import {  DroppingBoardingPoint, Aminities } from './modals'
 import { DownOutlined } from "@ant-design/icons";

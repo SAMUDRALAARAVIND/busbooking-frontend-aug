@@ -1,6 +1,5 @@
 import Endpoints from "../../../network/endpoints";
 import request from "../../../network/request";
-import { tripsResponse } from "../enum";
 import { updateTripsStatus } from "../redux/slice";
 import { togglePriceRange } from "../../filters/slice";
 export const fetchTripsList = (searchInfo) => {

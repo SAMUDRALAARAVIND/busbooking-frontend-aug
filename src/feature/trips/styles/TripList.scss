@@ -6,9 +6,12 @@
 .trips p {
   font-size: 0.8rem;
 }
+
 .trips-screen {
   // display: inline-block;
   // margin: auto;
+  
+  position: relative;
   height: 90vh;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -29,6 +32,8 @@
 &::-webkit-scrollbar-thumb:hover {
     background: #8a3b34;
 }
+
+ 
 }
 .tripsList {
   background-color: white;

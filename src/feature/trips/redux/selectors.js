@@ -1,6 +1,5 @@
 import { filterType, departureTime } from "../../filters/slice";
 import { busPartners, cities, boardingPoints, droppingPoints } from "../../filters/enum";
-import {tripsResponse} from '../enum'
 import TripsList from "../components/TripsList";
 import { createSelector } from "reselect";
 
@@ -49,8 +48,6 @@ export const tripsSelector = createSelector(
         const mainStop = mainBoardingPoints.find(
           (point) => point.stopId === stop.stopId
         );
-      console.log("selectedbrdingpoints", selectedBoardingPoints)
-      console.log("mainStop", mainStop)
         return mainStop && selectedBoardingPoints[mainStop.stopId];
       });
     })
@@ -68,21 +65,16 @@ export const tripsSelector = createSelector(
       });
     })
     .filter((trip) => {
-        console.log("tripsss", trip)
         const selectedDepartureTimes = Object.keys(
           filtersSelector[filterType.DEPARTURE_TIME]  ).filter((key) => filtersSelector[filterType.DEPARTURE_TIME][key]);
         if (selectedDepartureTimes.length === 0) return true;
-         console.log("selectedDepartureTimes", selectedDepartureTimes)
         const date = new Date((window.location.href.split("/").slice(-1)[0])*1000);
         const time10AM = new Date(date).setHours(10, 0, 0, 0);
         const time5PM = new Date(date).setHours(17, 0, 0, 0);
         const time11PM = new Date(date).setHours(23, 0, 0, 0);
-          console.log("time!0am",time10AM/1000, time5PM/1000, time11PM/1000)
         let filtered = false;
         trip?.boardingPoints?.forEach((stop) => {
           const arrivalTime = stop.arrivalTime;
-          // console.log("dpartre",departureTime.MORNING)
-          console.log("dpp",arrivalTime)
           if (selectedDepartureTimes.includes(departureTime.MORNING)) {
             filtered ||= arrivalTime <= (time10AM/1000) ;
           }

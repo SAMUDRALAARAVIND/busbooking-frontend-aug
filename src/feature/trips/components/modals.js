@@ -4,11 +4,29 @@ import { aminitiesSvg } from "./svg";
 import { tripsSelector } from "../redux/selectors";
 import { useSelector } from "react-redux";
 
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+
+
+function convertToIST(arrivalTime) {
+  const date = new Date(arrivalTime*1000);
+  return date.toLocaleString("en-IN", {
+    hour12: false, 
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+
 export function DroppingBoardingPoint({ trip }) {
   const tripsList = useSelector(tripsSelector);
-  console.log("boarding123", tripsList.mainDroppingPoints);
+  console.log("treeep", trip);
 
-  // filtering boarding and dropping pints from trips selector
   const filteredBoardingPoints = tripsList.mainBoardingPoints.filter(
     (mainPoint) =>
       trip.boardingPoints.some(
@@ -28,6 +46,12 @@ export function DroppingBoardingPoint({ trip }) {
         <h5>Boarding Points</h5>
         <div className="boardingList overflow">
           {filteredBoardingPoints.map((data) => {
+               const findArrivaltime = trip.boardingPoints.find(
+                (stopPoint) => stopPoint.stopId === data.stopId
+              );
+              const arrivalTime = findArrivaltime
+                ? convertToIST(findArrivaltime.arrivalTime)
+                : "N/A";
             return (
               <div>
                 {data.title.length > 17 ? (
@@ -35,10 +59,10 @@ export function DroppingBoardingPoint({ trip }) {
                 ) : (
                   <h6>{data.title}</h6>
                 )}
-                {data.directions.length > 65 ? (
-                  <p>{data.directions.slice(0, 65) + "..."}</p>
+                {data.directions.length > 35 ? (
+                  <p>{arrivalTime} :  {data.directions.slice(0, 35) + "..."}</p>
                 ) : (
-                  <p>{data.directions}</p>
+                  <p>{arrivalTime} : {data.directions}</p>
                 )}
               </div>
             );
@@ -50,20 +74,30 @@ export function DroppingBoardingPoint({ trip }) {
 
         <div className="DroppingList overflow">
           {filteredDroppingPoints.map((data) => {
+
+             const findArrivaltime = trip.droppingPoints.find(
+              (stopPoint) => stopPoint.stopId === data.stopId
+            );
+            const arrivalTime = findArrivaltime
+              ? convertToIST(findArrivaltime.arrivalTime)
+              : "N/A";
             return (
               <div>
                 <h6>
-                  {data.title.length > 18 ? (
-                    <h6>{data.title.slice(0, 18) + ".."} </h6>
+                  {data.title.length > 16 ? (
+                    <h6>{data.title.slice(0, 16) + ".."} </h6>
                   ) : (
                     <h6>{data.title}</h6>
                   )}
                 </h6>
                 <p className="grey">
-                  {data.directions.length > 55 ? (
-                    <p>{data.directions.slice(0, 55) + "..."}</p>
+                  {data.directions.length > 25 ? (
+                    <>
+                      <p>{arrivalTime} :  {data.directions.slice(0, 25) + ".."}</p>
+                    </>
+                  
                   ) : (
-                    <p>{data.directions}</p>
+                    <p>{arrivalTime} :  {data.directions}</p>
                   )}
                 </p>
               </div>
@@ -85,7 +119,7 @@ export const Aminities = ({ trip }) => {
         style={{ position: "absolute", zIndex: "10" }}
         className="aminitesModal"
       >
-        <h5>Aminities</h5>
+        <h6>Aminities</h6>
         <div>
           {trip.amenities.map((item, index) => {
             const matchedAmenity = aminitiesSvg.find((amenity) => {
