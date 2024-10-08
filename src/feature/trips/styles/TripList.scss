@@ -1,7 +1,12 @@
-.container {
+.trips {
   width: 100%;
   padding: 0;
   margin-left: 22rem;
+
+  
+  .notification{
+    margin-top: 20%;
+    }
 }
 .trips p {
   font-size: 0.8rem;
@@ -43,6 +48,7 @@
   margin: 0px;
   margin-top: 20px;
   border-radius: 10px;
+
   .TripContainer {
     text-align: start;
     display: flex;

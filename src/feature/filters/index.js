@@ -21,24 +21,20 @@ const time = [
     icon: <NightsStayIcon />,
   },
 ];
-
 const SideBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const dispatch = useDispatch();
-
   const busTypesState = useSelector(
     (state) => state.filters[filterType.BUS_TYPES]
   );
   const departureTimeState = useSelector(
     (state) => state.filters[filterType.DEPARTURE_TIME]
   );
-
   const updateBusTypeFilter = (add, value) => {
     dispatch(
       toggleStop({ identifier: filterType.BUS_TYPES, stopId: value, add })
     );
   };
-
   const updateDepartureTime = (add, value) => {
     dispatch(
       toggleStop({

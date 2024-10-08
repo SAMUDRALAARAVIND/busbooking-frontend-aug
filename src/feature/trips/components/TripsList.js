@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import "../styles/TripList.scss";
 import tagImg from "../assets/tagImg.jpg";
 
@@ -6,24 +7,30 @@ import { TripDetails } from "./TripsDetails";
 import { useSelector } from "react-redux";
 import { tripsSelector } from "../redux/selectors";
 import { useParams } from "react-router-dom";
-import { useRef, useState } from "react";
 import SeatLayout from "../seatLayout/SeatLayout.js";
+import { message } from "antd";
 
 export default function TripsList() {
   const tripsList = useSelector(tripsSelector);
   const { source, destination, travelDate } = useParams();
   console.log("tripsList", tripsList);
 
+  useEffect(() => {
+    if (tripsList.isFilteredEmpty) {
+      message.error("No data is available for the selected filters.");
+    }
+  }, [tripsList.isFilteredEmpty]);
   
   return (
     <div className="trips container ">
-      {tripsList?.filteredTrips?.length > 0 ? (
-        tripsList?.filteredTrips?.map((trip, index) => (
+     
+      {!tripsList.isFilteredEmpty ? tripsList?.filteredTrips?.map((trip, index) => (
           <SingleTrip key={trip.tripId} {...{ trip, source, destination }} />
-        ))
-      ) : (
-        <p>No Trips Available for this date </p>
-      )}
+        )) : 
+        <div className="notification">
+          <h3><b>No Data Is Available For this Selected Filter</b></h3>
+          </div>}
+     
     </div>
   );
 }

@@ -11,8 +11,6 @@ import timezone from "dayjs/plugin/timezone";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-
-
 function convertToIST(arrivalTime) {
   const date = new Date(arrivalTime*1000);
   return date.toLocaleString("en-IN", {
@@ -22,11 +20,9 @@ function convertToIST(arrivalTime) {
   });
 }
 
-
 export function DroppingBoardingPoint({ trip }) {
   const tripsList = useSelector(tripsSelector);
   console.log("treeep", trip);
-
   const filteredBoardingPoints = tripsList.mainBoardingPoints.filter(
     (mainPoint) =>
       trip.boardingPoints.some(
@@ -39,7 +35,6 @@ export function DroppingBoardingPoint({ trip }) {
         (stopPoint) => stopPoint.stopId === mainPoint.stopId
       )
   );
-
   return (
     <div className="bdContainer flex">
       <div className="left">

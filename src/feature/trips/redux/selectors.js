@@ -92,8 +92,10 @@ export const tripsSelector = createSelector(
         return filtered;
       });
     console.log("tripsResponse", filteredTrips)
+    const isFilteredEmpty = filteredTrips?.length === 0;
     return {
       filteredTrips: filteredTrips?.length > 0 ?  filteredTrips : tripsResponseSelector?.trips,
+      isFilteredEmpty,
       mainBoardingPoints,
       mainDroppingPoints,
     };
