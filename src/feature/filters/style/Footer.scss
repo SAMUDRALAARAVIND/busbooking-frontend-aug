@@ -1,0 +1,161 @@
+@media (max-width: 1170px) {
+  .res-sidebar {
+    display: flex;
+    position: fixed;
+    bottom: 15px;
+    left: 20px;
+    right: 20px;
+    background-color: rgb(49, 48, 48);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.25);
+    z-index: 1000;
+    border-radius: 8px;
+
+    .amenities-list {
+      display: flex;
+      // flex-direction: row;
+      // flex-wrap: wrap;
+      gap: 10px;
+      margin: 14px;
+      height: 50%;
+      border-radius: 8px;
+
+      overflow-x: auto;
+
+      .amenities-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-width: 80px;
+        height: 50px;
+        // margin: 5px;
+        cursor: pointer;
+        padding: 5px;
+        border: 1px solid transparent;
+        border-radius: 5px;
+        background-color: rgb(100, 97, 97);
+        cursor: pointer;
+        text-align: center;
+        color: white;
+        font-size: 12px;
+        line-height: 1.2;
+
+        .amenities-val {
+          margin-top: 2px;
+        }
+      }
+    }
+
+    .res-filter {
+      display: flex;
+      align-items: center;
+      background-color: red;
+      // padding: 10px;
+      margin-left: auto;
+      // border-radius: 8px;
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+      /* Pushes the filter button to the end of the sidebar */
+
+      .filter-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 10px 10px;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        // border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+
+        .filter-icon {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+  .ant-drawer-content {
+    background-color: #333;
+    border-radius: 8px;
+    margin-top: 5px;
+    padding: 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+
+    .ant-drawer-header {
+      background-color: #252424;
+      border-radius: 8px 8px 0 0;
+      color: white;
+
+      .ant-drawer-close {
+        color: white;
+      }
+    }
+
+    .ant-drawer-body {
+      margin: 2px;
+      padding: 0;
+    }
+
+    .nav-btn {
+      margin: 20px;
+      width: 410px;
+      padding: 15px;
+      border-radius: 5px;
+      border: 1px solid transparent;
+      background-color: #dc635b;
+      color: white;
+      font-weight: 500;
+      font-size: larger;
+      cursor: pointer;
+    }
+
+    .nav-btn:hover {
+      background-color: #e26258;
+    }
+  }
+}
+
+.header {
+  display: flex;
+
+  .subheading {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .clear_all_btn {
+    display: flex;
+    justify-content: flex-end;
+    background-color: #fff;
+    border: none;
+    color: #dc635b;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 1160px) {
+  .res-sidebar {
+    display: none;
+  }
+
+  .nav-filter {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+}
+
+@media (max-width: 1160px) {
+  .res-nav {
+    display: none;
+  }
+}
+
+.amenities-list::-webkit-scrollbar {
+  width: 0px;
+}

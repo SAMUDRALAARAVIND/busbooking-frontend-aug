@@ -1,0 +1,22 @@
+.seatPrice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: min(100%, 500px);
+  margin-top: 16px;
+  margin-left: 10px;
+  button {
+    background-color: hsl(0, 0%, 100%);
+    padding-inline: 1rem;
+    font-size: 0.875rem;
+    padding-block: 4px;
+    color: hsl(4, 65%, 61%);
+    border-radius: 3px;
+  }
+  button.active {
+    background-color: hsl(4, 65%, 61%);
+    color: hsl(0, 0%, 100%);
+    font-weight: 500;
+    padding-block: 6px;
+  }
+}

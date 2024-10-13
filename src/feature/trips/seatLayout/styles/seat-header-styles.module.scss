@@ -1,0 +1,66 @@
+.seatHeader {
+  display: flex;
+  justify-content: space-between;
+
+  li:first-child {
+    h3 {
+      font-size: 1rem;
+    }
+    p {
+      font-size: 0.875rem;
+      color: #b0b0b0;
+      font-weight: 500;
+    }
+  }
+
+  li:last-child {
+    display: flex;
+    gap: 8px;
+  }
+
+  @media screen {
+    @media (max-width: 550px) {
+      li:first-child {
+        h3 {
+          font-size: 0.85rem;
+        }
+        p {
+          font-size: 0.75rem;
+        }
+      }
+
+      li:last-child {
+        gap: 2px;
+      }
+    }
+  }
+}
+
+.seatLegend {
+  text-align: center;
+
+  & .legendBox {
+    height: 23px;
+    width: 23px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+
+  & p {
+    font-size: 10px;
+    max-width: 50px;
+  }
+
+  @media screen {
+    @media (max-width: 550px) {
+      & .legendBox {
+        height: 15px;
+        width: 15px;
+      }
+      & p {
+        font-size: 7px;
+        max-width: 50px;
+      }
+    }
+  }
+}

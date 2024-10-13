@@ -1,6 +1,9 @@
 const baseUrl = "http://localhost:8080";
 
-// TODO: add REST endpoints int this
-const Endpoints = {};
+const Endpoints = {
+  searchCities: `${baseUrl}/city/cities`,
+  tripsList: `${baseUrl}/api/trips/details`,
+  seatLayout: `${baseUrl}/api/seat/layout`,
+};
 
 export default Endpoints;

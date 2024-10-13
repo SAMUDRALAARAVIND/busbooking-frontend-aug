@@ -1,0 +1,15 @@
+.custom-range .ant-slider-handle {
+    background-color: #DC635B !important;
+    border-color: #DC635B !important;
+}
+
+.custom-range .ant-slider-track {
+    background-color: #DC635B !important;
+
+    &::after,
+    ::before {
+        background-color: #DC635B !important;
+    }
+
+    height: 6px !important;
+}

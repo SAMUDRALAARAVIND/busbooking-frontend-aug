@@ -1,0 +1,36 @@
+body {
+  text-align: center;
+  background-color: #f4f4f4;
+  flex-wrap: wrap;
+  /* background-color: #F4F4F4; */
+  /* height: 100vh; */
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.flex {
+  display: flex;
+  gap: 2px;
+  /* align-items: center; */
+}
+.text-end {
+  text-align: end;
+}
+p {
+  margin: 0;
+}
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
+
+.grey {
+  color: var(--grayFont);
+}
+/* .overflow {
+  overflow-y: auto;
+  scrollbar-color: var(--mediumRed) #fce3e3;
+  scrollbar-width: thin;
+} */

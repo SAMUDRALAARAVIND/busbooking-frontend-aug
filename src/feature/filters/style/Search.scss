@@ -1,0 +1,105 @@
+.search-box {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    height: 200px;
+    padding: 5px;
+
+    .search-input {
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
+    .custom-icon {
+        color: #b0b0b0;
+        font-size: 25px;
+        cursor: pointer;
+    }
+
+    .search-input .ant-input {
+        padding-right: 30px;
+    }
+
+    .selected-items {
+        font-size: 0.8rem;
+        color: #b0b0b0;
+    }
+
+    .items {
+        flex-grow: 1;
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        gap: 5;
+
+        .search-item {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            color: #868686;
+
+            label {
+                font-size: 1rem;
+            }
+        }
+    }
+
+}
+
+// .custom-checkbox .ant-checkbox-inner {
+//     .ant-checkbox-inner {
+//         border-color: #868686 !important; // Default border color
+//     }
+// }
+
+
+// .custom-checkbox .ant-checkbox-checked .ant-checkbox-inner {
+//     background-color: #DC635B;
+//     border-color: #DC635B;
+// }
+
+// .custom-checkbox .ant-checkbox-checked::after {
+//     background-color: #fff;
+// }
+
+
+// .custom-checkbox:hover .ant-checkbox-inner {
+//     border-color: #FF8C8C;
+// }
+
+// .custom-checkbox:hover .ant-checkbox-checked .ant-checkbox-inner {
+//     background-color: #FF8C8C;
+//     border-color: #FF8C8C;
+// }
+
+// .custom-checkbox:hover .ant-checkbox-checked::after {
+//     background-color: #fff;
+// }
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-container input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #FF8C8C;
+    border-radius: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.checkbox-container input[type="checkbox"]:checked {
+    background-color: #FF8C8C;
+}
+
+.checkbox-container input[type="checkbox"]:checked::after {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    margin: 3px;
+}

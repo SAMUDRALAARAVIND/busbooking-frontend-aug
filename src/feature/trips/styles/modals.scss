@@ -1,0 +1,128 @@
+.bdContainer {
+    position: absolute;
+    max-height: 35vh;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px 5px rgba(121, 120, 120, 0.2);
+    width: 35%;
+    text-align: start;
+    margin: 10px 23px;
+    padding: 10px;
+    z-index: 1000;
+    zoom: 0.9;
+  }
+  .boardingList,
+  .DroppingList {
+    height: 27vh;
+    padding:  10px;
+    overflow-y: auto;
+    scrollbar-color: var(--mediumRed) #fce3e3;
+    scrollbar-width: thin;
+
+
+    &::-webkit-scrollbar {
+      width: 10px;
+  }
+  &::-webkit-scrollbar-track {
+      background: #f0f0f0;
+      border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+      background: #dc635b;
+      border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+      background: #8a3b34;
+  }
+
+  }
+  
+  .boardingList::-webkit-scrollbar,
+.DroppingList::-webkit-scrollbar {
+    width: 10px;
+}
+
+  .boardingList::-webkit-scrollbar {
+    width: 10px;
+}
+  .bdContainer h5{
+    font-size: 20px;
+    font-weight: 500;
+    padding-bottom: 7px;
+    border-bottom: 1px solid rgb(209, 207, 207);
+  border-right: 1px solid rgb(209, 207, 207);
+  }
+  .boardingList h6, .DroppingList h6{
+    font-size: 18px;
+    font-weight: 500;
+    color: #616161;
+    margin: 3px 0px;
+    margin-top: 10px;
+  }
+
+  .boardingList p, .DroppingList p{
+    font-size: 16px;
+    color: rgb(184, 184, 184);
+  }
+  
+  .left h5,
+  .right h5 {
+    margin: 10px;
+  }
+  .left{
+    width: 54%;
+  
+  }
+  .right{
+    width:47%;
+  }
+  
+  
+  .aminitesModal {
+    gap: 10px;
+    background-color: #ffffff;
+    padding:  10px;
+    width: 40%;
+    text-align: left;
+    margin: auto;
+    margin-left: 20%;
+    margin-top: 5px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px 5px rgba(121, 120, 120, 0.2);
+  }
+  .aminitesModal h5{
+    font-size: 1.1rem;
+    margin: .8rem;
+  }
+  .aminitesModal div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 2px 30px;
+  }
+  .aminitesModal p{
+    font-size: .9rem;
+    margin: 0;
+  
+  }
+  .aminitesModal h5 {
+    line-height: 1px;
+    color: #703b3b;
+  }
+  .aminitesModal svg {
+    fill: #444444;
+    stroke: #444444;
+  }
+  .aminitesModal p {
+    display: flex;
+    line-height: 2px;
+    gap: 3px;
+    align-items: center;
+    text-align: center;
+    align-self: center;
+    color: #444492;
+  }
+
+ 
