@@ -34,8 +34,8 @@ function filterCities(type, cities, search) {
     });
 }
 
-const SearchBar = () => {
-  const navigate = useNavigate();
+const SearchBar = ({ handleNavigate }) => {
+  // const navigate = useNavigate();
   const suggestions = useSelector((state) => state);
   const [today, setToday] = useState(dayjs().unix());
   const [showPopOver, setShowPopOver] = useState({
@@ -131,17 +131,26 @@ const SearchBar = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    if (search.source && search.destination && today) {
-      const source = suggestions.search.sourceCity;
-      const sourceId = suggestions.search.sourceCityId;
-      const destination = suggestions.search.destinationCity;
-      const destinationId = suggestions.search.destinationCityId;
-      navigate(
-        `/trips/search/${source}/${sourceId}/${destination}/${destinationId}/${today}`
-      );
-    } else {
-      alert("Please fill in all search fields.");
-    }
+    handleNavigate({
+      source: suggestions.search.sourceCity,
+      sourceId: suggestions.search.sourceCityId,
+      destination: suggestions.search.destinationCity,
+      destinationId: suggestions.search.destinationCityId,
+      selectedDate: new Date(today).getTime(),
+    });
+    // if (search.source && search.destination && today) {
+    //   const source  suggestions.search.sourceCity;
+    //   const sourceId = suggestions.search.sourceCityId;
+    //   const destination = suggestions.search.destinationCity;
+    //   const destinationId = suggestions.search.destinationCityId;
+    //   const selectedDate = new Date(today).getTime();
+
+    //   navigate(
+    //     `/trips/search/${source}/${sourceId}/${destination}/${destinationId}/${selectedDate}`
+    //   );
+    // } else {
+    //   alert("Please fill in all search fields.");
+    // }
   };
 
   return (

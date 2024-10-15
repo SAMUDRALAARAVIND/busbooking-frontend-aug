@@ -6,7 +6,13 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useState } from "react";
 import CitiesDiv from "./CitiesDiv";
 import { useDispatch, useSelector } from "react-redux";
-import { addSourceCity, addDestinationCity, addDate, updateSourceCityId, updateDestinationCityId } from "./slice";
+import {
+  addSourceCity,
+  addDestinationCity,
+  addDate,
+  updateSourceCityId,
+  updateDestinationCityId,
+} from "./slice";
 import { useNavigate } from "react-router-dom";
 
 dayjs.extend(customParseFormat);
@@ -28,7 +34,7 @@ function filterCities(type, cities, search) {
     });
 }
 
-const SearchBarMobile = () => {
+const SearchBarMobile = ({ handleNavigate }) => {
   const suggestions = useSelector((state) => state);
   const dispatch = useDispatch();
   const [today, setToday] = useState(dayjs());
@@ -41,7 +47,7 @@ const SearchBarMobile = () => {
     source: "",
     destination: "",
   });
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const todayDate = dayjs();
   const maxDate = todayDate.add(3, "month");
 
@@ -94,18 +100,26 @@ const SearchBarMobile = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    if (search.source && search.destination && today) {
-      const source = suggestions.search.sourceCity;
-      const sourceId = suggestions.search.sourceCityId;
-      const destination = suggestions.search.destinationCity;
-      const destinationId = suggestions.search.destinationCityId;
+    handleNavigate({
+      source: suggestions.search.sourceCity,
+      sourceId: suggestions.search.sourceCityId,
+      destination: suggestions.search.destinationCity,
+      destinationId: suggestions.search.destinationCityId,
+      selectedDate: new Date(today).getTime(),
+    });
 
-      navigate(
-        `/trips/search/${source}/${sourceId}/${destination}/${destinationId}/${today}`
-      );
-    } else {
-      alert("Please fill in all search fields.");
-    }
+    // if (search.source && search.destination && today) {
+    //   const source = suggestions.search.sourceCity;
+    //   const sourceId = suggestions.search.sourceCityId;
+    //   const destination = suggestions.search.destinationCity;
+    //   const destinationId = suggestions.search.destinationCityId;
+
+    //   navigate(
+    //     `/trips/search/${source}/${sourceId}/${destination}/${destinationId}/${today}`
+    //   );
+    // } else {
+    //   alert("Please fill in all search fields.");
+    // }
   };
 
   return (
