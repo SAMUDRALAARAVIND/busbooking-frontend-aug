@@ -43,8 +43,8 @@ const SearchBar = ({ handleNavigate }) => {
     destination: false,
   });
   const [search, setSearch] = useState({
-    source: "",
-    destination: "",
+    source: suggestions.search.sourceCity,
+    destination: suggestions.search.destinationCity,
   });
   const dispatch = useDispatch();
 
@@ -230,6 +230,7 @@ const SearchBar = ({ handleNavigate }) => {
                 data-name="Path 1660"
               />
             </svg>
+
             <input
               type="text"
               name="destination-city-input"

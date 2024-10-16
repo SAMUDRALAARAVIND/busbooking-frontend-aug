@@ -44,8 +44,8 @@ const SearchBarMobile = ({ handleNavigate }) => {
     date: false,
   });
   const [search, setSearch] = useState({
-    source: "",
-    destination: "",
+    source: suggestions.search.sourceCity,
+    destination: suggestions.search.destinationCity,
   });
   // const navigate = useNavigate();
   const todayDate = dayjs();

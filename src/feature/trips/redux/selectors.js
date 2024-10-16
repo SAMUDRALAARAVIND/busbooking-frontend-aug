@@ -109,8 +109,6 @@ export const tripsSelector = createSelector(
         return isFiltered;
       });
 
-    console.log(filteredTrips);
-
     return {
       filteredTrips,
       mainBoardingPoints,
