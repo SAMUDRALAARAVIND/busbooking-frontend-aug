@@ -1,110 +1,120 @@
 import { filterType, departureTime } from "../../filters/slice";
-import { busPartners, cities, boardingPoints, droppingPoints } from "../../filters/enum";
-import {tripsResponse} from '../enum'
-import TripsList from "../components/TripsList";
 import { createSelector } from "reselect";
-
 
 export const tripsStatusSelector = (state) => state.trips.apiStatus;
 const tripsResponseSelector = (state) => state?.trips?.tripsResponse;
 const filtersSelector = (state) => state?.filters;
+const travelDateSelector = (state) => state.search.date;
 
+export const allTripsSelector = (state) => {
+  return state.trips?.tripsResponse?.trips ?? [];
+};
 export const tripsSelector = createSelector(
-  [tripsResponseSelector, filtersSelector],
-(tripsResponseSelector, filtersSelector) => {
+  [tripsResponseSelector, filtersSelector, travelDateSelector],
+  (tripsResponseSelector, filtersSelector, travelDate) => {
+    // convert travelDate into millis
+    travelDate *= 1000;
+    const mainBoardingPoints = tripsResponseSelector?.boardingPoints || [];
+    const mainDroppingPoints = tripsResponseSelector?.dropingPoints || [];
 
-  const mainBoardingPoints = tripsResponseSelector?.boardingPoints || [];
-  const mainDroppingPoints = tripsResponseSelector?.dropingPoints || [];
-
-  console.log("filtersSelector", filtersSelector)
-  // filtering Trips Data
-  const filteredTrips = tripsResponseSelector?.trips
-    .filter((trip) => {
-      const busTypes = Object.keys(filtersSelector[filterType.BUS_TYPES]).filter(
-        (key) => filtersSelector[filterType.BUS_TYPES][key]
-      );
-      if (busTypes.length === 0) return true;
-      return busTypes.includes(trip.busType);
-    })
-    .filter((trip) => {
-      const [min, max] = filtersSelector[filterType.PRICE_RANGE].selectedRange || [
-        0,
-        Infinity,
-      ];
-      return trip.maxPrice >= min && trip.minPrice <= max;
-    })
-    .filter((trip) => {
-      const selectedPartners = busPartners.filter(
-        (partner) => filtersSelector[filterType.BUS_PARTNER][partner]
-      );
-      if (selectedPartners.length === 0) return true;
-      return selectedPartners.includes(trip.busPartner);
-    })
-    .filter((trip) => {
-      const selectedBoardingPoints = filtersSelector[filterType.BOARDING_POINTS];
-      if (Object.keys(selectedBoardingPoints).length === 0) return true;
-      // const mainBoardingPoints = state?.trips?.tripsResponse.boardingPoints;
-      const sourceStops = trip?.boardingPoints ?? [];
-      return sourceStops.some((stop) => {
-        const mainStop = mainBoardingPoints.find(
-          (point) => point.stopId === stop.stopId
-        );
-      console.log("selectedbrdingpoints", selectedBoardingPoints)
-      console.log("mainStop", mainStop)
-        return mainStop && selectedBoardingPoints[mainStop.stopId];
-      });
-    })
-    .filter((trip) => {
-      const selectedDroppingPoints = filtersSelector[filterType.DROPPING_POINTS];
-      if (Object.keys(selectedDroppingPoints).length === 0) return true;
-
-  // drropping points
-      const destinationStops = trip?.droppingPoints ?? [];
-      return destinationStops?.some((stop) => {
-        const mainStop = mainDroppingPoints.find(
-          (point) => point.stopId === stop.stopId
-        );
-        return mainStop && selectedDroppingPoints[mainStop.stopId];
-      });
-    })
-    .filter((trip) => {
-        console.log("tripsss", trip)
-        const selectedDepartureTimes = Object.keys(
-          filtersSelector[filterType.DEPARTURE_TIME]  ).filter((key) => filtersSelector[filterType.DEPARTURE_TIME][key]);
-        if (selectedDepartureTimes.length === 0) return true;
-         console.log("selectedDepartureTimes", selectedDepartureTimes)
-        const date = new Date((window.location.href.split("/").slice(-1)[0])*1000);
-        const time10AM = new Date(date).setHours(10, 0, 0, 0);
-        const time5PM = new Date(date).setHours(17, 0, 0, 0);
-        const time11PM = new Date(date).setHours(23, 0, 0, 0);
-          console.log("time!0am",time10AM/1000, time5PM/1000, time11PM/1000)
-        let filtered = false;
-        trip?.boardingPoints?.forEach((stop) => {
-          const arrivalTime = stop.arrivalTime;
-          // console.log("dpartre",departureTime.MORNING)
-          console.log("dpp",arrivalTime)
-          if (selectedDepartureTimes.includes(departureTime.MORNING)) {
-            filtered ||= arrivalTime <= (time10AM/1000) ;
-          }
-          if (selectedDepartureTimes.includes(departureTime.AFTERNOON)) {
-            filtered ||= arrivalTime >= (time10AM/1000) && arrivalTime <= (time5PM/1000);
-          }
-          if (selectedDepartureTimes.includes(departureTime.EVENING)) {
-            filtered ||= arrivalTime >= (time5PM/1000) && arrivalTime <= (time11PM/1000);
-          }
-          if (selectedDepartureTimes.includes(departureTime.NIGHT)) {
-            filtered ||= arrivalTime >= (time11PM/1000) ;
+    const filteredTrips = tripsResponseSelector?.trips
+      .filter((trip) => {
+        // { NON_AC: true, AC: true }
+        const busTypes = Object.keys(filtersSelector[filterType.BUS_TYPES]);
+        if (busTypes.length === 0) return true;
+        return busTypes.includes(trip.busType);
+      })
+      .filter((trip) => {
+        const [min, max] =
+          filtersSelector[filterType.PRICE_RANGE].selectedRange;
+        return !(min > trip.maxPrice || max <= trip.minPrice);
+      })
+      .filter((trip) => {
+        const selectedPartners = filtersSelector[filterType.BUS_PARTNER];
+        if (Object.keys(selectedPartners).length === 0) return true;
+        return selectedPartners[trip.busPartner];
+      })
+      .filter((trip) => {
+        const selectedBoardingPoints =
+          filtersSelector[filterType.BOARDING_POINTS];
+        if (Object.keys(selectedBoardingPoints).length === 0) return true;
+        let isFiltered = false;
+        trip.boardingPoints?.forEach((boardingPoint) => {
+          if (selectedBoardingPoints[boardingPoint.stopId]) {
+            isFiltered = true;
           }
         });
-  console.log("filtered", filtered)
-        return filtered;
+        return isFiltered;
+      })
+      .filter((trip) => {
+        const selectedDroppingPoints =
+          filtersSelector[filterType.DROPPING_POINTS];
+        if (Object.keys(selectedDroppingPoints).length === 0) return true;
+
+        let isFiltered = false;
+        trip.droppingPoints?.forEach((droppingPoint) => {
+          if (selectedDroppingPoints[droppingPoint.stopId]) {
+            isFiltered = true;
+          }
+        });
+        return isFiltered;
+      })
+      .filter((trip) => {
+        const selectedDepartureTimes =
+          filtersSelector[filterType.DEPARTURE_TIME];
+        // converting epoch in seconds to millis
+        if (
+          !selectedDepartureTimes[departureTime.AFTERNOON] &&
+          !selectedDepartureTimes[departureTime.EVENING] &&
+          !selectedDepartureTimes[departureTime.MORNING] &&
+          !selectedDepartureTimes[departureTime.NIGHT]
+        ) {
+          return true;
+        }
+        const time10AM = new Date(travelDate).setHours(10, 0, 0, 0);
+        const time5PM = new Date(travelDate).setHours(17, 0, 0, 0);
+        const time11PM = new Date(travelDate).setHours(23, 0, 0, 0);
+
+        const busDepartureTimeInMillis = trip.departureTime * 1000;
+
+        let isFiltered = false;
+
+        if (
+          selectedDepartureTimes[departureTime.MORNING] &&
+          busDepartureTimeInMillis <= time10AM
+        ) {
+          isFiltered = true;
+        }
+        if (
+          selectedDepartureTimes[departureTime.AFTERNOON] &&
+          busDepartureTimeInMillis >= time10AM &&
+          busDepartureTimeInMillis <= time5PM
+        ) {
+          isFiltered = true;
+        }
+        if (
+          selectedDepartureTimes[departureTime.EVENING] &&
+          busDepartureTimeInMillis >= time5PM &&
+          busDepartureTimeInMillis <= time11PM
+        ) {
+          isFiltered = true;
+        }
+        if (
+          selectedDepartureTimes[departureTime.NIGHT] &&
+          busDepartureTimeInMillis >= time11PM
+        ) {
+          isFiltered = true;
+        }
+
+        return isFiltered;
       });
-    console.log("tripsResponse", filteredTrips)
+
+    console.log(filteredTrips);
+
     return {
-      filteredTrips: filteredTrips?.length > 0 ?  filteredTrips : tripsResponseSelector?.trips,
+      filteredTrips,
       mainBoardingPoints,
       mainDroppingPoints,
     };
-
   }
-)
+);
