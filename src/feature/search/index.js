@@ -7,8 +7,6 @@ const CitySearch = () => {
   const navigate = useNavigate();
 
   const handleNavigate = (navigationInfo) => {
-    // converting selected date into epoch in seconds
-    navigationInfo.selectedDate = parseInt(navigationInfo.selectedDate / 1000);
     navigate(
       `/trips/search/${navigationInfo.source}/${navigationInfo.sourceId}/${navigationInfo.destination}/${navigationInfo.destinationId}/${navigationInfo.selectedDate}`
     );
