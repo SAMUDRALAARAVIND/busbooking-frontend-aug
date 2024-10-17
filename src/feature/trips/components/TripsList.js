@@ -8,14 +8,11 @@ import { tripsSelector } from "../redux/selectors";
 import { useParams } from "react-router-dom";
 import { useRef, useState } from "react";
 import SeatLayout from "../seatLayout/SeatLayout.js";
-import { tripsResponse } from "../enum.js";
 
 export default function TripsList() {
   const tripsList = useSelector(tripsSelector);
-  const { source, destination, travelDate } = useParams();
-  console.log("tripsList", tripsList);
+  const { source, destination } = useParams();
 
-  
   return (
     <div className="trips container ">
       {tripsList?.filteredTrips?.length > 0 ? (
