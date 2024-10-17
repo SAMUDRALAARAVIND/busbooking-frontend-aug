@@ -10,7 +10,7 @@ import Spinner from "../../utlis/Spiner";
 
 const TripsScreen = () => {
   const { sourceCityId, destinationCityId, travelDate } = useParams();
-  // const allTrips = useSelector(allTripsSelector);
+  const allTrips = useSelector(allTripsSelector);
   const dispatch = useDispatch();
   const apiStatus = useSelector(tripsStatusSelector);
 
@@ -26,9 +26,9 @@ const TripsScreen = () => {
     return <h2>Error occured while fetching trips</h2>;
   }
 
-  // if (!allTrips.length) {
-  //   return <h2> No trips Available for this Date </h2>;
-  // }
+  if (!allTrips.length) {
+    return <h2> No trips Available for this Date </h2>;
+  }
 
   return (
     <>
