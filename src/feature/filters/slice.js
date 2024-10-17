@@ -52,13 +52,11 @@ const filtersSlice = createSlice({
       }
     },
     clearAllFilters: (state) => {
-      const preservedPriceRange = state[filterType.PRICE_RANGE].range; 
       return {
         ...initialState,
         [filterType.PRICE_RANGE]: {
           ...initialState[filterType.PRICE_RANGE],
-          range: preservedPriceRange, 
-          selectedRange : preservedPriceRange
+          selectedRange :  state[filterType.PRICE_RANGE].range
         },
       };
     },
