@@ -51,7 +51,15 @@ const filtersSlice = createSlice({
         delete state[identifier][stopId];
       }
     },
-    clearAllFilters: () => initialState,
+    clearAllFilters: (state) => {
+      return {
+        ...initialState,
+        [filterType.PRICE_RANGE]: {
+          ...initialState[filterType.PRICE_RANGE],
+          selectedRange :  state[filterType.PRICE_RANGE].range
+        },
+      };
+    },
   },
 });
 

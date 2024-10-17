@@ -7,8 +7,8 @@
   font-size: 0.8rem;
 }
 .trips-screen {
-  // display: inline-block;
-  // margin: auto;
+
+  position: relative;
   height: 90vh;
   overflow-y: scroll;
   overflow-x: hidden;
