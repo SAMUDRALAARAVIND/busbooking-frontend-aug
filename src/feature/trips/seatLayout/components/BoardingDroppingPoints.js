@@ -9,6 +9,7 @@ import {
 } from "../../redux/slice";
 import { useSingleSeatData } from "./Seats";
 import { useTripContext } from "../SeatLayout";
+import { useNavigate } from "react-router-dom";
 
 const BoardingDroppingPoints = () => {
   const { tripId } = useTripContext();
@@ -64,9 +65,10 @@ const BoardingDroppingPoints = () => {
 const BookingButton = ({ droppingPoint, boardingPoint, seats, tripId }) => {
   const isDisabled = !(seats?.length && boardingPoint && droppingPoint);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleClick = async () => {
-    const expires = new Date(new Date().getTime() + 5 * 60 * 1000);
+    const expires = new Date(new Date().getTime() + 10 * 60 * 1000);
     const points = { boardingPoint, droppingPoint };
     const singleSeatData = { tripId, seats, points };
     Cookies.set("selectedSeatData", JSON.stringify(singleSeatData), {
@@ -75,6 +77,7 @@ const BookingButton = ({ droppingPoint, boardingPoint, seats, tripId }) => {
     });
     dispatch(setAllTripsSelectedSeatData({ tripId, points }));
     dispatch(setSelectedSeatData(singleSeatData));
+    navigate("/book");
     // alert("Seat data saved to cookie");
   };
 
