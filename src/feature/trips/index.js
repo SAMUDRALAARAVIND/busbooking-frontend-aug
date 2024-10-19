@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { fetchTripsList } from "./redux/thunk";
 import { useParams } from "react-router-dom";
 import Spinner from "../../utlis/Spiner";
+import { clearSelectedSeat } from "./redux/slice";
 
 const TripsScreen = () => {
   const { sourceCityId, destinationCityId, travelDate } = useParams();
@@ -16,6 +17,9 @@ const TripsScreen = () => {
 
   useEffect(() => {
     dispatch(fetchTripsList({ sourceCityId, destinationCityId, travelDate }));
+    return () => {
+      dispatch(clearSelectedSeat());
+    };
   }, []);
 
   if (apiStatus === "init" || apiStatus === "pending") {

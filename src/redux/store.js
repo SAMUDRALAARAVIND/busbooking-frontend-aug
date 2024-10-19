@@ -3,6 +3,9 @@ import searchSlice from "../feature/search/slice";
 import filtersSlice from "../feature/filters/slice";
 import bookingSlice from "../feature/booking/slice";
 import tripsSlice from "../feature/trips/redux/slice";
+import { enableMapSet } from "immer";
+
+enableMapSet();
 
 const store = configureStore({
   reducer: {

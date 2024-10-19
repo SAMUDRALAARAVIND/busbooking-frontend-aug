@@ -79,35 +79,13 @@ const SEAT_DATA = {
 const SeatLayout = ({ trip }) => {
   const tripId = trip.tripId;
   const [isLoading, error, seatData] = useGetSeatData(tripId);
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [error, seterror] = useState("");
-  // const [seatData, setSeatData] = useState({});
   const dispatch = useDispatch();
-  const seatRef = useRef(null);
+
   useEffect(() => {
-    // const getSeatData = () => {
-    //   setSeatData(SEAT_DATA);
-    //   setIsLoading(false);
-    // };
-    // setTimeout(() => {
-    //   getSeatData();
-    // }, 1000);
     dispatch(setTripId(tripId));
-
-    //   type: "api/request/seat",
-    //   payload: {
-    //     url: `/api/seat/layout?${tripId}`,
-    //     method: "GET",
-    //     onSuccess: setSeatData,
-    //     onLoading: setIsLoading,
-    //     onError: setIsError,
-    //   },
-    // });
   }, []);
-
   if (isLoading) return <Spinner />;
   if (error) return <h1>{error}</h1>;
-
   return (
     <div className="styles.seatLayout_wrapper">
       <div className={styles.seatLayout_container}>
@@ -133,7 +111,7 @@ const useGetSeatData = (tripId) => {
         url: `${Endpoints.seatLayout}?tripId=${tripId}`,
         method: "GET",
       });
-      console.log(res);
+
       if (res.success) {
         setSeatData(res.data);
         setIsLoading(false);

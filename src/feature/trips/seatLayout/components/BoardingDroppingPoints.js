@@ -1,22 +1,17 @@
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import styles from "../styles/points-styles.module.scss";
-import {
-  setAllTripsSelectedSeatData,
-  setSelectedSeatData,
-} from "../../redux/slice";
 import { useSingleSeatData } from "./Seats";
 import { useTripContext } from "../SeatLayout";
 import { useNavigate } from "react-router-dom";
 
 const BoardingDroppingPoints = () => {
   const { tripId } = useTripContext();
-  const seatData = useSelector((state) => state.trips.allTripsSelectedSeatData);
+  const seatData = useSelector((state) => state.trips.allSelectedSeat);
   const { seats, points } = useSingleSeatData(seatData, tripId);
   const [brPoints, drPoints] = useGetPoints();
-  console.log(brPoints, drPoints);
   const [boardingPoint, setBoardingPoint] = useState(points?.boardingPoint);
   const [droppingPoint, setDroppingPoint] = useState(points?.droppingPoint);
 
@@ -64,19 +59,18 @@ const BoardingDroppingPoints = () => {
 
 const BookingButton = ({ droppingPoint, boardingPoint, seats, tripId }) => {
   const isDisabled = !(seats?.length && boardingPoint && droppingPoint);
-  const dispatch = useDispatch();
+  const tripList = useSelector((state) => state.trips.tripsResponse.trips);
   const navigate = useNavigate();
 
   const handleClick = async () => {
     const expires = new Date(new Date().getTime() + 10 * 60 * 1000);
     const points = { boardingPoint, droppingPoint };
-    const singleSeatData = { tripId, seats, points };
+    const tripData = tripList.find((item) => item.tripId === tripId);
+    const singleSeatData = { tripId, seats, points, tripData };
     Cookies.set("selectedSeatData", JSON.stringify(singleSeatData), {
       expires,
       path: "/",
     });
-    dispatch(setAllTripsSelectedSeatData({ tripId, points }));
-    dispatch(setSelectedSeatData(singleSeatData));
     navigate("/book");
     // alert("Seat data saved to cookie");
   };
@@ -127,47 +121,6 @@ const SelectedPoint = ({ setPoint, type, selectedPoint }) => {
   );
 };
 
-const po = [
-  {
-    title:
-      "Shamshabad - Boarding Zone - IntrCity Boarding Zone, MS Complex Hotel New Golden Pride Lodge, NH 44, Brindavan Colony",
-    directions:
-      "IntrCity Boarding Zone, MS Complex, Hotel New Golden Pride Lodge, NH 44, Brindavan Colony(Hyderabad)",
-    arrivalTime: "3:33",
-  },
-  {
-    title:
-      "Miyapur - Boarding Zone - Opposite Metro Pillar 641, KPHB Road, Hyderabad",
-    directions: "Opposite Metro Pillar 641, KPHB Road, Miyapur (Hyderabad)",
-    arrivalTime: "4:45",
-  },
-  {
-    title:
-      "Secunderabad - Boarding Zone - Paradise Metro Station, MG Road, Hyderabad",
-    directions: "Paradise Metro Station, MG Road, Secunderabad (Hyderabad)",
-    arrivalTime: "2:15",
-  },
-  {
-    title:
-      "Gachibowli - Boarding Zone - Near DLF Cyber City, Gachibowli, Hyderabad",
-    directions: "Near DLF Cyber City, Gachibowli (Hyderabad)",
-    arrivalTime: "5:30",
-  },
-  {
-    title:
-      "Banjara Hills - Boarding Zone - Opposite LV Prasad Eye Institute, Road No. 2, Hyderabad",
-    directions:
-      "Opposite LV Prasad Eye Institute, Road No. 2, Banjara Hills (Hyderabad)",
-    arrivalTime: "6:10",
-  },
-  {
-    title:
-      "Kondapur - Boarding Zone - Opposite Botanical Garden, Kondapur Main Road, Hyderabad",
-    directions: "Opposite Botanical Garden, Kondapur Main Road (Hyderabad)",
-    arrivalTime: "7:00",
-  },
-];
-
 const useGetPoints = () => {
   const { boardingPoints, droppingPoints } = useTripContext();
 
@@ -206,7 +159,7 @@ const useGetPoints = () => {
   ];
 };
 
-const PointList = ({ type, points = po, setPoint }) => {
+const PointList = ({ type, points, setPoint }) => {
   const [searchStr, setSearchStr] = useState("");
   const filteredPoints = points.filter((point) => {
     return point.title

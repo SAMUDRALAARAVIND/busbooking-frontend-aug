@@ -10,10 +10,7 @@ const tripsSlice = createSlice({
     tripsResponse: null,
     apiStatus: "init",
     // seat Layout states
-    allTripsSelectedSeatData: Cookies.get("selectedSeatData")
-      ? [JSON.parse(Cookies.get("selectedSeatData"))]
-      : [],
-    selectedSeatData: {},
+    allSelectedSeat: {},
   },
   reducers: {
     updateTripsStatus: (state, action) => {
@@ -23,53 +20,45 @@ const tripsSlice = createSlice({
         state.tripsResponse = action.payload.data;
       }
     },
-    setAllTripsSelectedSeatData: (state, action) => {
+    setAllSelectedSeat: (state, action) => {
       const seat = action.payload.seat;
       const tripId = action.payload.tripId;
       const points = action.payload.points;
-
-      state.allTripsSelectedSeatData = state.allTripsSelectedSeatData.map(
-        (s) => {
-          if (tripId === s.tripId) {
-            let seatExists;
-            if (s.seats && seat) {
-              seatExists = s.seats.some(
-                (s) => s.seatNumber === seat.seatNumber
-              );
-              if (seatExists) {
-                s.seats = s.seats.filter(
-                  (s) => s.seatNumber !== seat.seatNumber
-                );
-              } else if (s.seats.length < MAX_SEATS) s.seats.push(seat);
-              else {
-                window.alert("Sorry, Maximum 6 seats allowed per passenger");
-              }
-            } else if (seat) s.seats = [seat];
-            s.points = points;
+      if (state.allSelectedSeat[tripId]) {
+        const seatData = state.allSelectedSeat[tripId];
+        if (seatData.seats && seat) {
+          if (
+            seatData.seats.some((item) => item.seatNumber === seat.seatNumber)
+          ) {
+            seatData.seats = seatData.seats.filter(
+              (item) => item.seatNumber !== seat.seatNumber
+            );
+          } else {
+            if (seatData.seats.length === 6) {
+              window.alert("Sorry, Maximum 6 seats allowed per passenger");
+            } else seatData.seats.push(seat);
           }
-          return s;
-        }
-      );
-      // state.singleSeatData = state.seatData.find((s) => (s.tripId = tripId));
-    },
-    setSelectedSeatData: (state, action) => {
-      state.selectedSeatData = action.payload;
+        } else if (seat) seatData.seats = [seat];
+        if (points) seatData.points = points;
+        state.allSelectedSeat[tripId] = seatData;
+      }
     },
     setTripId: (state, action) => {
-      const isExist = state.allTripsSelectedSeatData.some(
-        (s) => s.tripId === action.payload
-      );
-      if (!isExist)
-        state.allTripsSelectedSeatData.push({ tripId: action.payload });
+      if (!state.allSelectedSeat[action.payload]) {
+        state.allSelectedSeat[action.payload] = {};
+      }
+    },
+    clearSelectedSeat: (state, action) => {
+      state.allSelectedSeat = {};
     },
   },
 });
 
 export const {
   updateTripsStatus,
-  setAllTripsSelectedSeatData,
-  setSelectedSeatData,
   setTripId,
+  clearSelectedSeat,
+  setAllSelectedSeat,
 } = tripsSlice.actions;
 
 export default tripsSlice;

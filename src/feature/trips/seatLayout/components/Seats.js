@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import styles from "../styles/seats-styles.module.scss";
 import { Tooltip } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { setAllTripsSelectedSeatData } from "../../redux/slice";
+import { setAllSelectedSeat } from "../../redux/slice";
 import { useTripContext } from "../SeatLayout";
 
 const getSeats = (seats) => {
@@ -118,12 +118,12 @@ const SeatRow = ({ seat, arr, i, selectedPrice }) => {
 };
 
 export const useSingleSeatData = (seatData, tripId) => {
-  return seatData.find((s) => s.tripId === tripId);
+  return seatData[tripId];
 };
 
 const SeatColumn = ({ item, arr, i, j, selectedPrice }) => {
   const { tripId } = useTripContext();
-  const seatData = useSelector((state) => state.trips.allTripsSelectedSeatData);
+  const seatData = useSelector((state) => state.trips.allSelectedSeat);
   const { seats } = useSingleSeatData(seatData, tripId);
   const dispatch = useDispatch();
 
@@ -144,7 +144,7 @@ const SeatColumn = ({ item, arr, i, j, selectedPrice }) => {
     if (item.gender) return;
     const seat = { seatNumber: item.seatNumber };
     seat.price = item.price;
-    dispatch(setAllTripsSelectedSeatData({ seat, tripId }));
+    dispatch(setAllSelectedSeat({ seat, tripId }));
   };
 
   return (
