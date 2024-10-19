@@ -120,7 +120,7 @@ const useGetSeatData = (tripId) => {
         setIsLoading(false);
       }
     };
-    setTimeout(() => getSeatData(), 1000);
+    getSeatData();
     // getSeatData();
   }, [tripId]);
   return [isLoading, error, seatData];

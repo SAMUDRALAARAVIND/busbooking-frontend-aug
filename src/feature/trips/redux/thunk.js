@@ -6,12 +6,12 @@ import { togglePriceRange } from "../../filters/slice";
 export const fetchTripsList = (searchInfo) => {
   return async function (dispatch) {
     dispatch(updateTripsStatus({ status: "pending" }));
-
     const { success, data } = await request({
       url: Endpoints.tripsList,
       method: "POST",
       data: searchInfo,
     });
+
     if (success) {
       const priceRange = [Number.MAX_SAFE_INTEGER, Number.MIN_SAFE_INTEGER];
       data?.trips?.forEach((trip) => {
