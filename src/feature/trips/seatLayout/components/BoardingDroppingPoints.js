@@ -60,12 +60,14 @@ const BoardingDroppingPoints = () => {
 const BookingButton = ({ droppingPoint, boardingPoint, seats, tripId }) => {
   const isDisabled = !(seats?.length && boardingPoint && droppingPoint);
   const tripList = useSelector((state) => state.trips.tripsResponse.trips);
+  const { sourceCity, destinationCity } = useSelector((state) => state.search);
   const navigate = useNavigate();
-
   const handleClick = async () => {
     const expires = new Date(new Date().getTime() + 10 * 60 * 1000);
     const points = { boardingPoint, droppingPoint };
-    const tripData = tripList.find((item) => item.tripId === tripId);
+    const tripData = { ...tripList.find((item) => item.tripId === tripId) };
+    tripData.sourceCity = sourceCity;
+    tripData.destinationCity = destinationCity;
     const singleSeatData = { tripId, seats, points, tripData };
     Cookies.set("selectedSeatData", JSON.stringify(singleSeatData), {
       expires,
