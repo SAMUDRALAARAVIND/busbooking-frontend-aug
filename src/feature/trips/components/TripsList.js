@@ -73,6 +73,7 @@ const SingleTrip = (props) => {
             </div>
             <div className="text-end">
               <button
+                id="show-seat"
                 onClick={() => setShowSeat((prev) => !prev)}
                 className="showSeat"
               >
