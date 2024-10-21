@@ -3,10 +3,10 @@ import "./LoginPage.scss";
 import { useNavigate } from "react-router-dom";
 import Endpoints from "../../network/endpoints";
 import request from "../../network/request";
-import  Cookies  from  "js-cookie"
+import Cookies from "js-cookie";
 
-const LoginPage = ({endpoint}) => {
-  const navigate = useNavigate()
+const LoginPage = ({ endpoint }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -20,7 +20,6 @@ const LoginPage = ({endpoint}) => {
     }));
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -29,21 +28,21 @@ const LoginPage = ({endpoint}) => {
         method: "POST",
         data: {
           email: formData.email,
-          password: formData.password
-        }
+          password: formData.password,
+        },
       });
-       if(success){
-        Cookies.set("token",data.token)
-        if(endpoint){
-          navigate(endpoint)
-        }else{
-          navigate("/")
+      if (success) {
+        Cookies.set("token", data.token);
+        if (endpoint) {
+          navigate(endpoint);
+        } else {
+          navigate("/");
         }
-       }else{
-        alert("error occured please try again later")
-       }
+      } else {
+        alert("error occured please try again later");
+      }
     } catch (error) {
-      alert("error occured please try again later")
+      alert("error occured please try again later");
     }
   };
 
@@ -130,12 +129,9 @@ const LoginPage = ({endpoint}) => {
           </button>
         </form>
         <div className="divider">
-          <span> or dont't hanve an acount ?
-          </span>
+          <span> or dont't hanve an acount ?</span>
         </div>
-        <button className="google-btn"
-          onClick={() => navigate("/Signup")}
-        >
+        <button className="google-btn" onClick={() => navigate("/otp")}>
           Register Now
         </button>
         <p>

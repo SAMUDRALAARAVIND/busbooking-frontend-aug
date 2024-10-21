@@ -1,8 +1,10 @@
 import "./styles/BookingMobileUI.scss";
 
 const BookingMobileUI = ({ selectedSeatsData, handelSubmit, loading }) => {
-
-  const amountToBePaid = selectedSeatsData.assuredCharge + selectedSeatsData.busFare + selectedSeatsData.gstAmount
+  const amountToBePaid =
+    selectedSeatsData.assuredCharge +
+    selectedSeatsData.busFare +
+    selectedSeatsData.gstAmount;
   return (
     <form onSubmit={handelSubmit}>
       <div className="city-info-mobile">
@@ -23,7 +25,9 @@ const BookingMobileUI = ({ selectedSeatsData, handelSubmit, loading }) => {
         <div>
           <p>{selectedSeatsData.departureDate}</p>
           <h3>{selectedSeatsData.points.boardingPoint.arrivalTime}</h3>
-          <p>{selectedSeatsData.points.boardingPoint.title.split(" ")[0]} ---</p>
+          <p>
+            {selectedSeatsData.points.boardingPoint.title.split(" ")[0]} ---
+          </p>
         </div>
 
         <div>
@@ -39,7 +43,9 @@ const BookingMobileUI = ({ selectedSeatsData, handelSubmit, loading }) => {
         <div>
           <p>{selectedSeatsData.arrivalDate}</p>
           <h3>{selectedSeatsData.points.droppingPoint.arrivalTime}</h3>
-          <p>{selectedSeatsData.points.droppingPoint.title.split(" ")[0]} ---</p>
+          <p>
+            {selectedSeatsData.points.droppingPoint.title.split(" ")[0]} ---
+          </p>
         </div>
       </div>
 
@@ -77,48 +83,79 @@ const BookingMobileUI = ({ selectedSeatsData, handelSubmit, loading }) => {
           <h2>Passenger Details</h2>
           <p>Fill passenger details corresponding to the seats</p>
         </div>
-        {
-          selectedSeatsData?.seats?.map((seat) => {
-            return <div className="form" key={seat.seatNumber}>
+        {selectedSeatsData?.seats?.map((seat) => {
+          return (
+            <div className="form" key={seat.seatNumber}>
               <p>
                 Add Passenger for seat : <span> {seat.seatNumber}</span>
               </p>
               <div className="user-info">
-                <input type="text" placeholder="Name" required name={`${seat.seatNumber}_name`} />
-                <input type="number" placeholder="Age" name={`${seat.seatNumber}_age`} required />
+                <input
+                  type="text"
+                  placeholder="Name"
+                  required
+                  name={`${seat.seatNumber}_name`}
+                />
+                <input
+                  type="number"
+                  placeholder="Age"
+                  name={`${seat.seatNumber}_age`}
+                  required
+                />
                 <div className="btn-mobile">
-                  <input type="radio" className="btn-mobile-radio" name={`${seat.seatNumber}_gender`} id={`${seat.seatNumber}_male`} value={'M'} required defaultChecked />
-                  <label className="male" htmlFor={`${seat.seatNumber}_male`}>Male</label>
+                  <input
+                    type="radio"
+                    className="btn-mobile-radio"
+                    name={`${seat.seatNumber}_gender`}
+                    id={`${seat.seatNumber}_male`}
+                    value={"M"}
+                    required
+                  />
+                  <label className="male" htmlFor={`${seat.seatNumber}_male`}>
+                    Male
+                  </label>
                   <hr />
-                  <input type="radio" className="btn-mobile-radio" name={`${seat.seatNumber}_gender`} id={`${seat.seatNumber}_female`} value={'F'} required />
-                  <label className="female" htmlFor={`${seat.seatNumber}_female`}>Female</label>
+                  <input
+                    type="radio"
+                    className="btn-mobile-radio"
+                    name={`${seat.seatNumber}_gender`}
+                    id={`${seat.seatNumber}_female`}
+                    value={"F"}
+                    required
+                  />
+                  <label
+                    className="female"
+                    htmlFor={`${seat.seatNumber}_female`}
+                  >
+                    Female
+                  </label>
                 </div>
               </div>
             </div>
-          })
-        }
+          );
+        })}
       </div>
 
-      <button type="submit"
+      <button
+        type="submit"
         className="proceed-btn"
         disabled={loading}
-        style={{ cursor: loading ? 'not-allowed' : "pointer" }}
+        style={{ cursor: loading ? "not-allowed" : "pointer" }}
       >
-
-              <div className="proceed-btn-left">
-                <p>
-                  <i class="material-icons-outlined">currency_rupee</i>
-                  {amountToBePaid}
-                </p>
-                <hr />
-                <div className="seat-detail">
-                  {selectedSeatsData.seats.map((seat) => {
-                    return <h3 key={seat.seatNumber}>{seat.seatNumber}</h3>
-                  })}
-                  <p>Selected Seats</p>
-                </div>
-              </div>
-              <p>{loading ? 'Submiting' : "Proceed"}</p>
+        <div className="proceed-btn-left">
+          <p>
+            <i class="material-icons-outlined">currency_rupee</i>
+            {amountToBePaid}
+          </p>
+          <hr />
+          <div className="seat-detail">
+            {selectedSeatsData.seats.map((seat) => {
+              return <h3 key={seat.seatNumber}>{seat.seatNumber}</h3>;
+            })}
+            <p>Selected Seats</p>
+          </div>
+        </div>
+        <p>{loading ? "Submiting" : "Proceed"}</p>
       </button>
     </form>
   );
