@@ -87,7 +87,7 @@ const BookingMobileUI = ({ selectedSeatsData, handelSubmit, loading }) => {
                 <input type="text" placeholder="Name" required name={`${seat.seatNumber}_name`} />
                 <input type="number" placeholder="Age" name={`${seat.seatNumber}_age`} required />
                 <div className="btn-mobile">
-                  <input type="radio" className="btn-mobile-radio" name={`${seat.seatNumber}_gender`} id={`${seat.seatNumber}_male`} value={'M'} required />
+                  <input type="radio" className="btn-mobile-radio" name={`${seat.seatNumber}_gender`} id={`${seat.seatNumber}_male`} value={'M'} required defaultChecked />
                   <label className="male" htmlFor={`${seat.seatNumber}_male`}>Male</label>
                   <hr />
                   <input type="radio" className="btn-mobile-radio" name={`${seat.seatNumber}_gender`} id={`${seat.seatNumber}_female`} value={'F'} required />

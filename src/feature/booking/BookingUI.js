@@ -184,7 +184,7 @@ const BookingUI = ({ selectedSeatsData, handelSubmit, loading }) => {
                               </div>
 
                               <div className="form-control age">
-                                <input type="text" placeholder="Age" name={`${seat.seatNumber}_age`} required />
+                                <input type="number" placeholder="Age" name={`${seat.seatNumber}_age`} required />
                               </div>
 
                               <div className="gemder-wrraper">

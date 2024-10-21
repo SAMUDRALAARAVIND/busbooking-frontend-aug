@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import request from "../../network/request.js";
 import Endpoints from "../../network/endpoints.js";
+import LoginPage from "../auth/LoginPage.js";
 
 const formatDate = (timestamp) => {
   const date = new Date(timestamp * 1000);
@@ -18,6 +19,8 @@ const BookingScreen = () => {
   const navigate = useNavigate()
   const cookieData = Cookies.get('selectedSeatData') && JSON.parse(Cookies.get('selectedSeatData'))
   const [loading, setLoading] = useState(false)
+  const token = Cookies.get("token")
+
 
   if (cookieData) {
     const busFare = cookieData?.seats?.reduce((total, item) => total + item.price, 0)
@@ -38,8 +41,14 @@ const BookingScreen = () => {
     }
   }, [])
 
+
+
   if (!cookieData) {
     return
+  }
+
+  if (!token) {
+    return <LoginPage endpoint={"/book"} />
   }
 
 
@@ -50,8 +59,8 @@ const BookingScreen = () => {
     const phoneNumber = form.phoneNumber.value
     const payLoad = {
       tripId: cookieData?.tripId,
-      boardingPointId: cookieData?.points?.boardingPoint?.stopId,
-      droppingPointId: cookieData?.points?.droppingPoint?.stopId,
+      boardingPointId: cookieData?.points?.boardingPoint?._id,
+      droppingPointId: cookieData?.points?.droppingPoint?._id,
       pocDetails: {
         phoneNumber,
         email
@@ -65,6 +74,7 @@ const BookingScreen = () => {
         seatNumber: seat,
         name: form[`${seat}_name`]?.value,
         gender: form[`${seat}_gender`]?.value,
+        age: form[`${seat}_age`]?.value
       })
 
     })
@@ -77,15 +87,15 @@ const BookingScreen = () => {
         data: payLoad
       })
       if (success) {
-        alert("Seat booked successfull")
+        alert(data?.message ? data.message : "Booking Successful")
         navigate("/")
       } else {
-        alert("error occured")
+        alert('Error occured please try again later')
       }
       setLoading(false)
     } catch (error) {
       setLoading(false)
-      alert("error occured")
+      alert('Error occured please try again later')
     }
   }
 
