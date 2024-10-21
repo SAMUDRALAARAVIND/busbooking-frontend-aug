@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 
 const request = async (httpConfig) => {
   const token = Cookies.get("token");
+
   try {
     const response = await axios({
       url: httpConfig.url,

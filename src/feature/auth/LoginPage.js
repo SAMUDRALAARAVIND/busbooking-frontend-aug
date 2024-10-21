@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import "./LoginPage.scss";
+import { useNavigate } from "react-router-dom";
+import Endpoints from "../../network/endpoints";
+import request from "../../network/request";
+import Cookies from "js-cookie";
 
-const LoginPage = () => {
+const LoginPage = ({ endpoint }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -15,8 +20,30 @@ const LoginPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const { success, data } = await request({
+        url: Endpoints.login,
+        method: "POST",
+        data: {
+          email: formData.email,
+          password: formData.password,
+        },
+      });
+      if (success) {
+        Cookies.set("token", data.token);
+        if (endpoint) {
+          navigate(endpoint);
+        } else {
+          navigate("/");
+        }
+      } else {
+        alert("error occured please try again later");
+      }
+    } catch (error) {
+      alert("error occured please try again later");
+    }
   };
 
   return (
@@ -83,16 +110,18 @@ const LoginPage = () => {
             value={formData.email}
             onChange={handleChange}
             placeholder="Enter Email"
+            required
           />
 
-          <label htmlFor="referral-code">Have a referral code?</label>
+          <label htmlFor="referral-code">Password</label>
           <input
             type="text"
             name="password"
             value={formData.password}
             onChange={handleChange}
             id="referral-code"
-            placeholder="Enter Referral Code if Available"
+            placeholder="Enter Password"
+            required
           />
 
           <button type="submit" className="login-btn">
@@ -100,14 +129,10 @@ const LoginPage = () => {
           </button>
         </form>
         <div className="divider">
-          <span>Or Continue With</span>
+          <span> or dont't hanve an acount ?</span>
         </div>
-        <button className="google-btn">
-          <img
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAABzElEQVR4Ab2WAUQDURjHDw0QIAQkAVBaMwvDJiMbY7QgFgAkAAGZZUASFiyAnQUEotMIGUKgAAYNWxY20Gyv9+d57d52X99mN/zcuee933vv/b+7sxKnyX9pxUORVixUkNe6pCMRQN3XVVuEMxbZ2E4Ej7WARwd9phbKGa/Izg2+aIwGxmAJsTUSMRcmSP2UFcgVqm0UDBzJjcKhZYSQcWZZIsVZjgz8pTEaGniI6mYnQnzCKothzfruFteFKeXL+Fh9J7DdfwyI4ZMlcIUUQDhnmRZeQDTKV3ZLnYU/wmdTiNWenReXqY6xQq8suZ6C8m6psiKFS21TiGeUTAnFDCQsQ6aEgRd/hN3c4oWL3VIIjdAgMMzQNCXvHjS9z1CVxWgtHt4lxaadIcuCkWBhgpS6Cv/jYU0E7YyGL+Ftt+vVVr0PidXKgUu4Y2de57U6PNfCVDWVM2WzSGP5nzwRmg0tBHLgTwg8pD3JkZcoaKfDmFj08k3E84NJstrY9xAHaoi85I6kpMB9T7dX90Tk9sqUuhI/NlNCxkJJXaVgfg99keKKQmf9JmJ7iTNlkg5P/SOMoOgzYmK+MGghkUIMpEKiV457pFMFaJ8z1i/ATnOr+aZzdAAAAABJRU5ErkJggg=="
-            alt=""
-          />
-          Sign in with Google
+        <button className="google-btn" onClick={() => navigate("/otp")}>
+          Register Now
         </button>
         <p>
           By logging in, I understand & agree to AbhiBus{" "}
