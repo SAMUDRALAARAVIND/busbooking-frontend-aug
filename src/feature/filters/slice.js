@@ -57,7 +57,7 @@ const filtersSlice = createSlice({
 
         [filterType.PRICE_RANGE]: {
           ...initialState[filterType.PRICE_RANGE],
-
+          range: state[filterType.PRICE_RANGE].range,
           selectedRange: state[filterType.PRICE_RANGE].range,
         },
       };
