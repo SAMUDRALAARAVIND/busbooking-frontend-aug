@@ -1,32 +1,33 @@
 import "./styles/BookingMobileUI.scss";
-// import { useSelector } from "react-redux";
 
-const BookingMobileUI = () => {
-  //   const suggestions = useSelector((state) => state);
-  //   console.log(suggestions.search.sourceCity);
+const BookingMobileUI = ({ selectedSeatsData, handelSubmit, loading }) => {
+  const amountToBePaid =
+    selectedSeatsData.assuredCharge +
+    selectedSeatsData.busFare +
+    selectedSeatsData.gstAmount;
   return (
-    <div>
+    <form onSubmit={handelSubmit}>
       <div className="city-info-mobile">
         <div className="cities">
           <span>
             <i className="material-icons-outlined">chevron_left</i>
           </span>
-          {/* <h3>{suggestions.search.sourceCity}</h3>
-          <h3>{suggestions.search.destinationCity}</h3> */}
-          <h4>Mumbai</h4>
+          <h4>{selectedSeatsData.tripData.sourceCity}</h4>
           <span>
             <i className="material-icons-outlined">arrow_forward</i>
           </span>
-          <h4>Delhi</h4>
+          <h4>{selectedSeatsData?.tripData?.destinationCity}</h4>
         </div>
-        <p>Sun 22 sep</p>
+        <p>{selectedSeatsData?.departureDate}</p>
       </div>
 
       <div className="trip-info-mobile">
         <div>
-          <p>Sun 22 Sep</p>
-          <h3>16:30</h3>
-          <p>Gachibowli ---</p>
+          <p>{selectedSeatsData.departureDate}</p>
+          <h3>{selectedSeatsData.points.boardingPoint.arrivalTime}</h3>
+          <p>
+            {selectedSeatsData.points.boardingPoint.title.split(" ")[0]} ---
+          </p>
         </div>
 
         <div>
@@ -40,9 +41,11 @@ const BookingMobileUI = () => {
           </div>
         </div>
         <div>
-          <p>Sun 22 Sep</p>
-          <h3>16:30</h3>
-          <p>Gachibowli ---</p>
+          <p>{selectedSeatsData.arrivalDate}</p>
+          <h3>{selectedSeatsData.points.droppingPoint.arrivalTime}</h3>
+          <p>
+            {selectedSeatsData.points.droppingPoint.title.split(" ")[0]} ---
+          </p>
         </div>
       </div>
 
@@ -56,8 +59,9 @@ const BookingMobileUI = () => {
             <input
               type="number"
               name="contact-number"
-              id="contact-number"
+              id="phoneNumber"
               placeholder="Enter Mobile Number"
+              required
             />
           </div>
           <hr />
@@ -65,9 +69,10 @@ const BookingMobileUI = () => {
             <i class="material-icons-outlined">email</i>
             <input
               type="email"
-              name="passengers-email"
+              name="email"
               id="passengers-email"
               placeholder="Enter Email Address"
+              required
             />
           </div>
         </div>
@@ -78,37 +83,81 @@ const BookingMobileUI = () => {
           <h2>Passenger Details</h2>
           <p>Fill passenger details corresponding to the seats</p>
         </div>
-        <div className="form">
-          <p>
-            Add Passenger for seat : <span>1LC</span>
-          </p>
-          <div className="user-info">
-            <input type="text" placeholder="Name" />
-            <input type="number" placeholder="Age" />
-            <div className="btn-mobile">
-              <button className="male">Male</button>
-              <hr />
-              <button className="female">Female</button>
+        {selectedSeatsData?.seats?.map((seat) => {
+          return (
+            <div className="form" key={seat.seatNumber}>
+              <p>
+                Add Passenger for seat : <span> {seat.seatNumber}</span>
+              </p>
+              <div className="user-info">
+                <input
+                  type="text"
+                  placeholder="Name"
+                  required
+                  name={`${seat.seatNumber}_name`}
+                />
+                <input
+                  type="number"
+                  placeholder="Age"
+                  name={`${seat.seatNumber}_age`}
+                  required
+                />
+                <div className="btn-mobile">
+                  <input
+                    type="radio"
+                    className="btn-mobile-radio"
+                    name={`${seat.seatNumber}_gender`}
+                    id={`${seat.seatNumber}_male`}
+                    value={"M"}
+                    required
+                  />
+                  <label className="male" htmlFor={`${seat.seatNumber}_male`}>
+                    Male
+                  </label>
+                  <hr />
+                  <input
+                    type="radio"
+                    className="btn-mobile-radio"
+                    name={`${seat.seatNumber}_gender`}
+                    id={`${seat.seatNumber}_female`}
+                    value={"F"}
+                    required
+                  />
+                  <label
+                    className="female"
+                    htmlFor={`${seat.seatNumber}_female`}
+                  >
+                    Female
+                  </label>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          );
+        })}
       </div>
 
-      <div className="proceed-btn">
+      <button
+        type="submit"
+        className="proceed-btn"
+        disabled={loading}
+        style={{ cursor: loading ? "not-allowed" : "pointer" }}
+      >
         <div className="proceed-btn-left">
           <p>
             <i class="material-icons-outlined">currency_rupee</i>
-            3120
+            {amountToBePaid}
           </p>
           <hr />
           <div className="seat-detail">
-            <h3>1LC</h3>
-            <p>Selected Seat</p>
+            {selectedSeatsData.seats.map((seat) => {
+              return <h3 key={seat.seatNumber}>{seat.seatNumber}</h3>;
+            })}
+            <p>Selected Seats</p>
           </div>
         </div>
-        <p>Proceed</p>
-      </div>
-    </div>
+        <p>{loading ? "Submiting" : "Proceed"}</p>
+      </button>
+    </form>
   );
 };
 

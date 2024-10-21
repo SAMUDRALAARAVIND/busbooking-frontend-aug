@@ -66,7 +66,7 @@
     font-weight: 700;
 }
 
-.para{
+.para {
     font-size: 1.2rem;
 }
 
@@ -88,7 +88,7 @@
     @include text-styles(14px, #878787, 500);
 }
 
-.span-top{
+.span-top {
     font-size: smaller;
 }
 
@@ -122,7 +122,7 @@
     @include flex-column-custom(flex-start);
     text-align: left;
 
-    h3{
+    h3 {
         font-weight: 500;
     }
 }
@@ -151,13 +151,13 @@
     margin-bottom: 0.3px;
 }
 
-.droping-point{
-    div{
+.droping-point {
+    div {
         text-align: right;
     }
 }
 
-.time{
+.time {
     font-weight: 600;
 }
 
@@ -168,7 +168,7 @@
     font-size: 11px;
     cursor: default;
 
-    &:hover{
+    &:hover {
         color: #a19f9f
     }
 }
@@ -176,13 +176,14 @@
 .droping-point {
     @include flex-column-custom(flex-end);
 
-    h3{
+    h3 {
         font-weight: 500;
     }
 }
 
-.Passenger-Details-body{
-    height: 14rem;
+.Passenger-Details-body {
+    max-height: 20rem;
+    overflow-y: scroll;
 }
 
 .Passenger-Details-head {
@@ -203,6 +204,7 @@
 
 .Add-Passenger {
     display: flex;
+    margin-top: 2%;
     margin-bottom: 2%;
     font-size: medium;
     line-height: 2;
@@ -211,9 +213,10 @@
 
 .Add-Passenger {
     line-height: 1;
+
     .text-success {
         color: rgb(61, 192, 112);
-        white-space:pre;
+        white-space: pre;
     }
 }
 
@@ -232,10 +235,12 @@
     text-align: left;
 
 }
-.add-details .name{
+
+.add-details .name {
     width: 45%;
-    input{
-        width:100%;
+
+    input {
+        width: 100%;
     }
 }
 
@@ -260,6 +265,16 @@
     align-items: center;
     gap: 5px;
     transition: ease-in 100ms;
+
+    .gemder-wrraper-radio {
+        display: none;
+    }
+
+    input[type="radio"]:checked+label {
+        background: #A34944;
+        color: #f8f8f8;
+        border: none !important;
+    }
 }
 
 .gender-option {
@@ -276,7 +291,7 @@
     padding: 0.8rem;
     border-radius: 0.7rem;
 
-    &:focus{
+    &:focus {
         background-color: #dc635b;
         color: white;
         border: none !important;
@@ -333,7 +348,7 @@
     gap: 0.5rem;
     align-items: center;
 
-    i{
+    i {
         font-size: 1.3rem;
         color: #868686;
     }
@@ -346,7 +361,7 @@
     width: 100%;
     height: 97%;
 
-    &::placeholder{
+    &::placeholder {
         color: #B0B0B0;
         font-weight: 500;
         font-size: larger;
@@ -436,13 +451,13 @@
     margin-left: 1rem;
 }
 
-.fare-child{
+.fare-child {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: -10px;
 
-    p{
+    p {
         color: #868686;
         font-size: 14px;
         line-height: 2;
@@ -458,7 +473,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding:8px 5px ;
+    padding: 8px 5px;
     font-weight: 500;
     font-size: medium;
     width: 95%;
@@ -466,32 +481,35 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.city-info{
+.city-info {
     background-color: #551615;
     color: white;
     padding: 1rem;
     width: 100vw !important;
-    
-    .cities{
+
+    .cities {
         display: flex;
         gap: 1rem;
         align-items: center;
         padding-left: 2rem;
-        hr{
+
+        hr {
             min-height: 2rem;
         }
-        p{
+
+        p {
             font-size: medium;
         }
-        i{
+
+        i {
             font-size: medium;
             color: #D5C5C5;
         }
 
-        .city-logo{
+        .city-logo {
             display: flex;
             gap: 0.4rem;
-            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         }
     }
 }
@@ -510,31 +528,40 @@
     }
 }
 
-@media screen and (min-width:426px) and (max-width: 768px){
-    .city-info{
+@media screen and (min-width:426px) and (max-width: 768px) {
+    .city-info {
         width: 105vw;
     }
-    .trip-details-body{
+
+    .trip-details-body {
         font-size: 10px;
     }
-    .fare-left, .fare-right, .fare-child{
-        p{
+
+    .fare-left,
+    .fare-right,
+    .fare-child {
+        p {
             font-size: 11px;
         }
     }
-    .parent{
+
+    .parent {
         margin-left: 1rem;
     }
-    .right-div{
-        h2{
+
+    .right-div {
+        h2 {
             font-size: 15px;
         }
     }
-    .Passenger-Details-body{
+
+    .Passenger-Details-body {
         height: 13rem;
     }
-    .add-details .form-control input, .passenger-details-mob-input input{
-        &::placeholder{
+
+    .add-details .form-control input,
+    .passenger-details-mob-input input {
+        &::placeholder {
             font-size: small !important;
         }
     }
